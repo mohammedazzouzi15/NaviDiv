@@ -3,12 +3,20 @@ requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "template"
+name = "navidiv"
 maintainers = [
   { name = "Mohammed Azzouzi", email = "mohammed.azzouzi@epfl.ch" },
 ]
 
-dependencies = []
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+  "matplotlib",
+  "rdkit",
+  "streamlit",
+  "scikit-learn"
+]
 requires-python = ">=3.12"
 dynamic = ["version"]
 readme = "README.rst"
