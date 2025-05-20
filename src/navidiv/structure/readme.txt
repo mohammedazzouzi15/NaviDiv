@@ -1,0 +1,1 @@
+Contain scorers related to the molecules structure, such as the number of rings, number of scaffolds, number of functional groups, 

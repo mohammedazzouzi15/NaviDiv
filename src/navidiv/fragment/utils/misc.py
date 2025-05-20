@@ -16,8 +16,8 @@ from omegaconf import DictConfig
 from rdkit import Chem
 from rdkit.Chem import FilterCatalog
 
-from OPTMOLGEN.fragment_utils.Mac_frag import MacFrag
-from OPTMOLGEN.fragment_utils.reduce_rings import fragment_mols_fused_ring
+from navidiv.fragment.utils.Mac_frag import MacFrag
+from navidiv.fragment.utils.reduce_rings import fragment_mols_fused_ring
 
 
 def run_frag_analysis(cfg: DictConfig):

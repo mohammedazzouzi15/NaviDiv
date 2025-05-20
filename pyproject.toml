@@ -15,7 +15,9 @@ dependencies = [
   "matplotlib",
   "rdkit",
   "streamlit",
-  "scikit-learn"
+  "scikit-learn",
+  "igraph",
+  "hydra-core"
 ]
 requires-python = ">=3.12"
 dynamic = ["version"]
