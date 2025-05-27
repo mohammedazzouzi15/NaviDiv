@@ -5,4 +5,6 @@ __pycache__
 /build
 docs/build
 docs/source/_autosummary
-examples/results
+reinvent_runs/runs/*
+examples/results*/*
+outputs/*

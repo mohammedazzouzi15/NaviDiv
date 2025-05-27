@@ -19,23 +19,30 @@ def get_scaffold(smile, cases: str = "all"):
             "bajorath": Use Bajorath's method.
             "real_bm": Use real Bajorath's method.
             "csk": Use CSK method.
+            "csk_bm": Use CSK with Bajorath's method.
+            "murcko": Use Murcko's method.
     """
     mol = Chem.MolFromSmiles(smile)
     if mol is None:
         return None
     Chem.RemoveStereochemistry(mol)  # important for canonization of CSK!
-    scaff = MurckoScaffold.GetScaffoldForMol(mol)
-    match cases:
-        case "bajorath":
-            scaff = AllChem.DeleteSubstructs(scaff, PATT)
-        case "real_bm":
-            scaff = AllChem.ReplaceSubstructs(scaff, PATT, REPL)[0]
-        case "csk":
-            scaff = MurckoScaffold.MakeScaffoldGeneric(scaff)
-        case "csk_bm":
-            scaff = AllChem.DeleteSubstructs(scaff, PATT)
-            scaff = MurckoScaffold.MakeScaffoldGeneric(scaff)
-    return scaff
+    try:
+        scaff = MurckoScaffold.GetScaffoldForMol(mol)
+        match cases:
+            case "bajorath":
+                scaff = AllChem.DeleteSubstructs(scaff, PATT)
+            case "real_bm":
+                scaff = AllChem.ReplaceSubstructs(scaff, PATT, REPL)[0]
+            case "csk":
+                scaff = MurckoScaffold.MakeScaffoldGeneric(scaff)
+            case "csk_bm":
+                scaff = AllChem.DeleteSubstructs(scaff, PATT)
+                scaff = MurckoScaffold.MakeScaffoldGeneric(scaff)
+
+        return scaff
+    except Exception as e:
+        print(f"Error generating scaffold for {smile}: {e}")
+        return None
 
 
 class Scaffold_scorer(BaseScore):

@@ -1,0 +1,23 @@
+model_params_FORMED_PROP:
+  model_dir: "/media/mohammed/Work/OPT_MOL_GEN/model_training_output/training/040325"
+  scoring_function: []
+  params_list: [ ]
+  lower_bound: []
+  higher_bound: []
+  gnn_list: []
+
+model_params_chemprop:
+  model_dir: [
+    "/media/mohammed/Work/SF_generative/model/formed_chemprop/fold_0/model_0/",
+    "/media/mohammed/Work/SF_generative/model/formed_t1t2/fold_0/model_0/",
+  ]
+  params_list: ["energy_score","T2-T1"]
+  scoring_function: ["ChemPropFORMED","ChemPropFORMEDT1T2"]
+  lower_bound: [-10,0]
+  higher_bound: [5,10]
+  weight: [1.3,0.4]
+
+rdkit_requirement:
+  max_number_of_rings: 3
+  max_num_atoms: 40
+  max_ring_size: 8

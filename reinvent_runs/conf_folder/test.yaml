@@ -1,0 +1,8 @@
+
+wd: "/media/mohammed/Work/OPT_MOL_GEN/example_running_to_find_low_band_gap_mols/reinvent_runs/first_run"
+name: "stage1"
+
+defaults:
+  - diversity_scorer: default
+  - reinvent_common: default
+  - stage_comp: SF

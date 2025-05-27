@@ -24,6 +24,7 @@ class NgramScorer(BaseScore):
         self._min_count_fragments = 10
         self._csv_name = f"ngrams_{ngram_size}"
         self.ngram_size = ngram_size
+        self.add_num_atoms  = False
 
     def get_count(self, smiles_list: list[str]) -> tuple[pd.DataFrame, None]:
         """Calculate the percentage of each fragment in the dataset.

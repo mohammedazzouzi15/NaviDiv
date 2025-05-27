@@ -22,11 +22,40 @@ class BaseScore:
             output_path (str | None): Path to save output files.
         """
         self._output_path = output_path
+        self.add_num_atoms = True
         self._csv_name = "fragments"
         self._fragments_df = None
+        self.selected_fragments = None
         self._min_count_fragments = 3
         self.overrepresented_fragments_min_perc = 20
         self.overrepresented_fragments = None
+        self.selection_criteria = {
+            "Count_perc_per_molecule": 1,
+            "Count_perc": 1,
+            "diff_median_score": -5,
+            "median_score_fragment": 0,
+        }
+
+    def update_selection_criteria(
+        self,
+        selection_criteria: dict[str, float],
+    ) -> None:
+        """Update the selection criteria for overrepresented fragments.
+
+        Args:
+            selection_criteria (dict[str, float]): Dictionary of selection
+                criteria.
+        
+        Example:
+            selection_criteria = {
+                "Count_perc_per_molecule": 1,
+                "Count_perc": 1,
+                "diff_median_score": -5,
+                "median_score_fragment": 0,
+            }
+            fragment_scorer.update_selection_criteria(selection_criteria)
+        """
+        self.selection_criteria = selection_criteria
 
     def get_count(self, smiles_list: list[str]) -> tuple[pd.DataFrame, None]:
         """Calculate the percentage of each fragment in the dataset.
@@ -57,7 +86,10 @@ class BaseScore:
         return {}
 
     def add_score_metrics(
-        self, smiles_list: list[str], scores: list[float]
+        self,
+        smiles_list: list[str],
+        scores: list[float],
+        additional_columns_df: {} = {},
     ) -> pd.DataFrame:
         """Add score metrics to the DataFrame.
 
@@ -78,7 +110,7 @@ class BaseScore:
             mol_score = [
                 (sm, score)
                 for score, sm in zip(scores, smiles, strict=False)
-                if sm != "None"# and Chem.MolFromSmiles(sm) is not None
+                if sm != "None"  # and Chem.MolFromSmiles(sm) is not None
             ]
             scores_all = [score for _, score in mol_score]
 
@@ -160,12 +192,29 @@ class BaseScore:
             ),
             axis=1,
         )
+        if self.add_num_atoms:
+            num_atoms = []
+            for substructure in self._fragments_df["Substructure"]:
+                mol = Chem.MolFromSmarts(substructure)
+                if mol is not None:
+                    num_atoms.append(mol.GetNumAtoms())
+                else:
+                    num_atoms.append(0)
+            self._fragments_df["num_atoms"] = num_atoms
         self._fragments_df["diff_median_score"] = (
             self._fragments_df["median_score_fragment"]
             - self._fragments_df["median_score_not_fragment"]
         )
+        # if file exists, append to it
+        for col, value in additional_columns_df.items():
+            self._fragments_df[col] = value
         self._fragments_df.to_csv(
-            f"{self._output_path}/{self._csv_name}_with_score.csv", index=False
+            f"{self._output_path}/{self._csv_name}_with_score.csv",
+            index=False,
+            mode="a",
+            header=not pd.io.common.file_exists(
+                f"{self._output_path}/{self._csv_name}_with_score.csv"
+            ),
         )
         return self._fragments_df
 
@@ -200,7 +249,35 @@ class BaseScore:
         plt.savefig(f"{self._output_path}/{self._csv_name}_histogram.png")
         plt.close(fig)
 
-    def get_score(self, smiles_list: list[str], scores: list[float],additional_columns_df:{} = {}) -> pd.DataFrame:
+    def select_overrepresented_fragments(self):
+        """Select overrepresented fragments based on the defined criteria."""
+        self.selected_fragments = self._fragments_df.copy()
+        if self._fragments_df is None:
+            raise ValueError("Fragments DataFrame is not initialized.")
+        for col, value in self.selection_criteria.items():
+            if col not in self.selected_fragments.columns:
+                raise ValueError(
+                    f"Column {col} not found in fragments DataFrame."
+                )
+            self.selected_fragments = self.selected_fragments[
+                self.selected_fragments[col] > value
+            ]
+        self.selected_fragments.to_csv(
+            f"{self._output_path}/{self._csv_name}_selected_fragments.csv",
+            index=False,
+            mode="a",
+            header=not pd.io.common.file_exists(
+                f"{self._output_path}/{self._csv_name}_selected_fragments.csv"
+            ),
+        )
+        return self.selected_fragments
+
+    def get_score(
+        self,
+        smiles_list: list[str],
+        scores: list[float],
+        additional_columns_df: {} = {},
+    ) -> pd.DataFrame:
         """Get the score for the fragments.
 
         Args:
@@ -212,34 +289,17 @@ class BaseScore:
         """
         self.get_count(smiles_list)
         unique_fragments = self._fragments_df.shape[0]
-        self.add_score_metrics(smiles_list, scores)
+        self.add_score_metrics(smiles_list, scores, additional_columns_df)
 
         unicity_ratio = unique_fragments / self.total_number_of_fragments
-        for col,value in additional_columns_df.items():
+        for col, value in additional_columns_df.items():
             self._fragments_df[col] = value
-        over_represented_fragments = self._fragments_df[
-            self._fragments_df["Count_perc_per_molecule"]
-            > self.overrepresented_fragments_min_perc
-        ].shape[0]
-        if self.overrepresented_fragments is None:
-            self.overrepresented_fragments = self._fragments_df[
-                self._fragments_df["Count_perc_per_molecule"]
-                > self.overrepresented_fragments_min_perc
-            ]
-        self.overrepresented_fragments = pd.concat(
-            [
-                self.overrepresented_fragments,
-                self._fragments_df[
-                    self._fragments_df["Count_perc_per_molecule"]
-                    > self.overrepresented_fragments_min_perc
-                ],
-            ]
-        )
+        self.select_overrepresented_fragments()
         dict_results = {
             "Unicity Ratio": unicity_ratio,
             "Total Number of Fragments": self.total_number_of_fragments,
             "Unique Fragments": unique_fragments,
-            "Over Represented Fragments": over_represented_fragments,
+            "Selected Fragments": self.selected_fragments.shape[0],
         }
         dict_results = {**dict_results, **self.additional_metrics()}
 

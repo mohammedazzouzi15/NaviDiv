@@ -176,5 +176,5 @@ if __name__ == "__main__":
     # test_ngram_scorer(df, steps=range(5, 1000, 50))
     test_cluster_scorer(df, steps=range(50, 1000, 50))
     #test_scaffold_scorer(df, steps=range(5, 1000, 50))
-    #test_orginal_scorer(df, steps=range(5, 1000, 50))
+    test_orginal_scorer(df, steps=range(5, 1000, 50))
     print("done")

@@ -79,7 +79,6 @@ class ClusterSimScorer(BaseScore):
                 if smiles != "None" and Chem.MolFromSmiles(smiles) is not None
             ]
 
-            print("Number of valid molecules:", len(self._mol_smiles))
         search_fps = get_fingerprints(self._mol_smiles)
 
         self._similarity_to_itself = calculate_similarity(

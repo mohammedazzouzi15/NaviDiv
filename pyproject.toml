@@ -17,7 +17,7 @@ dependencies = [
   "streamlit",
   "scikit-learn",
   "igraph",
-  "hydra-core"
+  "hydra-core",
 ]
 requires-python = ">=3.12"
 dynamic = ["version"]
