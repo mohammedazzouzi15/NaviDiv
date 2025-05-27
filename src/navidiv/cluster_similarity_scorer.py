@@ -64,20 +64,20 @@ class ClusterSimScorer(BaseScore):
         Returns:
             tuple: DataFrame with fragment info, None (for compatibility)
         """
-        if not hasattr(self, "_mol_smiles"):
-            self._mol_smiles = [
-                Chem.MolFromSmiles(smiles)
-                for smiles in smiles_list
-                if smiles != "None"
-            ]
-            self._mol_smiles = [
-                mol for mol in self._mol_smiles if mol is not None
-            ]
-            self._smiles_list = [
-                smiles
-                for smiles in smiles_list
-                if smiles != "None" and Chem.MolFromSmiles(smiles) is not None
-            ]
+        #if not hasattr(self, "_mol_smiles"):
+        self._mol_smiles = [
+            Chem.MolFromSmiles(smiles)
+            for smiles in smiles_list
+            if smiles != "None"
+        ]
+        self._mol_smiles = [
+            mol for mol in self._mol_smiles if mol is not None
+        ]
+        self._smiles_list = [
+            smiles
+            for smiles in smiles_list
+            if smiles != "None" and Chem.MolFromSmiles(smiles) is not None
+        ]
 
         search_fps = get_fingerprints(self._mol_smiles)
 
