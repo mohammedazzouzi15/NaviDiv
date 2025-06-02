@@ -15,7 +15,7 @@ if __name__ == "__main__":
             "prop_dict": {
                 "scorer_name": "Scaffold",
                 "scaffold_type": "csk_bm",
-                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp_scaffold/",
+                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp/",
                 "min_count_fragments": 1,
                 "selectrion_criteria": {
                     "Count_perc_per_molecule": 10,
@@ -35,7 +35,7 @@ if __name__ == "__main__":
             "prop_dict": {
                 "scorer_name": "Ngram",
                 "ngram_size": 10,
-                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp_ngram/",
+                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp/",
                 "min_count_fragments": 5,
                 "selectrion_criteria": {
                     "Count_perc_per_molecule": 10,
@@ -50,6 +50,45 @@ if __name__ == "__main__":
                 "count_per_molecule": 50,
             },
             "custom_alert_name": "customalertsngrams",
+        },
+        {
+            "prop_dict": {
+                "scorer_name": "Cluster",
+                "threshold": 0.25,
+                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp/",
+                "min_count_fragments": 0,
+                "selectrion_criteria": {
+                    "Count_perc_per_molecule": 10,
+                    "Count_perc": 0.1,
+                    "diff_median_score": 0.1,
+                },
+            },
+            "score_every": 10,
+            "groupby_every": 30,
+            "selection_criteria": {
+                "count_perc_ratio": 10,
+                "count_per_molecule": 50,
+            },
+            "custom_alert_name": "dissimilarity",
+        },
+        {
+            "prop_dict": {
+                "scorer_name": "Fragments",
+                "min_count_fragments": 2,
+                "output_path": "/media/mohammed/Work/Navi_diversity/examples/results/tmp/",
+                "selectrion_criteria": {
+                    "Count_perc_per_molecule": 10,
+                    "Count_perc": 0.1,
+                    "diff_median_score": 0.1,
+                },
+            },
+            "score_every": 50,
+            "groupby_every": 100,
+            "selection_criteria": {
+                "count_perc_ratio": 10,
+                "count_per_molecule": 50,
+            },
+            "custom_alert_name": "customalerts",
         },
     ]
     # Instantiate the class

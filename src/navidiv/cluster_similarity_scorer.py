@@ -47,7 +47,7 @@ class ClusterSimScorer(BaseScore):
 
     def get_clusters(self, similarity):
         """Get clusters of similar molecules based on a similarity threshold."""
-        #np.fill_diagonal(similarity, 0)
+        # np.fill_diagonal(similarity, 0)
         clusters = set()
 
         for i in range(similarity.shape[0]):
@@ -64,15 +64,13 @@ class ClusterSimScorer(BaseScore):
         Returns:
             tuple: DataFrame with fragment info, None (for compatibility)
         """
-        #if not hasattr(self, "_mol_smiles"):
+        # if not hasattr(self, "_mol_smiles"):
         self._mol_smiles = [
             Chem.MolFromSmiles(smiles)
             for smiles in smiles_list
             if smiles != "None"
         ]
-        self._mol_smiles = [
-            mol for mol in self._mol_smiles if mol is not None
-        ]
+        self._mol_smiles = [mol for mol in self._mol_smiles if mol is not None]
         self._smiles_list = [
             smiles
             for smiles in smiles_list
@@ -125,7 +123,7 @@ class ClusterSimScorer(BaseScore):
             smiles_index = self._smiles_list.index(smiles)
         else:
             return False
-        #print(f"ngram_index: {ngram_index}, smiles_index: {smiles_index}")
+        # print(f"ngram_index: {ngram_index}, smiles_index: {smiles_index}")
         return (
             self._similarity_to_itself[ngram_index, smiles_index]
             > self.threshold
@@ -140,3 +138,153 @@ class ClusterSimScorer(BaseScore):
             "mean_distance": mean_distance,
             "std_distance": std_distance,
         }
+
+    def aggregate_df(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Aggregate the DataFrame by clusters.
+
+        this is a funciton to be used one a groupedby Dataframe of clusters with steps.
+        """
+
+        def process_fragment(
+            fragment: str, smiles_list: list[str]
+        ) -> list[float]:
+            contains_fragment_dict = {}
+            for smiles in smiles_list:
+                if smiles not in contains_fragment_dict:
+                    contains_fragment_dict[smiles] = self._comparison_function(
+                        smiles=smiles, fragment=fragment
+                    )
+            molecules_countaining_fragment = [
+                smiles
+                for smiles in smiles_list
+                if contains_fragment_dict[smiles]
+            ]  # type: ignore
+
+            return molecules_countaining_fragment
+
+        smiles_list = df["Substructure"].tolist()
+        self.get_count(smiles_list)
+        self._fragments_df = self._fragments_df[
+            self._fragments_df["Count"] > self._min_count_fragments
+        ]
+        self._fragments_df["molecules_countaining_fragment"] = (
+            self._fragments_df[
+                "Substructure"
+            ].apply(lambda x: process_fragment(x, self._smiles_list))
+        )
+
+        if self.add_num_atoms:
+            num_atoms = []
+            for substructure in self._fragments_df["Substructure"]:
+                mol = Chem.MolFromSmarts(substructure)
+                if mol is not None:
+                    num_atoms.append(mol.GetNumAtoms())
+                else:
+                    num_atoms.append(0)
+            self._fragments_df["num_atoms"] = num_atoms
+        self._fragments_df["Mean score cluster"] = self._fragments_df.apply(
+            lambda x: df[
+                df["Substructure"].isin(x["molecules_countaining_fragment"])
+            ]["median_score_fragment_mean"].mean(),
+            axis=1,
+        )
+        self._fragments_df[
+            ["Molecules containing fragment", "Number of Molecules in Cluster"]
+        ] = flatten_dataframe_to_unique_column(
+            self._fragments_df.apply(
+                lambda x: df[
+                    df["Substructure"].isin(
+                        x["molecules_countaining_fragment"]
+                    )
+                ]["Molecules containing fragment"],
+                axis=1,
+            )
+        )
+        self._fragments_df[["Steps"]] = flatten_dataframe_to_column(
+            self._fragments_df.apply(
+                lambda x: df[
+                    df["Substructure"].isin(
+                        x["molecules_countaining_fragment"]
+                    )
+                ]["step_list"],
+                axis=1,
+            )
+        )
+        self._fragments_df[["Number of Molecules with fragment"]] = (
+            flatten_dataframe_to_column(
+                self._fragments_df.apply(
+                    lambda x: df[
+                        df["Substructure"].isin(
+                            x["molecules_countaining_fragment"]
+                        )
+                    ]["Number of Molecules with Substructure List"],
+                    axis=1,
+                )
+            )
+        )
+
+        self._fragments_df = self._fragments_df[
+            [
+                "Substructure",
+                "Molecules containing fragment",
+                "Number of Molecules in Cluster",
+                "Mean score cluster",
+                "Steps",
+                "Number of Molecules with fragment",
+            ]
+        ]
+        return self._fragments_df
+
+
+def flatten_dataframe_to_unique_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Flatten all non-NaN sets from a DataFrame into a single set,
+    and return a DataFrame with unique fragments and their count.
+    """
+    mat = df.to_numpy()
+    unique_items_list = []
+    for i in range(mat.shape[0]):
+        unique_items = set()
+        for j in range(mat.shape[1]):
+            if isinstance(mat[i, j], str):
+                unique_items.update(eval(mat[i, j]))
+            elif isinstance(mat[i, j], set):
+                unique_items.update(mat[i, j])
+
+        unique_items_list.append(unique_items)
+
+    return pd.DataFrame(
+        {
+            "unique_fragments": [x for x in unique_items_list],
+            "number of molecules": [len(x) for x in unique_items_list],
+        }
+    )
+
+
+def flatten_dataframe_to_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Flatten all non-NaN sets from a DataFrame into a single set,
+    and return a DataFrame with unique fragments and their count.
+    """
+    mat = df.to_numpy()
+    unique_items_list = []
+    for i in range(mat.shape[0]):
+        unique_items = []
+        for j in range(mat.shape[1]):
+            if isinstance(mat[i, j], str):
+                unique_items.extend(eval(mat[i, j]))
+            elif isinstance(mat[i, j], list):
+                unique_items.extend(mat[i, j])
+
+        unique_items_list.append(unique_items)
+
+    return pd.DataFrame(
+        {
+            "unique_fragments": [list(x) for x in unique_items_list],
+        }
+    )
+
+
+def aggregate_list_column(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    """Aggregate a list column in a DataFrame."""
+    df[column_name] = df[column_name].apply(eval)
+    df[column_name] = df[column_name].apply(lambda x: list(set(x)))
+    return df.groupby(column_name).size().reset_index(name="Count")

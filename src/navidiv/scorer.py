@@ -45,7 +45,7 @@ class BaseScore:
         Args:
             selection_criteria (dict[str, float]): Dictionary of selection
                 criteria.
-        
+
         Example:
             selection_criteria = {
                 "Count_perc_per_molecule": 1,
@@ -113,22 +113,31 @@ class BaseScore:
                 if sm != "None"  # and Chem.MolFromSmiles(sm) is not None
             ]
             scores_all = [score for _, score in mol_score]
+            contains_fragment_dict = {}
+            for smiles, score in mol_score:
+                if smiles not in contains_fragment_dict:
+                    contains_fragment_dict[smiles] = self._comparison_function(
+                        smiles=smiles, fragment=fragment
+                    )
 
             scores_containing_fragment = [
                 score
                 for smiles, score in mol_score
-                if self._comparison_function(smiles=smiles, fragment=fragment)
+                if contains_fragment_dict[smiles]  # type: ignore
             ]
             scores_not_containing_fragment = [
                 score
                 for smiles, score in mol_score
-                if not self._comparison_function(
-                    smiles=smiles, fragment=fragment
-                )
+                if not contains_fragment_dict[smiles]  # type: ignore
             ]
+            molecules_countaining_fragment = [
+                smiles
+                for smiles, score in mol_score
+                if contains_fragment_dict[smiles]
+            ]  # type: ignore
 
             if len(scores_containing_fragment) == 0:
-                return [0.0] * 9
+                return [0.0] * 10
             try:
                 mean_score = np.mean(scores_all)
                 std_score = np.std(scores_all)
@@ -143,12 +152,13 @@ class BaseScore:
                 median_score_not_fragment = np.median(
                     scores_not_containing_fragment
                 )
+                smiles_countaining_fragment = molecules_countaining_fragment
             except (ValueError, TypeError):
                 logging.exception(
                     "Error calculating score metrics for fragment: %s",
                     fragment,
                 )
-                return [0.0] * 9
+                return [0.0] * 10
             return [
                 mean_score,
                 std_score,
@@ -159,6 +169,7 @@ class BaseScore:
                 mean_score_not_fragment,
                 std_score_not_fragment,
                 median_score_not_fragment,
+                smiles_countaining_fragment,
             ]
 
         self._fragments_df = self._fragments_df[
@@ -181,6 +192,7 @@ class BaseScore:
                 "mean_score_not_fragment",
                 "std_score_not_fragment",
                 "median_score_not_fragment",
+                "molecules_countaining_fragment",
             ]
         ] = self._fragments_df.apply(
             lambda row: pd.Series(
@@ -288,18 +300,21 @@ class BaseScore:
             pd.DataFrame: DataFrame with score metrics.
         """
         self.get_count(smiles_list)
-        unique_fragments = self._fragments_df.shape[0]
+        unique_fragments = self._fragments_df["Substructure"].to_list()
         self.add_score_metrics(smiles_list, scores, additional_columns_df)
 
-        unicity_ratio = unique_fragments / self.total_number_of_fragments
+        unicity_ratio = (
+            len(unique_fragments) / self.total_number_of_fragments * 100
+        )
         for col, value in additional_columns_df.items():
             self._fragments_df[col] = value
         self.select_overrepresented_fragments()
         dict_results = {
-            "Unicity Ratio": unicity_ratio,
+            "Percentage of Unique Fragments": unicity_ratio,
             "Total Number of Fragments": self.total_number_of_fragments,
-            "Unique Fragments": unique_fragments,
+            "Number of Unique Fragments": len(unique_fragments),
             "Selected Fragments": self.selected_fragments.shape[0],
+            "Unique Fragments": unique_fragments,
         }
         dict_results = {**dict_results, **self.additional_metrics()}
 

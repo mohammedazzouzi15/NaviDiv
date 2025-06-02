@@ -1,14 +1,14 @@
-import time
+
+import logging
 
 import numpy as np
-from sklearn.manifold import TSNE
-import logging
 
 # from cuml.manifold import TSNE
 import pandas as pd
 from matplotlib import pyplot as plt
 from rdkit import Chem
 from rdkit.Chem import rdFingerprintGenerator
+from sklearn.manifold import TSNE
 
 
 def get_fingerprints(molecules):
@@ -26,11 +26,10 @@ def get_fingerprints(molecules):
 
 def perform_tsne(fingerprints_array):
     """Perform t-SNE dimensionality reduction, with options to save or load the model."""
-
     # Perform t-SNE using sklearn
-    if fingerprints_array.shape[0] > 10000:
+    if fingerprints_array.shape[0] > 20000:
         raise ValueError(
-            "t-SNE is not supported for more than 10000 samples. Please reduce the number of samples."
+            "t-SNE is not supported for more than 20000 samples. Please reduce the number of samples."
         )
     tsne = TSNE(
         n_components=2,

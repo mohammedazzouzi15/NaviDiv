@@ -15,7 +15,7 @@ python_script_path="/media/mohammed/Work/Navi_diversity/src/navidiv/reinvent/"
 config_path="/media/mohammed/Work/Navi_diversity/reinvent_runs/conf_folder"
 config_name="test"
 
-run_name=test3
+run_name=test4
 wd="/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/test/$run_name"
 smart_list_path="$wd/full_smartlist.txt"
 mkdir -p $wd

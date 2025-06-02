@@ -11,6 +11,7 @@ from navidiv import (
     orginal_similarity_scorer,
 )
 from navidiv.fragment import fragment_scorer
+from navidiv.utils import get_smiles_column
 
 def test_orginal_scorer(smiles_list, scores):
     """Test the original similarity scorer."""
@@ -154,20 +155,21 @@ def test_fg_scorer(smiles_list, scores):
 
 
 if __name__ == "__main__":
-    csv_file = "/media/mohammed/Work/Navi_diversity/examples/stage0_1.csv"
-    df = pd.read_csv(csv_file)
-    df = df[df["step"] == 1000]
+    csv_file = "/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/test/test2/stage0/results/clusters/groupby_results_clusters.csv"
+    df = pd.read_csv(csv_file).sample(frac=0.1).reset_index(drop=True)
+    #df = df[df["step"] == 1000]
     print("columns", df.columns)
-    df = df.dropna(subset=["SMILES"])
-    smiles_list = df["SMILES"].tolist()
-    scores = df["Score"].tolist()
+    smiles_col= get_smiles_column(df)
+    df = df.dropna(subset=[smiles_col])
+    smiles_list = df[smiles_col].tolist()
+    scores = df["median_score_fragment_mean"].tolist()
     print("will process", len(smiles_list), "smiles")
     print("will process", len(scores), "scores")
     test_orginal_scorer(smiles_list, scores)
-    test_fg_scorer(smiles_list, scores)
-    test_ngram_scorer(smiles_list, scores)
-    test_ring_scorer(smiles_list, scores)
-    test_cluster_scorer(smiles_list, scores)
-    test_scaffold_scorer(smiles_list, scores)
-    test_fragment_scorer(smiles_list, scores)
+    #test_fg_scorer(smiles_list, scores)
+    #test_ngram_scorer(smiles_list, scores)
+    #test_ring_scorer(smiles_list, scores)
+    #test_cluster_scorer(smiles_list, scores)
+    #test_scaffold_scorer(smiles_list, scores)
+    #test_fragment_scorer(smiles_list, scores)
     print("done")

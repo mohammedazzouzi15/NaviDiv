@@ -1,20 +1,14 @@
-import io
 import logging
 import os
-import streamlit as st
 
 import pandas as pd
-from PIL import Image
-from rdkit.Chem.Draw import rdMolDraw2D
 
 
 def get_smiles_column(df):
-    for col in ["smiles", "SMILES", "Smiles"]:
+    for col in ["smiles", "SMILES", "Smiles", "Substructure"]:
         if col in df.columns:
             return col
     raise ValueError("No column containing SMILES strings found.")
-
-
 
 
 def add_mean_of_numeric_columns(df, steps) -> dict:
@@ -32,35 +26,58 @@ def groupby_results(df):
     grouped_by_df = df.groupby(["Substructure"]).agg(
         {
             "Count": ["sum", "max"],
-            "step": ["max", "min", "count"],
-            "median_score_fragment": ["max", "min", "mean"],
-            "diff_median_score": ["max", "min", "mean"],
-            "Count_perc_per_molecule": ["max", "first", "mean"],
-            "count_per_molecule": ["max", "first", "mean", "sum"],
+            "step": ["max", "min", "count", lambda x: list(x)],
+            "median_score_fragment": ["max", "min", "mean", lambda x: list(x)],
+            "diff_median_score": ["max", "min", "mean", lambda x: list(x)],
+            "Count_perc_per_molecule": [
+                "max",
+                "first",
+                "mean",
+                lambda x: list(x),
+            ],
+            "count_per_molecule": [
+                "max",
+                "first",
+                "mean",
+                "sum",
+                lambda x: list(x),
+            ],
+            "molecules_countaining_fragment": [
+                lambda x: set([xsy for xs in x for xsy in eval(xs)]),
+                lambda x: len(set([xsy for xs in x for xsy in eval(xs)])),
+            ],
         }
     )
+
     # transform the groubed_by_df to a dataframe
     grouped_by_df = grouped_by_df.reset_index()
     grouped_by_df.columns = [
         "Substructure",
         "Count",
-        "Count_max",
-        "step_max",
-        "step_min",
-        "step_count",
+        "Count max",
+        "step max",
+        "step min",
+        "step count",
+        "step_list",
         "median_score_fragment_max",
         "median_score_fragment_min",
         "median_score_fragment_mean",
+        "median_score_fragment_list",
         "diff_median_score_max",
         "diff_median_score_min",
         "diff_median_score_mean",
+        "diff_median_score_list",
         "Count_perc_per_molecule_max",
         "Count_perc_per_molecule_first",
         "Count_perc_per_molecule_mean",
+        "Count_perc_per_molecule_list",
         "count_per_molecule_max",
         "count_per_molecule_first",
         "count_per_molecule_mean",
-        "count_per_molecule",
+        "Total Number of Molecules with Substructure",
+        "Number of Molecules with Substructure List",
+        "Molecules containing fragment",
+        "Number of Molecules with fragment",
     ]
 
     grouped_by_df["count_perc_ratio"] = grouped_by_df.apply(

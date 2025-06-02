@@ -6,7 +6,7 @@ import streamlit as st
 
 def data_filter(data, key="ori"):
     # --- Data Filtering UI ---
-    st.markdown("## Data Filtering")
+    #st.markdown("## Data Filtering")
     # Allow multiple columns to be selected for filtering
     filter_columns = st.multiselect(
         "Select columns to filter (optional)",
