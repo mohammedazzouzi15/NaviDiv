@@ -93,7 +93,14 @@ def plot_list_column_distribution(df):
         ascending=True,
         inplace=True,
     )
-
+    # Make sure only up to 10 different indexes are shown
+    df_list_columns["index"] = df_list_columns.index
+    if len(df_list_columns["index"].unique()) > 10:
+        df_list_columns = df_list_columns[
+            df_list_columns["index"].isin(
+                df_list_columns["index"].unique()[:10]
+            )
+        ]
     fig = px.line(
         df_list_columns,
         x=selected_col_x,
@@ -111,7 +118,10 @@ def plot_list_column_distribution(df):
 def plot_results(file_path):
     try:
         st.session_state.df = pd.read_csv(file_path, index_col=False)
+
+        # st.session_state.df = st.session_state.df[columns_to_keep]
         st.session_state.df["index"] = st.session_state.df.index
+
         st.write("#### Data Preview")
         st.dataframe(st.session_state.df.head(2))
     except Exception as e:
@@ -135,6 +145,16 @@ def plot_results(file_path):
     ]  # avoid color scale for large number of unique values
 
     columns = filtered_data.columns.tolist()
+    columns_to_keep = [
+        # "Substructure",
+        "index",
+        "Mean score cluster",
+        "Mean diff score",
+        "Number of Molecules with fragment",
+        "step count",
+        "step min",
+    ]
+    columns = columns_to_keep
     col_columns_selection = st.columns(3)
     with col_columns_selection[0]:
         x_column = st.selectbox(
@@ -147,7 +167,7 @@ def plot_results(file_path):
     with col_columns_selection[2]:
         hue_column = st.selectbox(
             "Hue column",
-            col_not_object,
+            columns_to_keep,
         )
     filtered_data.reset_index(drop=True, inplace=True)
     fig = px.scatter(
@@ -156,6 +176,18 @@ def plot_results(file_path):
         y=y_column,
         color=hue_column if hue_column else None,
         hover_data=[filtered_data.index],
+    )
+    fig.update_layout(
+        coloraxis_colorbar=dict(
+            title=dict(
+                text=hue_column,  # or your custom title
+                side="right",  # 'right', 'top', 'bottom'
+                font=dict(size=14),
+            ),
+            # You can also adjust x/y to move the colorbar itself
+            # x=1.05,  # move colorbar horizontally
+            # y=0.5,   # move colorbar vertically
+        )
     )
     selected_points = st.plotly_chart(
         fig,
@@ -176,13 +208,23 @@ def plot_results(file_path):
         )
         smiles_column = "Substructure"  # get_smiles_column(filtered_data)
         if smiles_column in filtered_data.columns:
-            img = draw_molecule(
-                Chem.MolFromSmiles(
+            mol = Chem.MolFromSmiles(
+                filtered_data.iloc[st.session_state.hover_indexs][
+                    smiles_column
+                ].values[0]
+            )
+            if mol is None:
+                mol = Chem.MolFromSmarts(
                     filtered_data.iloc[st.session_state.hover_indexs][
                         smiles_column
                     ].values[0]
                 )
-            )
+            if mol is None:
+                st.error(
+                    f"Invalid SMILES or SMARTS: {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].values[0]}"
+                )
+            img = draw_molecule(mol)
+
             if img is not None:
                 st.image(
                     img,
@@ -250,6 +292,18 @@ def plot_step_results(file_path):
         y=y_column,
         color=hue_column if hue_column else None,
         hover_data=[filtered_data.index],
+    )
+    fig.update_layout(
+        coloraxis_colorbar=dict(
+            title=dict(
+                text=hue_column,  # or your custom title
+                side="right",  # 'right', 'top', 'bottom'
+                font=dict(size=14),
+            ),
+            # You can also adjust x/y to move the colorbar itself
+            # x=1.05,  # move colorbar horizontally
+            # y=0.5,   # move colorbar vertically
+        )
     )
     selected_points = st.plotly_chart(
         fig,

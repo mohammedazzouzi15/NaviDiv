@@ -29,13 +29,13 @@ def groupby_results(df):
             "step": ["max", "min", "count", lambda x: list(x)],
             "median_score_fragment": ["max", "min", "mean", lambda x: list(x)],
             "diff_median_score": ["max", "min", "mean", lambda x: list(x)],
-            "Count_perc_per_molecule": [
+            "Ratio of Molecules with Fragment": [
                 "max",
                 "first",
                 "mean",
                 lambda x: list(x),
             ],
-            "count_per_molecule": [
+            "Molecules with Fragment": [
                 "max",
                 "first",
                 "mean",
@@ -61,11 +61,11 @@ def groupby_results(df):
         "step_list",
         "median_score_fragment_max",
         "median_score_fragment_min",
-        "median_score_fragment_mean",
+        "Mean score cluster",
         "median_score_fragment_list",
         "diff_median_score_max",
         "diff_median_score_min",
-        "diff_median_score_mean",
+        "Mean diff score",
         "diff_median_score_list",
         "Count_perc_per_molecule_max",
         "Count_perc_per_molecule_first",
@@ -104,59 +104,68 @@ def initialize_scorer(scorer_props: dict):
             - "threshold": Threshold for similarity (for Cluster and Original scorers).
     """
     scorer_name = scorer_props.get("scorer_name")
-    try:
-        if scorer_name == "Fragments":
-            from navidiv.fragment import fragment_scorer
+    if scorer_name == "Fragments Match":
+        from navidiv.fragment import fragment_scorer_matching
 
-            scorer = fragment_scorer.FragmentScorer(
-                output_path=scorer_props.get("output_path"),
-                min_count_fragments=scorer_props.get("min_count_fragments"),
-            )
-        elif scorer_name == "Ngram":
-            from navidiv import Ngram_scorer
+        scorer = fragment_scorer_matching.FragmentMatchScorer(
+            output_path=scorer_props.get("output_path"),
+            min_count_fragments=scorer_props.get("min_count_fragments", 1),
+        )
+    elif scorer_name == "Fragments":
+        from navidiv.fragment import fragment_scorer
 
-            scorer = Ngram_scorer.NgramScorer(
-                ngram_size=scorer_props.get("ngram_size", 10),
-                output_path=scorer_props.get("output_path"),
-            )
-        elif scorer_name == "Scaffold":
-            from navidiv import Scaffold_scorer
+        scorer = fragment_scorer.FragmentScorer(
+            output_path=scorer_props.get("output_path"),
+            min_count_fragments=scorer_props.get("min_count_fragments"),
+        )
+    elif scorer_name == "Ngram":
+        from navidiv import Ngram_scorer
 
-            scorer = Scaffold_scorer.Scaffold_scorer(
-                output_path=scorer_props.get("output_path"),
-                scaffold_type=scorer_props.get("scaffold_type", "csk_bm"),
-            )
-        elif scorer_name == "Cluster":
-            from navidiv import cluster_similarity_scorer
+        scorer = Ngram_scorer.NgramScorer(
+            ngram_size=scorer_props.get("ngram_size", 10),
+            output_path=scorer_props.get("output_path"),
+        )
+    elif scorer_name == "Scaffold":
+        from navidiv import Scaffold_scorer
 
-            scorer = cluster_similarity_scorer.ClusterSimScorer(
-                output_path=scorer_props.get("output_path"),
-                threshold=scorer_props.get("threshold", 0.25),
-            )
-        elif scorer_name == "Original":
-            from navidiv import orginal_similarity_scorer
+        scorer = Scaffold_scorer.Scaffold_scorer(
+            output_path=scorer_props.get("output_path"),
+            scaffold_type=scorer_props.get("scaffold_type", "csk_bm"),
+        )
+    elif scorer_name == "Cluster":
+        from navidiv import cluster_similarity_scorer
 
-            # Use original smiles as reference if available
-            df_original = pd.read_csv(
-                scorer_props.get(
-                    "reference_csv",
-                    "/media/mohammed/Work/Navi_diversity/examples/df_original.csv",
-                )
+        scorer = cluster_similarity_scorer.ClusterSimScorer(
+            output_path=scorer_props.get("output_path"),
+            threshold=scorer_props.get("threshold", 0.25),
+        )
+    elif scorer_name == "Original":
+        from navidiv import orginal_similarity_scorer
+
+        # Use original smiles as reference if available
+        df_original = pd.read_csv(
+            scorer_props.get(
+                "reference_csv",
+                "/media/mohammed/Work/Navi_diversity/examples/df_original.csv",
             )
-            smiles_list_to_compare_to = df_original["smiles"].tolist()
-            scorer = orginal_similarity_scorer.OriginalSimScorer(
-                output_path=scorer_props.get("output_path"),
-                threshold=scorer_props.get("threshold", 0.3),
-                smiles_list_to_compare_to=smiles_list_to_compare_to,
-            )
-        else:
-            logging.error(
-                f"Scorer '{scorer_name}' not recognized. Please check the scorer name."
-            )
-            return None
-    except Exception as e:
-        logging.exception(f"Error initializing scorer '{scorer_name}': {e}")
+        )
+        smiles_list_to_compare_to = df_original[
+            get_smiles_column(df_original)
+        ].tolist()
+        scorer = orginal_similarity_scorer.OriginalSimScorer(
+            output_path=scorer_props.get("output_path"),
+            threshold=scorer_props.get("threshold", 0.3),
+            smiles_list_to_compare_to=smiles_list_to_compare_to,
+        )
+    else:
+        logging.error(
+            f"Scorer '{scorer_name}' not recognized. Please check the scorer name."
+        )
+        raise ValueError(
+            f"Scorer '{scorer_name}' not recognized. Please check the scorer name."
+        )
         return None
+
     scorer._min_count_fragments = scorer_props.get("min_count_fragments", 1)
     scorer.update_selection_criteria(
         selection_criteria=scorer_props.get("selection_criteria", {}),

@@ -51,7 +51,7 @@ class NgramScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _cout_substructure_in_smiles(self, smiles_list, ngram):
+    def _count_substructure_in_smiles(self, smiles_list, ngram):
         """Check if ngram is in smiles"""
         return len([smiles for smiles in smiles_list if ngram in smiles])
 

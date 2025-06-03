@@ -1,0 +1,2 @@
+Substructure,Count,Count_perc,count_per_molecule,Count_perc_per_molecule,mean_score,std_score,mean_score_fragment,std_score_fragment,median_score,median_score_fragment,mean_score_not_fragment,std_score_not_fragment,median_score_not_fragment,molecules_countaining_fragment,diff_median_score,step
+(c3ccccc3),2,1.6666666666666667,1,50.0,0.21821165,0.11452745,0.3327391,0.0,0.21821165,0.3327391,0.1036842,0.0,0.1036842,['C1=CC(=Cc2ccccc2)C(=[N+]2C[B-](c3ccccc3)(c3ccccc3)n3cc4ccccc4c32)C=C1'],0.2290549,73

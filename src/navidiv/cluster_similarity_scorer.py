@@ -96,7 +96,7 @@ class ClusterSimScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _cout_substructure_in_smiles(self, smiles_list, ngram):
+    def _count_substructure_in_smiles(self, smiles_list, ngram):
         """Check if ngram is in smiles"""
         # np.fill_diagonal(self._similarity_to_itself, 0)
         ngram_index = self._smiles_list.index(ngram)
@@ -168,9 +168,9 @@ class ClusterSimScorer(BaseScore):
             self._fragments_df["Count"] > self._min_count_fragments
         ]
         self._fragments_df["molecules_countaining_fragment"] = (
-            self._fragments_df[
-                "Substructure"
-            ].apply(lambda x: process_fragment(x, self._smiles_list))
+            self._fragments_df["Substructure"].apply(
+                lambda x: process_fragment(x, self._smiles_list)
+            )
         )
 
         if self.add_num_atoms:
@@ -185,7 +185,7 @@ class ClusterSimScorer(BaseScore):
         self._fragments_df["Mean score cluster"] = self._fragments_df.apply(
             lambda x: df[
                 df["Substructure"].isin(x["molecules_countaining_fragment"])
-            ]["median_score_fragment_mean"].mean(),
+            ]["Mean score cluster"].mean(),
             axis=1,
         )
         self._fragments_df[
@@ -227,12 +227,18 @@ class ClusterSimScorer(BaseScore):
             [
                 "Substructure",
                 "Molecules containing fragment",
-                "Number of Molecules in Cluster",
+                "Number of Molecules with fragment",
                 "Mean score cluster",
                 "Steps",
-                "Number of Molecules with fragment",
+                "Molecules with fragment",
             ]
         ]
+        self._fragments_df["step min"] = self._fragments_df["Steps"].apply(
+            lambda x: min(x) if isinstance(x, list) else x
+        )
+        self._fragments_df["step count"] = self._fragments_df["Steps"].apply(
+            lambda x: len(x) if isinstance(x, list) else 1
+        )
         return self._fragments_df
 
 

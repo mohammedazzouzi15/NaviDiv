@@ -54,6 +54,40 @@ def do_tsne(file_path):
     return False
 
 
+def run_all_scorers(file_path):
+    """Run all scorers with default settings on the provided CSV file.
+
+    Args:
+        file_path (str): Path to the CSV file containing molecular data.
+
+    Returns:
+        bool: True if scoring was successful, False otherwise.
+    """
+    st.session_state.output_path = st.sidebar.text_input(
+        "Output path",
+        value=Path(file_path).parent / "scorer_output",
+        key="scorer_output_path",
+    )
+    if st.sidebar.button("Run All Scorers"):
+        cmd = [
+            "python3",
+            "src/navidiv/run_all_scorers.py",
+            "--df_path",
+            file_path,
+            "--output_path",
+            st.session_state.scorer_output_path,
+        ]
+        try:
+            subprocess.Popen(cmd)
+            st.text(
+                "Running all scorers. This may take a while depending on the size of the dataset."
+            )
+            return True
+        except Exception as e:
+            st.error(f"Error running all scorers: {e}")
+    return False
+
+
 def on_change_file_path():
     st.session_state.file_path = st.session_state.file_path_input
 
@@ -88,6 +122,7 @@ def main() -> None:
                         )
             if val:
                 do_tsne(st.session_state.file_path)
+                run_all_scorers(st.session_state.file_path)
 
                 filtered_data = plot_generated_molecules_from_file(
                     st.session_state.file_path

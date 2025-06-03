@@ -98,10 +98,11 @@ class OriginalSimScorer(BaseScore):
             self._smiles_list = [
                 smiles
                 for smiles in smiles_list
-                if smiles != "None" #and Chem.MolFromSmiles(smiles) is not None
+                if smiles
+                != "None"  # and Chem.MolFromSmiles(smiles) is not None
             ]
 
-            #print("Number of valid molecules:", len(self._mol_smiles))
+            # print("Number of valid molecules:", len(self._mol_smiles))
         search_fps = get_fingerprints(self._mol_smiles)
 
         self._similarity_to_original = calculate_similarity(
@@ -121,14 +122,13 @@ class OriginalSimScorer(BaseScore):
         ].apply(lambda x: self._get_max_similarity(x))
         return fragments, over_represented_fragments
 
-    def _cout_substructure_in_smiles(self, smiles_list, ngram):
-        """Check if ngram is in smiles"""
-        # np.fill_diagonal(self._similarity_to_itself, 0)
+    def _count_substructure_in_smiles(self, smiles_list, ngram):
         ngram_index = self._smiles_list.index(ngram)
+        # print(f"ngram_index: {self._similarity_to_original.shape}, ")
         return 1 + len(
             [
                 i
-                for i in range(self._similarity_to_original.shape[0])
+                for i in range(self._similarity_to_original.shape[1])
                 if self._similarity_to_original[ngram_index, i]
                 > self.threshold
             ]
@@ -140,20 +140,33 @@ class OriginalSimScorer(BaseScore):
         fragment: str | None = None,
         mol: Chem.Mol | None = None,
     ) -> bool:
-        """Check if the fragment is present in the SMILES string or molecule."""
-        if fragment in self._smiles_list:
-            ngram_index = self._smiles_list.index(fragment)
-        else:
+        """Check if teh smiles and fragment are similar to the same molecules in the original one."""
+        return False
+        fragment_index = self._smiles_list.index(fragment)
+        smiles_index = self._smiles_list.index(smiles)
+        if fragment_index is None or smiles_index is None:
             return False
-        if smiles in self._smiles_list:
-            smiles_index = self._smiles_list.index(smiles)
-        else:
-            return False
-        # print(f"ngram_index: {ngram_index}, smiles_index: {smiles_index}")
-        return (
-            self._similarity_to_original[ngram_index, smiles_index]
-            > self.threshold
-        )
+
+        sim_smiles = {
+            i
+            for i in range(self._similarity_to_original.shape[1])
+            if self._similarity_to_original[smiles_index, i] > self.threshold
+        }
+        sim_frag = {
+            i
+            for i in range(self._similarity_to_original.shape[1])
+            if self._similarity_to_original[fragment_index, i] > self.threshold
+        }
+        if fragment_index == smiles_index and len(sim_frag) > 0:
+            print(
+                f"Fragment {fragment} {fragment_index} is similar to itself in the original dataset."
+            )
+            print(sim_frag, sim_smiles)
+            raise ValueError(
+                "The fragment is the same as the SMILES. This should not happen."
+            )
+
+        return bool(sim_smiles & sim_frag)
 
     def additional_metrics(self):
         """Calculate additional metrics for the scorer."""

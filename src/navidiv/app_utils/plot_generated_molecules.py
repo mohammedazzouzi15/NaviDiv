@@ -24,6 +24,9 @@ def plot_generated_molecules_from_file(file_path):
     """Plot a dataframe using Streamlit and Seaborn."""
     try:
         data = pd.read_csv(file_path, index_col=False)
+        data = data.dropna(
+            axis=1, how="all"
+        )  # Drop columns with all NaN values
         st.write("#### Data Preview")
         st.dataframe(data.head(2))
     except Exception as e:
@@ -36,7 +39,14 @@ def plot_generated_molecules_from_file(file_path):
     # --- Scorer UI ---
 
     st.sidebar.markdown("## Run Scorer on DataFrame ")
-    scorer_options = ["Ngram", "Scaffold", "Cluster", "Original", "Fragments"]
+    scorer_options = [
+        "Ngram",
+        "Scaffold",
+        "Cluster",
+        "Original",
+        "Fragments",
+        "Fragments Match",
+    ]
     scorer_name = st.sidebar.selectbox(
         "Scorer", scorer_options, key="scorer_select"
     )
@@ -66,7 +76,7 @@ def plot_generated_molecules_from_file(file_path):
         steps = list(range(steps[0], steps[1] + 1, steps_increment))
     # --- Scorer properties UI ---
     scorer_props = get_scorer_properties_ui(scorer_name)
-    scorer_props["selection_criteria"] = selection_criteria_ui()
+    scorer_props["selection_criteria"] = {} # selection_criteria_ui()
     scorer_props["scorer_name"] = scorer_name
 
     run_scorer = st.sidebar.button("Run scorer")
@@ -101,6 +111,18 @@ def plot_generated_molecules_from_file(file_path):
             hover_data=[filtered_data.index],
             render_mode="webgl",
         )
+        fig_2.update_layout(
+            coloraxis_colorbar=dict(
+                title=dict(
+                    text=hue_column_2,  # or your custom title
+                    side="right",  # 'right', 'top', 'bottom'
+                    font=dict(size=14),
+                ),
+                # You can also adjust x/y to move the colorbar itself
+                # x=1.05,  # move colorbar horizontally
+                # y=0.5,   # move colorbar vertically
+            )
+        )
         selected_points_2 = st.plotly_chart(
             fig_2,
             use_container_width=True,
@@ -108,6 +130,7 @@ def plot_generated_molecules_from_file(file_path):
             key="iris",
             on_select="rerun",
         )
+
         if len(selected_points_2.selection.points) > 0:
             st.session_state.hover_indexs = [
                 selected_points_2.selection.points[x]["customdata"]["0"]
@@ -196,6 +219,18 @@ def plot_generated_molecules(filtered_data, key="second", symbol_column=None):
             yaxis_title=y_column_2,
         )
 
+        fig_2.update_layout(
+            coloraxis_colorbar=dict(
+                title=dict(
+                    text=hue_column_2,  # or your custom title
+                    side="right",  # 'right', 'top', 'bottom'
+                    font=dict(size=14),
+                ),
+                # You can also adjust x/y to move the colorbar itself
+                # x=1.05,  # move colorbar horizontally
+                # y=0.5,   # move colorbar vertically
+            )
+        )
         selected_points_2 = st.plotly_chart(
             fig_2,
             use_container_width=True,

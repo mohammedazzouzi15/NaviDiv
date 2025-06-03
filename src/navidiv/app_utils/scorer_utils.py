@@ -40,17 +40,17 @@ def run_scorer_on_dataframe(
             continue
         smiles_list = df_copy["SMILES"].tolist()
         scores = df_copy["Score"].tolist()
-        try:
-            scores_result = scorer.get_score(
-                smiles_list=smiles_list,
-                scores=scores,
-                additional_columns_df={"step": step},
-            )
-            scores_list.append(scores_result)
-            succesfull_steps.append(step)
-        except Exception as e:
-            st.error(f"Scorer error in '{scorer_name}' at step {step}: {e}")
-            continue
+        # try:
+        scores_result = scorer.get_score(
+            smiles_list=smiles_list,
+            scores=scores,
+            additional_columns_df={"step": step},
+        )
+        scores_list.append(scores_result)
+        succesfull_steps.append(step)
+        # except Exception as e:
+        #   st.error(f"Scorer error in '{scorer_name}' at step {step}: {e}")
+        #   continue
         scores_result_copy = scores_result.copy()
         scores_result_copy.pop("Unique Fragments")
         score_status_placeholder.write(
@@ -114,7 +114,12 @@ def get_scorer_properties_ui(scorer_name):
         props["ngram_size"] = st.sidebar.number_input(
             "Ngram size", min_value=2, max_value=20, value=10, step=1
         )
-    if scorer_name in ["Ngram", "Scaffold", "Cluster", "Original"]:
+        props["min_count_fragments"] = st.sidebar.number_input(
+            "min_count_fragments", min_value=0, max_value=10, value=5, step=1
+        )
+        props["output_path"] = st.session_state.output_path
+
+    if scorer_name in ["Scaffold", "Cluster", "Original"]:
         props["output_path"] = st.session_state.output_path
         props["min_count_fragments"] = st.sidebar.number_input(
             "min_count_fragments", min_value=0, max_value=10, value=0, step=1
@@ -145,10 +150,10 @@ def get_scorer_properties_ui(scorer_name):
             "Reference CSV path",
             value="/media/mohammed/Work/Navi_diversity/examples/df_original.csv",
         )
-    if scorer_name == "Fragments":
+    if scorer_name == "Fragments" or scorer_name == "Fragments Match":
         props["output_path"] = st.session_state.output_path
         props["min_count_fragments"] = st.sidebar.number_input(
-            "min_count_fragments", min_value=1, max_value=10, value=1, step=1
+            "min_count_fragments", min_value=0, max_value=10, value=0, step=1
         )
     return props
 

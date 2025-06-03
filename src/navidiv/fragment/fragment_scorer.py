@@ -60,7 +60,7 @@ class FragmentScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _cout_substructure_in_smiles(self, smiles_list, fragment):
+    def _count_substructure_in_smiles(self, smiles_list, fragment):
         """Check if ngram is in smiles"""
         if not hasattr(self, "_mol_smiles"):
             self._mol_smiles = [
