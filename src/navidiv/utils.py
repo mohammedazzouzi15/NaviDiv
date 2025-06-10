@@ -23,19 +23,26 @@ def add_mean_of_numeric_columns(df, steps) -> dict:
 
 
 def groupby_results(df):
+    df = df[df["Molecules_with_Fragment"] > 0]
+    # delete rows where molecules_countaining_fragment is not a list
+    df = df[
+        df["molecules_countaining_fragment"].apply(
+            lambda x: isinstance(eval(x), list)
+        )
+    ]
     grouped_by_df = df.groupby(["Substructure"]).agg(
         {
             "Count": ["sum", "max"],
             "step": ["max", "min", "count", lambda x: list(x)],
             "median_score_fragment": ["max", "min", "mean", lambda x: list(x)],
             "diff_median_score": ["max", "min", "mean", lambda x: list(x)],
-            "Ratio of Molecules with Fragment": [
+            "Ratio_of Molecules_with_Fragment": [
                 "max",
                 "first",
                 "mean",
                 lambda x: list(x),
             ],
-            "Molecules with Fragment": [
+            "Molecules_with_Fragment": [
                 "max",
                 "first",
                 "mean",
@@ -77,7 +84,7 @@ def groupby_results(df):
         "Total Number of Molecules with Substructure",
         "Number of Molecules with Substructure List",
         "Molecules containing fragment",
-        "Number of Molecules with fragment",
+        "Number of Molecules_with_Fragment",
     ]
 
     grouped_by_df["count_perc_ratio"] = grouped_by_df.apply(
@@ -111,6 +118,12 @@ def initialize_scorer(scorer_props: dict):
             output_path=scorer_props.get("output_path"),
             min_count_fragments=scorer_props.get("min_count_fragments", 1),
         )
+    elif scorer_name == "ScaffoldGNN":
+        from navidiv.scaffold_gnn.Scaffold_GNN import ScaffoldGNNScorer
+
+        scorer = ScaffoldGNNScorer(
+            output_path=scorer_props.get("output_path"),
+        )
     elif scorer_name == "Fragments":
         from navidiv.fragment import fragment_scorer
 
@@ -138,6 +151,19 @@ def initialize_scorer(scorer_props: dict):
         scorer = cluster_similarity_scorer.ClusterSimScorer(
             output_path=scorer_props.get("output_path"),
             threshold=scorer_props.get("threshold", 0.25),
+        )
+    elif scorer_name == "RingScorer":
+        from navidiv import ring_scorer
+
+        scorer = ring_scorer.RingScorer(
+            output_path=scorer_props.get("output_path"),
+        )
+    elif scorer_name == "FGscorer":
+        from navidiv import fg_scorer
+
+        scorer = fg_scorer.FGScorer(
+            output_path=scorer_props.get("output_path"),
+            # min_count_fragments=scorer_props.get("min_count_fragments", 1),
         )
     elif scorer_name == "Original":
         from navidiv import orginal_similarity_scorer

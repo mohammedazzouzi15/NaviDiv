@@ -82,10 +82,10 @@ class ClusterSimScorer(BaseScore):
         self._similarity_to_itself = calculate_similarity(
             search_fps, search_fps
         )
-        df_similarity = pd.DataFrame(
-            self._similarity_to_itself,
-        )
-        df_similarity.to_csv(self._output_path + "/similarity.csv")
+        #df_similarity = pd.DataFrame(
+        #    self._similarity_to_itself,
+        #)
+        #df_similarity.to_csv(self._output_path + "/similarity.csv")
         clusters = self.get_clusters(self._similarity_to_itself)
         clusters_smiles = [self._smiles_list[i] for i in clusters]
         fragments, over_represented_fragments = self._from_list_to_count_df(
@@ -168,9 +168,9 @@ class ClusterSimScorer(BaseScore):
             self._fragments_df["Count"] > self._min_count_fragments
         ]
         self._fragments_df["molecules_countaining_fragment"] = (
-            self._fragments_df["Substructure"].apply(
-                lambda x: process_fragment(x, self._smiles_list)
-            )
+            self._fragments_df[
+                "Substructure"
+            ].apply(lambda x: process_fragment(x, self._smiles_list))
         )
 
         if self.add_num_atoms:
@@ -189,7 +189,10 @@ class ClusterSimScorer(BaseScore):
             axis=1,
         )
         self._fragments_df[
-            ["Molecules containing fragment", "Number of Molecules in Cluster"]
+            [
+                "Molecules containing fragment",
+                "Number of Molecules_with_Fragment",
+            ]
         ] = flatten_dataframe_to_unique_column(
             self._fragments_df.apply(
                 lambda x: df[
@@ -210,7 +213,7 @@ class ClusterSimScorer(BaseScore):
                 axis=1,
             )
         )
-        self._fragments_df[["Number of Molecules with fragment"]] = (
+        self._fragments_df[["Number of Molecules_with_Fragment List"]] = (
             flatten_dataframe_to_column(
                 self._fragments_df.apply(
                     lambda x: df[
@@ -223,14 +226,16 @@ class ClusterSimScorer(BaseScore):
             )
         )
 
+
         self._fragments_df = self._fragments_df[
             [
                 "Substructure",
                 "Molecules containing fragment",
-                "Number of Molecules with fragment",
+                "Number of Molecules_with_Fragment",
                 "Mean score cluster",
                 "Steps",
-                "Molecules with fragment",
+                "Number of Molecules_with_Fragment List",
+                # "Molecules_with_Fragment",
             ]
         ]
         self._fragments_df["step min"] = self._fragments_df["Steps"].apply(

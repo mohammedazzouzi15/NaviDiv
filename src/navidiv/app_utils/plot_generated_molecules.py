@@ -1,7 +1,5 @@
 """Module for plotting results from a CSV file in Streamlit."""
 
-from pathlib import Path
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go  # Add this import at the top if not present
@@ -13,7 +11,6 @@ from navidiv.app_utils.molecules_drawing import draw_molecule
 from navidiv.app_utils.scorer_utils import (
     get_scorer_properties_ui,
     run_scorer_on_dataframe,
-    selection_criteria_ui,
 )
 from navidiv.utils import (
     get_smiles_column,
@@ -46,6 +43,8 @@ def plot_generated_molecules_from_file(file_path):
         "Original",
         "Fragments",
         "Fragments Match",
+        "RingScorer",
+        "FGscorer",
     ]
     scorer_name = st.sidebar.selectbox(
         "Scorer", scorer_options, key="scorer_select"
@@ -69,14 +68,11 @@ def plot_generated_molecules_from_file(file_path):
             value=10,
             step=1,
         )
-        st.session_state.output_path = st.sidebar.text_input(
-            "Output path",
-            value=Path(file_path).parent / "scorer_output",
-        )
+
         steps = list(range(steps[0], steps[1] + 1, steps_increment))
     # --- Scorer properties UI ---
     scorer_props = get_scorer_properties_ui(scorer_name)
-    scorer_props["selection_criteria"] = {} # selection_criteria_ui()
+    scorer_props["selection_criteria"] = {}  # selection_criteria_ui()
     scorer_props["scorer_name"] = scorer_name
 
     run_scorer = st.sidebar.button("Run scorer")
@@ -213,8 +209,9 @@ def plot_generated_molecules(filtered_data, key="second", symbol_column=None):
         fig_2 = go.Figure()
         fig_2.add_trace(background_trace.data[0])
         fig_2.add_trace(foreground_trace.data[0])
+        fig_2.data[1].marker.size = 16  # Only foreground trace
         fig_2.update_layout(
-            title=f"Plot of {x_column_2} vs {y_column_2}",
+            # title=f"Plot of {x_column_2} vs {y_column_2}",
             xaxis_title=x_column_2,
             yaxis_title=y_column_2,
         )
@@ -243,23 +240,27 @@ def plot_generated_molecules(filtered_data, key="second", symbol_column=None):
                 selected_points_2.selection.points[x]["customdata"]["0"]
                 for x in range(len(selected_points_2.selection.points))
             ]
-            st.dataframe(
-                filtered_data.iloc[st.session_state.hover_indexs][
-                    list(set([x_column_2, y_column_2, hue_column_2]))
-                ]
-            )
-            smiles_column = get_smiles_column(filtered_data)
-            img = draw_molecule(
-                Chem.MolFromSmiles(
+            if any(
+                x in filtered_data[foreground_mask].index
+                for x in st.session_state.hover_indexs
+            ):
+                st.dataframe(
                     filtered_data.iloc[st.session_state.hover_indexs][
-                        smiles_column
-                    ].to_numpy()[0]
+                        list(set([x_column_2, y_column_2, hue_column_2]))
+                    ]
                 )
-            )
-            if img is not None:
-                st.image(
-                    img,
-                    caption=(
-                        f" {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].to_numpy()[0]}"
-                    ),
+                smiles_column = get_smiles_column(filtered_data)
+                img = draw_molecule(
+                    Chem.MolFromSmiles(
+                        filtered_data.iloc[st.session_state.hover_indexs][
+                            smiles_column
+                        ].to_numpy()[0]
+                    )
                 )
+                if img is not None:
+                    st.image(
+                        img,
+                        caption=(
+                            f" {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].to_numpy()[0]}"
+                        ),
+                    )

@@ -14,11 +14,9 @@ def check_mols_has_bond_not_in_ring(mol):
 
 def Fragment_rings(mol):
     frags = set()
-    smarts_to_check = "[R0]"
     if mol is None:
         return frags
     Chem.Kekulize(mol, clearAromaticFlags=True)
-    smarts_mol = Chem.MolFromSmarts(smarts_to_check)
     atoms_in_rings = []
     atoms_in_multiple_rings = set()
     ring_info = mol.GetRingInfo()
@@ -44,10 +42,6 @@ def Fragment_rings(mol):
         frags.update(
             Chem.GetMolFrags(mol_copy, asMols=True, sanitizeFrags=True)
         )
-    #frags = [frag for frag in frags if not frag.HasSubstructMatch(smarts_mol)]
-    #frags = [
-    #    frag for frag in frags if not check_mols_has_bond_not_in_ring(frag)
-    #]
     return frags
 
 

@@ -361,8 +361,7 @@ def MacFrag(mol, maxBlocks=6, maxSR=8, asMols=False, minFragAtoms=1):
     m2 = BreakBRICSBonds(mol)
 
     blocks = Chem.GetMolFrags(m2, asMols=True)
-    #blocks = [Chem.MolToSmiles(x, True) for x in frags]
-    #blocks = Chem.GetMolFrags(fragmol, asMols=True)
+
     for block in blocks:
         tmp = copy.deepcopy(block)
         tmp_smiles = Chem.MolToSmiles(tmp)

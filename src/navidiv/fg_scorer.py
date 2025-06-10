@@ -35,7 +35,7 @@ class FGScorer(BaseScore):
             tuple: DataFrame with fragment info, None (for compatibility)
         """
         func_groups = []
-        
+
         for smi in smiles_list:
             if smi == "None":
                 continue
@@ -51,9 +51,21 @@ class FGScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _count_substructure_in_smiles(self, smiles_list, ngram):
+    def _count_substructure_in_smiles(self, smiles_list, fragment):
         """Check if ngram is in smiles"""
-        return len([smiles for smiles in smiles_list if ngram in smiles])
+        self._mol_smiles = [
+            Chem.MolFromSmiles(smiles)
+            for smiles in smiles_list
+            if smiles != "None"
+        ]
+
+        return len(
+            [
+                mol
+                for mol in self._mol_smiles
+                if mol.HasSubstructMatch(Chem.MolFromSmarts(fragment))
+            ]
+        )
 
     def _comparison_function(
         self,

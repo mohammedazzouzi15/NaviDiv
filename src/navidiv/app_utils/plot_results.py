@@ -94,7 +94,6 @@ def plot_list_column_distribution(df):
         inplace=True,
     )
     # Make sure only up to 10 different indexes are shown
-    df_list_columns["index"] = df_list_columns.index
     if len(df_list_columns["index"].unique()) > 10:
         df_list_columns = df_list_columns[
             df_list_columns["index"].isin(
@@ -151,23 +150,25 @@ def plot_results(file_path):
         "Mean score cluster",
         "Mean diff score",
         "Number of Molecules with fragment",
+        "Number of Molecules_with_fragment",
+        "Number of Molecules_with_Fragment",
         "step count",
         "step min",
     ]
-    columns = columns_to_keep
+    columns = [x for x in columns if x in columns_to_keep]
     col_columns_selection = st.columns(3)
     with col_columns_selection[0]:
         x_column = st.selectbox(
             "X-axis column",
             columns,
-            index=len(columns) - 2,
+            index=len(columns) -1,
         )
     with col_columns_selection[1]:
         y_column = st.selectbox("Y-axis column ", columns)
     with col_columns_selection[2]:
         hue_column = st.selectbox(
             "Hue column",
-            columns_to_keep,
+            columns,
         )
     filtered_data.reset_index(drop=True, inplace=True)
     fig = px.scatter(

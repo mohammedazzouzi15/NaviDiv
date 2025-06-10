@@ -150,7 +150,12 @@ def get_scorer_properties_ui(scorer_name):
             "Reference CSV path",
             value="/media/mohammed/Work/Navi_diversity/examples/df_original.csv",
         )
-    if scorer_name == "Fragments" or scorer_name == "Fragments Match":
+    if (
+        scorer_name == "Fragments"
+        or scorer_name == "Fragments Match"
+        or scorer_name == "FGscorer"
+        or scorer_name == "RingScorer"
+    ):
         props["output_path"] = st.session_state.output_path
         props["min_count_fragments"] = st.sidebar.number_input(
             "min_count_fragments", min_value=0, max_value=10, value=0, step=1

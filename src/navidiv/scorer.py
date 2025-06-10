@@ -351,12 +351,12 @@ class BaseScore:
         ) * 100
         ngrams_df = ngrams_df.sort_values(by="Count ratio", ascending=False)
         ngrams_df = ngrams_df.reset_index(drop=True)
-        ngrams_df["Molecules with Fragment"] = ngrams_df["Substructure"].apply(
+        ngrams_df["Molecules_with_Fragment"] = ngrams_df["Substructure"].apply(
             lambda x: self._count_substructure_in_smiles(smiles_list, x)
         )
 
-        ngrams_df["Ratio of Molecules with Fragment"] = (
-            ngrams_df["Molecules with Fragment"] / len(smiles_list)
+        ngrams_df["Ratio_of Molecules_with_Fragment"] = (
+            ngrams_df["Molecules_with_Fragment"] / len(smiles_list)
         ) * 100
         if self._output_path:
             try:
