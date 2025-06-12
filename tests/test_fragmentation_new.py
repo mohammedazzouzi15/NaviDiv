@@ -156,6 +156,4 @@ if __name__ == "__main__":
         }
     )
     fragment_df.to_csv("fragments.csv", index=False)
-    # plot_scaffold_network(
-    #    fragments, filename="scaffold_network.png", labels=None
-    # )
+

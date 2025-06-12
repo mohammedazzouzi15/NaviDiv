@@ -71,21 +71,19 @@ class ClusterSimScorer(BaseScore):
             if smiles != "None"
         ]
         self._mol_smiles = [mol for mol in self._mol_smiles if mol is not None]
+        # sort the mol_smiles by their number of atoms
+        self._mol_smiles.sort(key=lambda x: x.GetNumAtoms())
         self._smiles_list = [
             smiles
             for smiles in smiles_list
             if smiles != "None" and Chem.MolFromSmiles(smiles) is not None
         ]
-
+        
         search_fps = get_fingerprints(self._mol_smiles)
 
         self._similarity_to_itself = calculate_similarity(
             search_fps, search_fps
         )
-        #df_similarity = pd.DataFrame(
-        #    self._similarity_to_itself,
-        #)
-        #df_similarity.to_csv(self._output_path + "/similarity.csv")
         clusters = self.get_clusters(self._similarity_to_itself)
         clusters_smiles = [self._smiles_list[i] for i in clusters]
         fragments, over_represented_fragments = self._from_list_to_count_df(
@@ -132,11 +130,11 @@ class ClusterSimScorer(BaseScore):
     def additional_metrics(self):
         """Calculate additional metrics for the scorer."""
         np.fill_diagonal(self._similarity_to_itself, 0)
-        mean_distance = np.mean(self._similarity_to_itself)
-        std_distance = np.std(self._similarity_to_itself)
+        mean_similarity = np.mean(self._similarity_to_itself)
+        std_similarity = np.std(self._similarity_to_itself)
         return {
-            "mean_distance": mean_distance,
-            "std_distance": std_distance,
+            "mean_similarity": mean_similarity,
+            "std_similarity": std_similarity,
         }
 
     def aggregate_df(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -225,7 +223,6 @@ class ClusterSimScorer(BaseScore):
                 )
             )
         )
-
 
         self._fragments_df = self._fragments_df[
             [

@@ -19,14 +19,13 @@ class BaseScore:
         """Initialize the BaseScore class.
 
         Args:
-            min_count_fragments (int): Minimum count of fragments to consider.
             output_path (str | None): Path to save output files.
         """
         self._output_path = output_path
         self.add_num_atoms = True
-        self._csv_name = "fragments"
+        self._csv_name = "Default"
         self._fragments_df = None
-        self.selected_fragments = None
+        self._filtered_fragments = None  # renamed from selected_fragments
         self._min_count_fragments = 3
         self.overrepresented_fragments_min_perc = 20
         self.overrepresented_fragments = None
@@ -105,77 +104,60 @@ class BaseScore:
         def process_fragment(
             fragment: str, smiles: list[str], scores: list[float]
         ) -> list[float]:
-            # frag_mol = Chem.MolFromSmarts(fragment)
-            # if frag_mol is None:
-            #    return [0.0] * 9
-            mol_score = [
+            # ...existing code...
+            molecule_scores = [
                 (sm, score)
                 for score, sm in zip(scores, smiles, strict=False)
-                if sm != "None"  # and Chem.MolFromSmiles(sm) is not None
+                if sm != "None"
             ]
-            scores_all = [score for _, score in mol_score]
+            scores_all = [score for _, score in molecule_scores]
             contains_fragment_dict = {}
-            for smiles, score in mol_score:
+            for smiles, score in molecule_scores:
                 if smiles not in contains_fragment_dict:
                     contains_fragment_dict[smiles] = self._comparison_function(
                         smiles=smiles, fragment=fragment
                     )
 
-            scores_containing_fragment = [
+            scores_with_fragment = [
                 score
-                for smiles, score in mol_score
+                for smiles, score in molecule_scores
                 if contains_fragment_dict[smiles]  # type: ignore
             ]
-            scores_not_containing_fragment = [
+            scores_without_fragment = [
                 score
-                for smiles, score in mol_score
+                for smiles, score in molecule_scores
                 if not contains_fragment_dict[smiles]  # type: ignore
             ]
-            molecules_countaining_fragment = [
+            molecules_with_fragment = [
                 smiles
-                for smiles, score in mol_score
+                for smiles, score in molecule_scores
                 if contains_fragment_dict[smiles]
             ]  # type: ignore
 
-            if len(scores_containing_fragment) == 0:
-                return [0.0] * 10
+            if len(scores_with_fragment) == 0:
+                return [0.0] * 4
             try:
-                mean_score = np.mean(scores_all)
-                std_score = np.std(scores_all)
-                mean_score_fragment = np.mean(scores_containing_fragment)
-                std_score_fragment = np.std(scores_containing_fragment)
                 median_score = np.median(scores_all)
-                median_score_fragment = np.median(scores_containing_fragment)
-                mean_score_not_fragment = np.mean(
-                    scores_not_containing_fragment
-                )
-                std_score_not_fragment = np.std(scores_not_containing_fragment)
-                median_score_not_fragment = np.median(
-                    scores_not_containing_fragment
-                )
-                smiles_countaining_fragment = molecules_countaining_fragment
+                median_score_fragment = np.median(scores_with_fragment)
+
+                median_score_not_fragment = np.median(scores_without_fragment)
+                smiles_with_fragment = molecules_with_fragment
             except (ValueError, TypeError):
                 logging.exception(
                     "Error calculating score metrics for fragment: %s",
                     fragment,
                 )
-                return [0.0] * 10
+                return [0.0] * 4
             return [
-                mean_score,
-                std_score,
-                mean_score_fragment,
-                std_score_fragment,
                 median_score,
                 median_score_fragment,
-                mean_score_not_fragment,
-                std_score_not_fragment,
                 median_score_not_fragment,
-                smiles_countaining_fragment,
+                smiles_with_fragment,
             ]
 
         self._fragments_df = self._fragments_df[
             self._fragments_df["Count"] > self._min_count_fragments
-        ]
+        ]  # select fragments with count greater than min_count_fragments
         if self._fragments_df.shape[0] == 0:
             logging.warning(
                 "No fragments found with count greater than %d",
@@ -184,16 +166,10 @@ class BaseScore:
             return self._fragments_df
         self._fragments_df[
             [
-                "mean_score",
-                "std_score",
-                "mean_score_fragment",
-                "std_score_fragment",
                 "median_score",
                 "median_score_fragment",
-                "mean_score_not_fragment",
-                "std_score_not_fragment",
                 "median_score_not_fragment",
-                "molecules_countaining_fragment",
+                "molecules_with_fragment",
             ]
         ] = self._fragments_df.apply(
             lambda row: pd.Series(
@@ -264,16 +240,16 @@ class BaseScore:
 
     def select_overrepresented_fragments(self):
         """Select overrepresented fragments based on the defined criteria."""
-        self.selected_fragments = self._fragments_df.copy()
+        self._filtered_fragments = self._fragments_df.copy()
         if self._fragments_df is None:
             raise ValueError("Fragments DataFrame is not initialized.")
         for col, value in self.selection_criteria.items():
-            if col not in self.selected_fragments.columns:
+            if col not in self._filtered_fragments.columns:
                 continue
-            self.selected_fragments = self.selected_fragments[
-                self.selected_fragments[col] > value
+            self._filtered_fragments = self._filtered_fragments[
+                self._filtered_fragments[col] > value
             ]
-        self.selected_fragments.to_csv(
+        self._filtered_fragments.to_csv(
             f"{self._output_path}/{self._csv_name}_selected_fragments.csv",
             index=False,
             mode="a",
@@ -281,7 +257,7 @@ class BaseScore:
                 f"{self._output_path}/{self._csv_name}_selected_fragments.csv"
             ),
         )
-        return self.selected_fragments
+        return self._filtered_fragments
 
     def get_score(
         self,
@@ -314,21 +290,19 @@ class BaseScore:
             )
         for col, value in additional_columns_df.items():
             self._fragments_df[col] = value
-        # self.select_overrepresented_fragments()
         dict_results = {
             "Percentage of Unique Fragments": unicity_ratio,
             "Total Number of Fragments": self.total_number_of_fragments,
             "Number of Unique Fragments": len(unique_fragments),
-            # "Selected Fragments": self.selected_fragments.shape[0],
             "Unique Fragments": unique_fragments,
         }
         dict_results = {**dict_results, **self.additional_metrics()}
         elapsed_time = time.time() - time_to_get_count
-        print(f"time to get added score metrics {elapsed_time:.2f} seconds")
+        logging.info(
+            f"time to get added score metrics {elapsed_time:.2f} seconds"
+        )
 
         return dict_results
-
-    # Generated by Copilot
 
     def _from_list_to_count_df(
         self,
@@ -351,12 +325,12 @@ class BaseScore:
         ) * 100
         ngrams_df = ngrams_df.sort_values(by="Count ratio", ascending=False)
         ngrams_df = ngrams_df.reset_index(drop=True)
-        ngrams_df["Molecules_with_Fragment"] = ngrams_df["Substructure"].apply(
-            lambda x: self._count_substructure_in_smiles(smiles_list, x)
-        )
+        ngrams_df["Number_of_molecules_with_fragment"] = ngrams_df[
+            "Substructure"
+        ].apply(lambda x: self._count_substructure_in_smiles(smiles_list, x))
 
-        ngrams_df["Ratio_of Molecules_with_Fragment"] = (
-            ngrams_df["Molecules_with_Fragment"] / len(smiles_list)
+        ngrams_df["Ratio_of_Molecules_with_Fragment"] = (
+            ngrams_df["Number_of_molecules_with_fragment"] / len(smiles_list)
         ) * 100
         if self._output_path:
             try:

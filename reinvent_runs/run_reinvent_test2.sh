@@ -15,9 +15,9 @@ python_script_path="/media/mohammed/Work/Navi_diversity/src/navidiv/reinvent/"
 config_path="/media/mohammed/Work/Navi_diversity/reinvent_runs/conf_folder"
 config_name="test"
 
-run_name=test4
+run_name=Full_Filters_long
 wd="/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/test/$run_name"
 smart_list_path="$wd/full_smartlist.txt"
 mkdir -p $wd
 
-conda run -n $ENV_NAME python3 $python_script_path/run_reinvent_2.py --config-name $config_name --config-path $config_path  name=stage0 wd=$wd 
+conda run -n $ENV_NAME python3 $python_script_path/run_reinvent_2.py --config-name $config_name --config-path $config_path  name=stage0 wd=$wd reinvent_common.max_steps=10000 

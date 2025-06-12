@@ -13,15 +13,16 @@ from navidiv.utils import (
 )
 
 SCORERS = [
-    #"Ngram",
-    #"Scaffold",
-    #"Cluster",
-    #"Original",
-    #"RingScorer",
-    #"FGscorer",
-    #"Fragments Match",
-    #"Fragments",
-    "ScaffoldGNN",
+    "Ngram",
+    "Scaffold",
+    "Cluster",
+    "Original",
+    "RingScorer",
+    "FGscorer",
+    # "Fragments Match",
+    "Fragmets_basic",
+    "Fragments_default",
+    #"ScaffoldGNN",
 ]
 
 
@@ -48,9 +49,16 @@ def get_default_props(scorer_name, output_path):
     if scorer_name in ["Scaffold", "Cluster", "Original", "Fragments Match"]:
         props["min_count_fragments"] = 0
     if scorer_name == "Scaffold":
-        props["scaffold_type"] = "csk_bm"
+        props["scaffold_type"] = "basic_framework"
     if scorer_name == "Cluster":
         props["threshold"] = 0.25
+    if scorer_name == "Fragmets_basic":
+        props["tranfomation_mode"] = "basic_wire_frame"
+        props["scorer_name"] = "Fragments"
+
+    if scorer_name == "Fragments_default":
+        props["tranfomation_mode"] = "none"
+        props["scorer_name"] = "Fragments"
     if scorer_name == "Original":
         props["threshold"] = 0.3
         props["reference_csv"] = (
@@ -81,7 +89,7 @@ def run_scorer(steps, df, scorer, scorer_name, output_path):
             succesfull_steps.append(step)
         except Exception as e:
             print(f"Error running {scorer_name} on step {step}: {e}")
-        
+
     if scores_list:
         df_scores = pd.DataFrame(scores_list)
 
@@ -147,10 +155,14 @@ def main():
     os.makedirs(args.output_path, exist_ok=True)
     df = pd.read_csv(args.df_path)
     steps = df["step"].unique().tolist()
+    steps.sort()
+    print(f"Found {len(steps)} unique steps in the dataset.")
     max_number_of_steps = 100
-    steps = np.linspace(
-        min(steps), max(steps), max_number_of_steps, dtype=int
-    ).tolist()
+    if len(steps) > max_number_of_steps:
+        indices = np.linspace(
+            0, len(steps) - 1, max_number_of_steps, dtype=int
+        )
+        steps = [steps[i] for i in indices]
 
     for scorer_name in SCORERS:
         print(f"Running scorer: {scorer_name}")

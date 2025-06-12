@@ -23,10 +23,10 @@ def add_mean_of_numeric_columns(df, steps) -> dict:
 
 
 def groupby_results(df):
-    df = df[df["Molecules_with_Fragment"] > 0]
+    df = df[df["Number_of_molecules_with_fragment"] > 0]
     # delete rows where molecules_countaining_fragment is not a list
     df = df[
-        df["molecules_countaining_fragment"].apply(
+        df["molecules_with_fragment"].apply(
             lambda x: isinstance(eval(x), list)
         )
     ]
@@ -36,20 +36,14 @@ def groupby_results(df):
             "step": ["max", "min", "count", lambda x: list(x)],
             "median_score_fragment": ["max", "min", "mean", lambda x: list(x)],
             "diff_median_score": ["max", "min", "mean", lambda x: list(x)],
-            "Ratio_of Molecules_with_Fragment": [
-                "max",
-                "first",
-                "mean",
-                lambda x: list(x),
-            ],
-            "Molecules_with_Fragment": [
+            "Number_of_molecules_with_fragment": [
                 "max",
                 "first",
                 "mean",
                 "sum",
                 lambda x: list(x),
             ],
-            "molecules_countaining_fragment": [
+            "molecules_with_fragment": [
                 lambda x: set([xsy for xs in x for xsy in eval(xs)]),
                 lambda x: len(set([xsy for xs in x for xsy in eval(xs)])),
             ],
@@ -74,10 +68,6 @@ def groupby_results(df):
         "diff_median_score_min",
         "Mean diff score",
         "diff_median_score_list",
-        "Count_perc_per_molecule_max",
-        "Count_perc_per_molecule_first",
-        "Count_perc_per_molecule_mean",
-        "Count_perc_per_molecule_list",
         "count_per_molecule_max",
         "count_per_molecule_first",
         "count_per_molecule_mean",
@@ -88,9 +78,8 @@ def groupby_results(df):
     ]
 
     grouped_by_df["count_perc_ratio"] = grouped_by_df.apply(
-        lambda x: x["Count_perc_per_molecule_max"]
-        / x["Count_perc_per_molecule_first"]
-        if x["Count_perc_per_molecule_first"] != 0
+        lambda x: x["count_per_molecule_max"] / x["count_per_molecule_first"]
+        if x["count_per_molecule_first"] != 0
         else 0,
         axis=1,
     )
@@ -116,10 +105,10 @@ def initialize_scorer(scorer_props: dict):
 
         scorer = fragment_scorer_matching.FragmentMatchScorer(
             output_path=scorer_props.get("output_path"),
-            min_count_fragments=scorer_props.get("min_count_fragments", 1),
+            min_count_fragments=scorer_props.get("min_count_fragments", 2),
         )
     elif scorer_name == "ScaffoldGNN":
-        from navidiv.scaffold_gnn.Scaffold_GNN import ScaffoldGNNScorer
+        from navidiv.scaffold.Scaffold_GNN import ScaffoldGNNScorer
 
         scorer = ScaffoldGNNScorer(
             output_path=scorer_props.get("output_path"),
@@ -130,43 +119,48 @@ def initialize_scorer(scorer_props: dict):
         scorer = fragment_scorer.FragmentScorer(
             output_path=scorer_props.get("output_path"),
             min_count_fragments=scorer_props.get("min_count_fragments"),
+            tranfomation_mode=scorer_props.get(
+                "tranfomation_mode", "basic_wire_frame"
+            ),
         )
     elif scorer_name == "Ngram":
-        from navidiv import Ngram_scorer
+        from navidiv.stringbased import Ngram_scorer
 
         scorer = Ngram_scorer.NgramScorer(
             ngram_size=scorer_props.get("ngram_size", 10),
             output_path=scorer_props.get("output_path"),
         )
     elif scorer_name == "Scaffold":
-        from navidiv import Scaffold_scorer
+        from navidiv.scaffold import Scaffold_scorer
 
         scorer = Scaffold_scorer.Scaffold_scorer(
             output_path=scorer_props.get("output_path"),
-            scaffold_type=scorer_props.get("scaffold_type", "csk_bm"),
+            scaffold_type=scorer_props.get(
+                "scaffold_type", "basic_wire_frame"
+            ),
         )
     elif scorer_name == "Cluster":
-        from navidiv import cluster_similarity_scorer
+        from navidiv.simlarity import cluster_similarity_scorer
 
         scorer = cluster_similarity_scorer.ClusterSimScorer(
             output_path=scorer_props.get("output_path"),
             threshold=scorer_props.get("threshold", 0.25),
         )
     elif scorer_name == "RingScorer":
-        from navidiv import ring_scorer
+        from navidiv.fragment import ring_scorer
 
         scorer = ring_scorer.RingScorer(
             output_path=scorer_props.get("output_path"),
         )
     elif scorer_name == "FGscorer":
-        from navidiv import fg_scorer
+        from navidiv.fragment import fg_scorer
 
         scorer = fg_scorer.FGScorer(
             output_path=scorer_props.get("output_path"),
             # min_count_fragments=scorer_props.get("min_count_fragments", 1),
         )
     elif scorer_name == "Original":
-        from navidiv import orginal_similarity_scorer
+        from navidiv.simlarity import orginal_similarity_scorer
 
         # Use original smiles as reference if available
         df_original = pd.read_csv(

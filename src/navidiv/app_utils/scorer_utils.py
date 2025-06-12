@@ -127,7 +127,12 @@ def get_scorer_properties_ui(scorer_name):
     if scorer_name == "Scaffold":
         props["scaffold_type"] = st.sidebar.selectbox(
             "Scaffold type",
-            ["csk_bm", "csk", "bajorath", "murcko", "real_bm"],
+            [
+                "basic_wire_frame",
+                "murcko_framework",
+                "elemental_wire_frame",
+                "basic_framework",
+            ],
             index=0,
         )
     if scorer_name == "Cluster":
@@ -159,6 +164,16 @@ def get_scorer_properties_ui(scorer_name):
         props["output_path"] = st.session_state.output_path
         props["min_count_fragments"] = st.sidebar.number_input(
             "min_count_fragments", min_value=0, max_value=10, value=0, step=1
+        )
+        props["tranfomation_mode"] = st.sidebar.selectbox(
+            "Transformation mode",
+            [
+                "none",
+                "basic_framework",
+                "elemental_wire_frame",
+                "basic_wire_frame",
+            ],
+            index=0,
         )
     return props
 

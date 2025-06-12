@@ -8,12 +8,12 @@ than the classical Murcko scaffold.
 
 from rdkit import Chem
 
-from navidiv.scaffold_gnn.utils import (
+from navidiv.scaffold.Scaffold_scorer import Scaffold_scorer
+from navidiv.scaffold.utils import (
     ModelLoader,
     annotate_molecule,
     get_scaffold,
 )
-from navidiv.Scaffold_scorer import Scaffold_scorer
 
 
 class Params:
@@ -51,6 +51,7 @@ class ScaffoldGNNScorer(Scaffold_scorer):
             scaffold_type=scaffold_type,
         )
         self._dict_scaffolds = {}
+        self._dict_targets = {}
 
         self.number_of_endpoints = 1
         self.smiles_type = "rdkit_smiles"
@@ -76,6 +77,7 @@ class ScaffoldGNNScorer(Scaffold_scorer):
         molecule = annotate_molecule(molecule, embeddings[0])
         # print(f"ScaffoldGNNScorer.get_scaffold: {smiles}")
         self._dict_scaffolds[smiles] = get_scaffold(molecule, self.threshold)
+        self._dict_targets[smiles] = target
         return self._dict_scaffolds[smiles]
 
     def get_scaffolds(self, smiles_list: list[str]) -> list[str]:

@@ -8,3 +8,4 @@ docs/source/_autosummary
 reinvent_runs/runs/*
 examples/results*/*
 outputs/*
+figures/*

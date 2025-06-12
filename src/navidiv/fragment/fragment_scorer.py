@@ -3,16 +3,19 @@ import logging
 
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem.Scaffolds import rdScaffoldNetwork
 
-from navidiv.fragment.utils.Mac_frag import MacFrag
+from navidiv.fragment.utils import (
+    GetRingSystems,
+    get_fragment_not_in_scaffolds,
+    transform_molecules,
+)
 from navidiv.scorer import BaseScore
 
 DIFF_MEDIAN_SCOR_LIMIT = 0.2
-MIN_COUNT_FRAGMENTS = 1
+MIN_COUNT_FRAGMENTS = 2
 MAX_BLOCKS = 100
 MAX_SR = 1
-MIN_FRAG_ATOMS = 10
+MIN_FRAG_ATOMS = 8
 MAX_FRAGMENT_ATOMS = 40
 
 
@@ -23,6 +26,7 @@ class FragmentScorer(BaseScore):
         self,
         min_count_fragments: int = MIN_COUNT_FRAGMENTS,
         output_path: str | None = None,
+        tranfomation_mode: str = "none",
     ) -> None:
         """Initialize FragmentScore.
 
@@ -30,10 +34,31 @@ class FragmentScorer(BaseScore):
             min_count_fragments (int): Minimum count for fragments to be
                 considered.
             output_path (str | None): Path to save output files.
+            tranfomation_mode (str): Transformation mode for fragments.
+                the different modes are:
+                - "none": No transformation
+                - "basic_framework": Anonymize atoms and set all bonds to single.
+                - "elemental_wire_frame": Set all bonds to single, keep atom types.
+                - "basic_wire_frame": Set all atoms to carbon, keep bond orders.
+                - "none": No transformation, return the original molecule.
+
         """
         super().__init__(output_path=output_path)
         self._min_count_fragments = min_count_fragments
         self._min_num_atoms_fragments = MIN_FRAG_ATOMS
+        self.tranfomation_mode = tranfomation_mode
+        self.fragment_dict = {}
+        self._csv_name = f"fragments_{self.tranfomation_mode}"
+
+    def update_transformation_mode(self, transformation_mode: str) -> None:
+        """Update the transformation mode for fragment scoring.
+
+        Args:
+            transformation_mode (str): The new transformation mode.
+        """
+        self.tranfomation_mode = transformation_mode
+        self._csv_name = f"fragments_{self.tranfomation_mode}"
+        self.fragment_dict = {}
 
     def get_count(self, smiles_list: list[str]) -> tuple[pd.DataFrame, None]:
         """Calculate the percentage of each fragment in the dataset.
@@ -44,18 +69,9 @@ class FragmentScorer(BaseScore):
         Returns:
             tuple: DataFrame with fragment info, None (for compatibility)
         """
-        mol_smiles = [
-            Chem.MolFromSmiles(smiles)
-            for smiles in smiles_list
-            if smiles != "None"
-        ]
-        mol_smiles = [mol for mol in mol_smiles if mol is not None]
-        self._mol_smiles = mol_smiles
         fragments = []
-        fragments = get_fragments(mol_smiles, self._min_num_atoms_fragments)
+        fragments = self.get_fragments(smiles_list)
 
-        # for mol in mol_smiles:
-        #   fragments.extend(get_fragment(mol))
         fragments, over_represented_fragments = self._from_list_to_count_df(
             smiles_list,
             fragments,
@@ -67,11 +83,72 @@ class FragmentScorer(BaseScore):
         """Check if ngram is in smiles"""
         return len(
             [
-                mol
-                for mol in self._mol_smiles
-                if mol.HasSubstructMatch(Chem.MolFromSmiles(fragment))
+                smiles
+                for smiles in smiles_list
+                if self._comparison_function(smiles, fragment)
             ]
         )
+
+    def get_fragments(self, smiles_list: list[str]) -> list[str]:
+        """Extract fragments from a list of SMILES strings using MacFrag and fused ring fragmentation."""
+        mol_smiles = [
+            Chem.MolFromSmiles(smiles)
+            for smiles in smiles_list
+            if smiles != "None"
+        ]
+        mol_smiles = [mol for mol in mol_smiles if mol is not None]
+        self._mol_smiles = mol_smiles
+        fragments = []
+        for smiles in smiles_list:
+            if smiles in self.fragment_dict:
+                fragments.extend(self.fragment_dict[smiles])
+                continue
+            mol = Chem.MolFromSmiles(smiles)
+            if mol is None:
+                self.fragment_dict[smiles] = []
+                continue
+            fragments_mol = self._get_fragment(mol)
+            self.fragment_dict[smiles] = fragments_mol
+            fragments.extend(fragments_mol)
+        self._fragments = fragments
+        return fragments
+
+    def _get_fragment(self, mol: Chem.Mol) -> list[str]:
+        """Get fragments from a molecule."""
+        fragments_mol = []
+        new_nodes_copy = get_fragment_not_in_scaffolds(
+            mol, self._min_num_atoms_fragments
+        )
+        rings = GetRingSystems(mol)
+        for new_nodes in rings:
+            mol_node = Chem.MolFromSmiles(new_nodes)
+            if mol_node is None:
+                logging.warning(
+                    "Ring transformation failed for: %s", new_nodes
+                )
+                continue
+            if mol_node.GetNumAtoms() > self._min_num_atoms_fragments:
+                new_nodes_copy.append(new_nodes)
+        for fragment in new_nodes_copy:
+            mol_fragment = Chem.MolFromSmiles(fragment)
+            mol_fragment = transform_molecules(
+                mol_fragment, self.tranfomation_mode
+            )
+            if mol_fragment is None:
+                logging.warning(
+                    "Fragment transformation failed for: %s", fragment
+                )
+                continue
+            smiles_transformed = Chem.MolToSmiles(
+                mol_fragment, isomericSmiles=True
+            )
+            if smiles_transformed is None:
+                logging.warning(
+                    "Fragment transformation failed for: %s", fragment
+                )
+                continue
+            fragments_mol.append(smiles_transformed)
+        return fragments_mol
 
     def _comparison_function(
         self,
@@ -80,182 +157,33 @@ class FragmentScorer(BaseScore):
         mol: Chem.Mol | None = None,
     ) -> bool:
         """Check if the fragment is present in the SMILES string or molecule."""
-        if smiles is None and mol is None:
-            return False
-        if smiles is not None:
-            mol = Chem.MolFromSmiles(smiles)
-        if fragment is None or mol is None:
-            return False
-        try:
-            return mol.HasSubstructMatch(Chem.MolFromSmiles(fragment))
-        except ValueError:
-            logging.exception(
-                "Error in substructure match for fragment: %s", fragment
-            )
-            return False
+        if smiles not in self.fragment_dict:
+            self.get_fragments([smiles])
+        return fragment in self.fragment_dict[smiles]
 
+    def additional_metrics(self):
+        """Calculate additional metrics for the scorer."""
+        from collections import Counter
 
-def get_fragments(mols: list[Chem.Mol], min_num_atoms) -> list[str]:
-    """Extract fragments from a list of SMILES strings using MacFrag and fused ring fragmentation."""
-    # params = rdScaffoldNetwork.BRICSScaffoldParams()
-    # net = build_scaffold_network(mols, params)
-    #    print("Scaffold network built with", len(net.nodes), "nodes")
-    fragments = []
-    for mol in mols:
-        new_nodes_copy = get_fragment_not_in_scaffolds(mol, min_num_atoms)
-        fragments.extend(new_nodes_copy)
-    return fragments
+        count_fragments = Counter(self._fragments)
+        ngrams_above_10 = {
+            ngram: count
+            for ngram, count in count_fragments.items()
+            if count > 10
+        }
+        ngrams_above_5 = {
+            ngram: count
+            for ngram, count in count_fragments.items()
+            if count > 5
+        }
+        ngrams_below_2 = {
+            ngram: count
+            for ngram, count in count_fragments.items()
+            if count < 2
+        }
 
-
-def build_scaffold_network(mols, params=None):
-    if params is None:
-        params = rdScaffoldNetwork.ScaffoldNetworkParams()
-        params.collectMolCounts = True
-    net = rdScaffoldNetwork.CreateScaffoldNetwork(mols, params)
-    return net
-
-
-def remove_substructure(mol, substruct_smarts):
-    """Remove a substructure (given as SMARTS) from a molecule.
-    Returns a list of resulting molecule fragments (as Chem.Mol objects).
-    If the substructure is not found, returns the original molecule in a list.
-    Generated by Copilot.
-    """
-    patt = Chem.MolFromSmarts(substruct_smarts)
-    if patt is None:
-        raise ValueError("Invalid SMARTS pattern")
-    matches = mol.GetSubstructMatch(patt)
-    if not matches:
-        return []
-    # Remove the atoms in the match
-    emol = Chem.EditableMol(mol)
-    # Remove atoms in reverse order to avoid reindexing issues
-    for idx in sorted(matches, reverse=True):
-        emol.RemoveAtom(idx)
-    frag_mol = emol.GetMol()
-    # Split into fragments if disconnected
-    frags = Chem.GetMolFrags(frag_mol, asMols=True, sanitizeFrags=False)
-    return list(frags)
-
-
-def get_fragment_not_in_scaffolds(mol, min_num_atoms) -> list[str]:
-    """Get fragments of a molecule that are not present in the given scaffolds.
-    Returns a list of fragments (as SMARTS).
-    Generated by Copilot.
-    """
-    params = rdScaffoldNetwork.BRICSScaffoldParams()
-    fragments = set(
-        [Chem.MolToSmiles(mol)]
-    )  # Start with the original molecule
-    net = build_scaffold_network([mol], params)
-    for scaffold in net.nodes:
-            if mol.HasSubstructMatch(Chem.MolFromSmiles(scaffold)):
-                if Chem.MolFromSmiles(scaffold).GetNumAtoms() >= min_num_atoms:
-                    fragments.add(scaffold)
-            else:
-                continue
-            for frag in remove_substructure(mol, scaffold):
-                if (
-                    mol.HasSubstructMatch(frag)
-                    and frag.GetNumAtoms() >= min_num_atoms
-                ):
-                    fragments.add(Chem.MolToSmiles(frag))
-        #except Exception as e:
-        #    print(f"Error processing scaffold '{scaffold}': {e}")
-        #    continue
-    fragments = [
-        smi for smi in fragments if Chem.MolFromSmiles(smi) is not None
-    ]
-    return fragments
-
-
-def delete_non_ring_atoms(mol: Chem.Mol) -> Chem.Mol:
-    """Delete non-ring atoms from the molecule."""
-    atoms_to_delete = [
-        atom.GetIdx() for atom in mol.GetAtoms() if not atom.IsInRing()
-    ]
-    mol_rw = Chem.RWMol(mol)
-    mol_rw.BeginBatchEdit()
-    for atom in atoms_to_delete:
-        mol_rw.RemoveAtom(atom)
-    mol_rw.CommitBatchEdit()
-    return Chem.Mol(mol_rw)
-
-
-def get_fragment(mol: Chem.Mol) -> list[str]:
-    """Extract fragments from a molecule using MacFrag and fused ring fragmentation."""
-    if mol is None:
-        return []
-    mol_fragments = [
-        mol_frag
-        for mol_frag in MacFrag(
-            mol,
-            maxBlocks=MAX_BLOCKS,
-            maxSR=MAX_SR,
-            asMols=True,
-            minFragAtoms=MIN_FRAG_ATOMS,
-        )
-    ]
-
-    return [Chem.MolToSmarts(mol_fragment) for mol_fragment in mol_fragments]
-    # return smarts_list
-
-
-"""
-    for smarts in smarts_list:
-        mol_frag = Chem.MolFromSmarts(smarts)
-        try:
-            Chem.SanitizeMol(mol_frag)
-            ring_info = mol_frag.GetRingInfo()
-            if (
-                mol_frag is not None
-                and mol_frag.GetNumAtoms() < MAX_FRAGMENT_ATOMS
-                and mol_frag.GetNumAtoms() > MIN_FRAG_ATOMS
-                and ring_info.NumRings() > 2
-            ):
-                new_frag = fragment_mols_fused_ring(mol_frag)
-                fragments.update(
-                    [
-                        Chem.MolToSmarts(frag)
-                        for frag in new_frag
-                        if frag is not None
-                    ]
-                )
-        except (ValueError, TypeError):
-            logging.exception(
-                "Error in fused ring fragmentation for fragment: %s",
-                smarts,
-            )
-            continue
-    fragment_ring_only = [
-        delete_non_ring_atoms(Chem.MolFromSmarts(fragment))
-        for fragment in fragments
-    ]
-    fragments.update(
-        [Chem.MolToSmarts(fragment) for fragment in fragment_ring_only]
-    )
-    fragments = [fragment for fragment in fragments if "." not in fragment]
-    fragments = [
-        fragment
-        for fragment in fragments
-        if len(fragment) > MIN_FRAG_ATOMS * 4
-    ]
-    mol_fragments = [
-        Chem.MolFromSmarts(fragment)
-        for fragment in fragments
-        if Chem.MolFromSmarts(fragment) is not None
-    ]
-    fragments_cleaned = []
-    for mol_fragment in mol_fragments:
-        if mol_fragment is not None:
-            try:
-                if mol.HasSubstructMatch(mol_fragment):
-                    fragments_cleaned.append(Chem.MolToSmarts(mol_fragment))
-            except (ValueError, TypeError):
-                logging.exception(
-                    "Issue with fragment: %s; Error in matching fragment.",
-                    Chem.MolToSmarts(mol_fragment),
-                )
-                continue
-    return fragments_cleaned
-"""
+        return {
+            "Appeared more than 10 times": len(ngrams_above_10),
+            "Appeared more than 5 times": len(ngrams_above_5),
+            "Appeared once": len(ngrams_below_2),
+        }
