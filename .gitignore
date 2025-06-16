@@ -9,3 +9,4 @@ reinvent_runs/runs/*
 examples/results*/*
 outputs/*
 figures/*
+nohup.out

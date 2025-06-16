@@ -9,8 +9,8 @@ scorer_dicts:
     score_every: 10
     groupby_every: 20
     selection_criteria:
-      count_perc_ratio: 500
-      Total Number of Molecules with Substructure: 50000
+      count_perc_ratio: 5
+      Total Number of Molecules with Substructure: 50
     custom_alert_name: customalertsscaffold
   - prop_dict:
       scorer_name: Ngram
@@ -20,8 +20,8 @@ scorer_dicts:
     score_every: 10
     groupby_every: 30
     selection_criteria:
-      count_perc_ratio: 3000
-      Total Number of Molecules with Substructure: 10000
+      count_perc_ratio: 300
+      Total Number of Molecules with Substructure: 100000
     custom_alert_name: customalertsngrams
   - prop_dict:
       scorer_name: Fragments
@@ -32,7 +32,7 @@ scorer_dicts:
     groupby_every: 20
     selection_criteria:
       count_perc_ratio: 500
-      Total Number of Molecules with Substructure: 50000
+      Total Number of Molecules with Substructure: 500000
     custom_alert_name: customalerts
   - prop_dict:
       scorer_name: Cluster

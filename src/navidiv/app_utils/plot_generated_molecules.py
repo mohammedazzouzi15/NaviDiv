@@ -209,11 +209,15 @@ def plot_generated_molecules(filtered_data, key="second", symbol_column=None):
         fig_2 = go.Figure()
         fig_2.add_trace(background_trace.data[0])
         fig_2.add_trace(foreground_trace.data[0])
-        fig_2.data[1].marker.size = 16  # Only foreground trace
+        fig_2.data[0].hovertemplate = ""
+        fig_2.data[0].hoverinfo = "skip"  # Skip hover info for background trace
+        fig_2.data[0].marker.size = 6  # Only background trace
+        fig_2.data[1].marker.size = 12  # Only foreground trace
         fig_2.update_layout(
             # title=f"Plot of {x_column_2} vs {y_column_2}",
             xaxis_title=x_column_2,
             yaxis_title=y_column_2,
+            hovermode="closest",
         )
 
         fig_2.update_layout(
@@ -223,9 +227,6 @@ def plot_generated_molecules(filtered_data, key="second", symbol_column=None):
                     side="right",  # 'right', 'top', 'bottom'
                     font=dict(size=14),
                 ),
-                # You can also adjust x/y to move the colorbar itself
-                # x=1.05,  # move colorbar horizontally
-                # y=0.5,   # move colorbar vertically
             )
         )
         selected_points_2 = st.plotly_chart(
