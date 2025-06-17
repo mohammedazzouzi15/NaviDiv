@@ -117,6 +117,15 @@ def plot_list_column_distribution(df):
 def plot_results(file_path):
     try:
         st.session_state.df = pd.read_csv(file_path, index_col=False)
+        #if st.button("add atoms count"):
+            # Add a column with the number of atoms in each molecule
+        st.session_state.df["Number of Atoms"] = st.session_state.df[
+            "Substructure"
+        ].apply(
+            lambda x: Chem.MolFromSmiles(x).GetNumAtoms()
+            if Chem.MolFromSmiles(x)
+            else 0
+        )
 
         # st.session_state.df = st.session_state.df[columns_to_keep]
         st.session_state.df["index"] = st.session_state.df.index
@@ -161,7 +170,7 @@ def plot_results(file_path):
         x_column = st.selectbox(
             "X-axis column",
             columns,
-            index=len(columns) -1,
+            index=len(columns) - 1,
         )
     with col_columns_selection[1]:
         y_column = st.selectbox("Y-axis column ", columns)

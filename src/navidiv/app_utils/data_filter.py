@@ -19,8 +19,8 @@ def data_filter(data, key="ori"):
     for col in filter_columns:
         col_dtype = data[col].dtype
         if pd.api.types.is_numeric_dtype(col_dtype):
-            min_val = float(data[col].min())
-            max_val = float(data[col].max())
+            min_val = float(filtered_data[col].min())
+            max_val = float(filtered_data[col].max())
             filter_range = st.slider(
                 f"Filter {col} range",
                 min_value=min_val,
@@ -37,7 +37,7 @@ def data_filter(data, key="ori"):
             pd.api.types.is_categorical_dtype(col_dtype)
             or data[col].nunique() < 50
         ):
-            categories = data[col].unique().tolist()
+            categories = filtered_data[col].unique().tolist()
             selected_categories = st.multiselect(
                 f"Select {col} values",
                 options=categories,
