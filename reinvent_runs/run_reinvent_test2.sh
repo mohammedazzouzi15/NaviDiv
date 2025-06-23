@@ -10,7 +10,7 @@ then
 fi
 
 ENV_NAME="OPTMOLGEN2"
-export PYTHONPATH="${PYTHONPATH}:/media/mohammed/Work/SF_generative/script"
+export PYTHONPATH="${PYTHONPATH}:/media/mohammed/Work/Navi_diversity/src/navidiv/reinvent"
 python_script_path="/media/mohammed/Work/Navi_diversity/src/navidiv/reinvent/"
 config_path="/media/mohammed/Work/Navi_diversity/reinvent_runs/conf_folder"
 config_name=test

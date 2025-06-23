@@ -6,6 +6,7 @@ __pycache__
 docs/build
 docs/source/_autosummary
 reinvent_runs/runs/*
+reinvent_runs/SF_files/*
 examples/results*/*
 outputs/*
 figures/*

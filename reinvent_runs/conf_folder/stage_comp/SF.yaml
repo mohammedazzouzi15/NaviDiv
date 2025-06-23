@@ -8,8 +8,8 @@ model_params_FORMED_PROP:
 
 model_params_chemprop:
   model_dir: [
-    "/media/mohammed/Work/SF_generative/model/formed_chemprop/fold_0/model_0/",
-    "/media/mohammed/Work/SF_generative/model/formed_t1t2/fold_0/model_0/",
+    "/media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed_chemprop/fold_0/model_0/",
+    "/media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed_t1t2/fold_0/model_0/",
   ]
   params_list: ["energy_score","T2-T1"]
   scoring_function: ["ChemPropFORMED","ChemPropFORMEDT1T2"]

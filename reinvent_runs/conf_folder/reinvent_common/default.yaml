@@ -1,7 +1,7 @@
   run_type: "staged_learning"
   smart_list_path: "None"
-  prior_filename: "/media/mohammed/Work/SF_generative/model/formed.prior"
-  agent_filename: "/media/mohammed/Work/SF_generative/model/formed.prior"
+  prior_filename: "/media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed.prior"
+  agent_filename: "/media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed.prior"
   avoid_filename: []
   max_steps: 1000
   batch_size: 128
