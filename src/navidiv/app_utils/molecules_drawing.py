@@ -8,7 +8,7 @@ from rdkit.Chem.Draw import rdMolDraw2D
 def draw_molecule(mol):
     """Draw a molecule using RDKit and return the image."""
     try:
-        drawer = rdMolDraw2D.MolDraw2DCairo(400, 200)
+        drawer = rdMolDraw2D.MolDraw2DCairo(300, 200)
         drawer.DrawMolecule(mol)
         drawer.FinishDrawing()
         img = Image.open(io.BytesIO(drawer.GetDrawingText()))

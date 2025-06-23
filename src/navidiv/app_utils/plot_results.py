@@ -10,6 +10,10 @@ from rdkit import Chem
 from navidiv.app_utils.data_filter import data_filter
 from navidiv.app_utils.molecules_drawing import draw_molecule
 
+from .file_name_registry import initiate_file_name_registry
+
+file_name_registry = initiate_file_name_registry()
+
 
 def cumulative_sum_per_substructure(df, col):
     """Computes the cumulative sum of a specified column grouped by 'Substructure'.
@@ -82,11 +86,19 @@ def plot_list_column_distribution(df):
     col1, col2 = st.columns(2)
     with col1:
         selected_col_x = st.selectbox(
-            "x axis", list_columns, key="list_col_select_1"
+            "X-axis column",
+            list_columns,
+            key="list_col_select_1",
+            format_func=lambda x: file_name_registry.get_display_name(x),
+            index=0,
         )
     with col2:
         selected_col_y = st.selectbox(
-            "y axis", list_columns, key="list_col_select"
+            "Y-axis column",
+            list_columns,
+            key="list_col_select",
+            format_func=lambda x: file_name_registry.get_display_name(x),
+            index=3,
         )
     df_list_columns.sort_values(
         by=[selected_col_x],
@@ -109,16 +121,27 @@ def plot_list_column_distribution(df):
         # labels={"x": selected_col_x, "y": selected_col_y},
         # title=f"List Lengths in '{selected_col_x}' vs '{selected_col_y}'",
     )
-
-    # fig = px.histogram(list_lengths, nbins=20, labels={'value': 'List Length'}, title=f"Distribution of list lengths in '{selected_col}'")
+    fig.update_layout(
+        xaxis_title=file_name_registry.get_display_name(selected_col_x),
+        yaxis_title=file_name_registry.get_display_name(selected_col_y),
+        legend_title_text="Index",
+    )
+    # put the legend in the top right corner
+    fig.update_layout(
+        legend=dict(
+            orientation="h",
+            y=1.01,
+            x=0.03,
+        )
+    )
     st.plotly_chart(fig, use_container_width=True, key="list_col_dist")
 
 
-def plot_results(file_path):
+def plot_results(file_path, column_3):
     try:
         st.session_state.df = pd.read_csv(file_path, index_col=False)
-        #if st.button("add atoms count"):
-            # Add a column with the number of atoms in each molecule
+        # if st.button("add atoms count"):
+        # Add a column with the number of atoms in each molecule
         st.session_state.df["Number of Atoms"] = st.session_state.df[
             "Substructure"
         ].apply(
@@ -130,31 +153,16 @@ def plot_results(file_path):
         # st.session_state.df = st.session_state.df[columns_to_keep]
         st.session_state.df["index"] = st.session_state.df.index
 
-        st.write("#### Data Preview")
-        st.dataframe(st.session_state.df.head(2))
+        # st.write("#### Data Preview")
+        # st.dataframe(st.session_state.df.head(2))
     except Exception as e:
         st.error(f"Error reading CSV file: {e}")
         return
     if len(st.session_state.df) == 0:
         st.warning("No data to display.")
         return
-    filtered_data = data_filter(st.session_state.df, key="results")
-    col_not_object = [
-        col
-        for col in filtered_data.columns
-        if filtered_data[col].dtype != "object"
-    ]
-
-    col_not_object = col_not_object + [
-        col
-        for col in filtered_data.columns
-        if isinstance(filtered_data[col].values[0], str)
-        and len(set(filtered_data[col].values)) < 100
-    ]  # avoid color scale for large number of unique values
-
-    columns = filtered_data.columns.tolist()
     columns_to_keep = [
-        # "Substructure",
+        "Substructure",
         "index",
         "Mean score cluster",
         "Mean diff score",
@@ -164,20 +172,38 @@ def plot_results(file_path):
         "step count",
         "step min",
     ]
-    columns = [x for x in columns if x in columns_to_keep]
+    columns_to_keep = st.session_state.df.columns.intersection(
+        columns_to_keep
+    ).tolist()
+    # filtered_data = st.session_state.df[columns_to_keep]
+    filtered_data = data_filter(
+        st.session_state.df, key="results", columns_option=columns_to_keep
+    )
+
+    columns = columns_to_keep
+    columns.remove("Substructure")  # Remove 'Substructure' from columns
+
     col_columns_selection = st.columns(3)
     with col_columns_selection[0]:
         x_column = st.selectbox(
             "X-axis column",
             columns,
-            index=len(columns) - 1,
+            index=2,
+            format_func=lambda x: file_name_registry.get_display_name(x),
         )
     with col_columns_selection[1]:
-        y_column = st.selectbox("Y-axis column ", columns)
+        y_column = st.selectbox(
+            "Y-axis column ",
+            columns,
+            index=4,
+            format_func=lambda x: file_name_registry.get_display_name(x),
+        )
     with col_columns_selection[2]:
         hue_column = st.selectbox(
             "Hue column",
             columns,
+            index=0,
+            format_func=lambda x: file_name_registry.get_display_name(x),
         )
     filtered_data.reset_index(drop=True, inplace=True)
     fig = px.scatter(
@@ -188,16 +214,17 @@ def plot_results(file_path):
         hover_data=[filtered_data.index],
     )
     fig.update_layout(
+        xaxis_title=file_name_registry.get_display_name(x_column),
+        yaxis_title=file_name_registry.get_display_name(y_column),
         coloraxis_colorbar=dict(
             title=dict(
-                text=hue_column,  # or your custom title
+                text=file_name_registry.get_display_name(hue_column)
+                if hue_column
+                else "",
                 side="right",  # 'right', 'top', 'bottom'
                 font=dict(size=14),
             ),
-            # You can also adjust x/y to move the colorbar itself
-            # x=1.05,  # move colorbar horizontally
-            # y=0.5,   # move colorbar vertically
-        )
+        ),
     )
     selected_points = st.plotly_chart(
         fig,
@@ -206,58 +233,75 @@ def plot_results(file_path):
         key="iris_3",
         on_select="rerun",
     )
-    if len(selected_points.selection.points) > 0:
-        st.session_state.hover_indexs = [
-            selected_points.selection.points[x]["customdata"]["0"]
-            for x in range(len(selected_points.selection.points))
-        ]
-        st.dataframe(
-            filtered_data.iloc[st.session_state.hover_indexs][
-                list(set(["Substructure", x_column, y_column, hue_column]))
+    with column_3:
+        if len(selected_points.selection.points) > 0:
+            st.session_state.hover_indexs = [
+                selected_points.selection.points[x]["customdata"]["0"]
+                for x in range(len(selected_points.selection.points))
             ]
-        )
-        smiles_column = "Substructure"  # get_smiles_column(filtered_data)
-        if smiles_column in filtered_data.columns:
-            mol = Chem.MolFromSmiles(
-                filtered_data.iloc[st.session_state.hover_indexs][
-                    smiles_column
-                ].values[0]
-            )
-            if mol is None:
-                mol = Chem.MolFromSmarts(
+            st.write("#### Selected Fragment Details")
+            col_diplay_molecules = st.columns(2)
+            with col_diplay_molecules[0]:
+                st.dataframe(
+                    filtered_data.iloc[st.session_state.hover_indexs][
+                        list(
+                            set(
+                                [
+                                    "Substructure",
+                                    x_column,
+                                    y_column,
+                                    hue_column,
+                                ]
+                            )
+                        )
+                    ].T
+                )
+            smiles_column = "Substructure"  # get_smiles_column(filtered_data)
+            if smiles_column in filtered_data.columns:
+                mol = Chem.MolFromSmiles(
                     filtered_data.iloc[st.session_state.hover_indexs][
                         smiles_column
                     ].values[0]
                 )
-            if mol is None:
-                st.error(
-                    f"Invalid SMILES or SMARTS: {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].values[0]}"
-                )
-            img = draw_molecule(mol)
+                if mol is None:
+                    mol = Chem.MolFromSmarts(
+                        filtered_data.iloc[st.session_state.hover_indexs][
+                            smiles_column
+                        ].values[0]
+                    )
+                if mol is None:
+                    st.error(
+                        f"Invalid SMILES or SMARTS: {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].values[0]}"
+                    )
+                img = draw_molecule(mol)
 
-            if img is not None:
-                st.image(
-                    img,
-                    caption=f" {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].values[0]}",
-                )
-        st.session_state.list_of_molecules_containing_fragment = eval(
-            filtered_data.iloc[st.session_state.hover_indexs][
-                "Molecules containing fragment"
-            ].values[0]
-        )
-        # st.write(
-        #    f"List of molecules containing fragment: {list_of_molecules_containing_fragment}"
-        # )
-    # After the iris_3 chart, plot list column distribution if available
-    plot_list_column_distribution(filtered_data)
+                if img is not None:
+                    with col_diplay_molecules[1]:
+                        st.image(
+                            img,
+                            caption=f" {filtered_data.iloc[st.session_state.hover_indexs][smiles_column].values[0]}",
+                        )
+            st.session_state.list_of_molecules_containing_fragment = eval(
+                filtered_data.iloc[st.session_state.hover_indexs][
+                    "Molecules containing fragment"
+                ].values[0]
+            )
+            # st.write(
+            #    f"List of molecules containing fragment: {list_of_molecules_containing_fragment}"
+            # )
+        # After the iris_3 chart, plot list column distribution if available
+        if len(selected_points.selection.points) > 0:
+            filtered_data = filtered_data.iloc[st.session_state.hover_indexs]
+
+        plot_list_column_distribution(filtered_data)
 
 
 def plot_step_results(file_path):
     try:
         st.session_state.df = pd.read_csv(file_path, index_col=False)
         st.session_state.df["index"] = st.session_state.df.index
-        st.write("#### Data Preview")
-        st.dataframe(st.session_state.df.head(2))
+        # st.write("#### Data Preview")
+        # st.dataframe(st.session_state.df.head(2))
     except Exception as e:
         st.error(f"Error reading CSV file: {e}")
         return
@@ -304,16 +348,17 @@ def plot_step_results(file_path):
         hover_data=[filtered_data.index],
     )
     fig.update_layout(
+        xaxis_title=file_name_registry.get_display_name(x_column),
+        yaxis_title=file_name_registry.get_display_name(y_column),
         coloraxis_colorbar=dict(
             title=dict(
-                text=hue_column,  # or your custom title
+                text=file_name_registry.get_display_name(hue_column)
+                if hue_column
+                else "",
                 side="right",  # 'right', 'top', 'bottom'
                 font=dict(size=14),
             ),
-            # You can also adjust x/y to move the colorbar itself
-            # x=1.05,  # move colorbar horizontally
-            # y=0.5,   # move colorbar vertically
-        )
+        ),
     )
     selected_points = st.plotly_chart(
         fig,
