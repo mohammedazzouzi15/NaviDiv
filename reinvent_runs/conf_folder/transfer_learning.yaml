@@ -1,0 +1,22 @@
+# Hydra configuration file for REINVENT transfer learning
+
+output_dir: "/media/mohammed/Work/Navi_diversity/reinvent_runs/TL/output"
+data_file: "/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/experiment_1206/All_constraints/All_constraints_1.csv"
+n_head: 100000
+n_tail: 20000
+stage1_checkpoint: "/media/mohammed/Work/REINVENT4/priors/reinvent.prior"
+train_filename: "/media/mohammed/Work/Navi_diversity/reinvent_runs/TL/TL_train.csv"
+validation_filename: "/media/mohammed/Work/Navi_diversity/reinvent_runs/TL/TL_validation.csv"
+config_filename: "/media/mohammed/Work/Navi_diversity/reinvent_runs/TL/transfer_learning.toml"
+smiles_column: 4
+
+parameters:
+  num_epochs: 50
+  save_every_n_epochs: 2
+  batch_size: 100
+  sample_batch_size: 2000
+  standardize_smiles: false
+  randomize_smiles: true
+  randomize_all_smiles: false
+  internal_diversity: true
+  device: "cuda:0"

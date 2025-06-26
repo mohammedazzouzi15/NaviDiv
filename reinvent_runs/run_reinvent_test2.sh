@@ -14,7 +14,7 @@ export PYTHONPATH="${PYTHONPATH}:/media/mohammed/Work/Navi_diversity/src/navidiv
 python_script_path="/media/mohammed/Work/Navi_diversity/src/navidiv/reinvent/"
 config_path="/media/mohammed/Work/Navi_diversity/reinvent_runs/conf_folder"
 config_name=test
-wd="/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/experiment_1506_sigma"
+wd="/media/mohammed/Work/Navi_diversity/reinvent_runs/runs/experiment_2306_sigma"
 
 
 for i in 24 48 64 128 256 512; do
