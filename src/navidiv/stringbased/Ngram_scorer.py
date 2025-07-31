@@ -53,9 +53,9 @@ class NgramScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _count_substructure_in_smiles(self, smiles_list, ngram):
-        """Check if ngram is in smiles"""
-        return len([smiles for smiles in smiles_list if ngram in smiles])
+    def _count_pattern_occurrences(self, smiles_list: list[str], ngram: str) -> int:
+        """Count occurrences of an n-gram pattern in the dataset."""
+        return sum(1 for smiles in smiles_list if ngram in smiles)
 
     def _comparison_function(
         self,

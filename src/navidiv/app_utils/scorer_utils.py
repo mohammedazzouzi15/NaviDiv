@@ -51,24 +51,26 @@ def run_scorer_on_dataframe(
         #   st.error(f"Scorer error in '{scorer_name}' at step {step}: {e}")
         #   continue
         scores_result_copy = scores_result.copy()
-        scores_result_copy.pop("Unique Fragments")
+        if "Unique Fragments" in scores_result_copy:
+            scores_result_copy.pop("Unique Fragments")
         score_status_placeholder.write(
             f"### Scoring step {step} for {scorer_name} completed. Scores: {scores_result_copy}",
         )
     if scores_list:
         df_scores = pd.DataFrame(scores_list)
 
-        df_scores["Cumulative Number of unique Fragments"] = (
+        if "Unique Fragments" in df_scores.columns:
+            df_scores["Cumulative Number of unique Fragments"] = (
             cumulative_unique_count(df_scores["Unique Fragments"].tolist())
-        )
-        df_scores["Cumulative Number of Fragments"] = df_scores[
-            "Total Number of Fragments"
-        ].cumsum()
-        df_scores["Cumulative Percentage of Unique Fragments"] = (
-            df_scores["Cumulative Number of unique Fragments"]
-            / df_scores["Cumulative Number of Fragments"]
-        ) * 100
-        df_scores = df_scores.drop("Unique Fragments", axis=1, errors="ignore")
+            )
+            df_scores["Cumulative Number of Fragments"] = df_scores[
+                "Total Number of Fragments"
+            ].cumsum()
+            df_scores["Cumulative Percentage of Unique Fragments"] = (
+                df_scores["Cumulative Number of unique Fragments"]
+                / df_scores["Cumulative Number of Fragments"]
+            ) * 100
+            df_scores = df_scores.drop("Unique Fragments", axis=1, errors="ignore")
         dict_mean = add_mean_of_numeric_columns(data, succesfull_steps)
         for col, mean in dict_mean.items():
             df_scores[col] = mean
@@ -93,6 +95,9 @@ def run_scorer_on_dataframe(
             groupby_results_df = None
         if scorer_name == "Cluster":
             try:
+                print(
+                    f"Aggregating clusters for {scorer_name} with {len(groupby_results_df)} groups."
+                )
                 groupby_results_df.to_csv(
                     f"{st.session_state.output_path}/{scorer._csv_name}/_groupby_results_aggregated_clusters.csv",
                     index=False,
@@ -102,6 +107,7 @@ def run_scorer_on_dataframe(
                     f"{scorer._output_path}/groupby_results_aggregated_clusters.csv",
                     index=False,
                 )
+                print(f"Cluster aggregation completed for {scorer_name}.")
             except Exception as e:
                 st.error(f"Error aggregating clusters: {e}")
                 scores_cluster = None

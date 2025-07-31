@@ -135,7 +135,7 @@ class BaseScore:
             ]  # type: ignore
 
             if len(scores_with_fragment) == 0:
-                return [0.0] * 4
+                return [0.0, 0.0, 0.0, []]
             try:
                 median_score = np.median(scores_all)
                 median_score_fragment = np.median(scores_with_fragment)
@@ -147,7 +147,7 @@ class BaseScore:
                     "Error calculating score metrics for fragment: %s",
                     fragment,
                 )
-                return [0.0] * 4
+                return [0.0, 0.0, 0.0, []]
             return [
                 median_score,
                 median_score_fragment,
@@ -327,7 +327,7 @@ class BaseScore:
         ngrams_df = ngrams_df.reset_index(drop=True)
         ngrams_df["Number_of_molecules_with_fragment"] = ngrams_df[
             "Substructure"
-        ].apply(lambda x: self._count_substructure_in_smiles(smiles_list, x))
+        ].apply(lambda x: self._count_pattern_occurrences(smiles_list, x))
 
         ngrams_df["Ratio_of_Molecules_with_Fragment"] = (
             ngrams_df["Number_of_molecules_with_fragment"] / len(smiles_list)
@@ -346,8 +346,27 @@ class BaseScore:
         self._fragments_df = ngrams_df
         return ngrams_df, None
 
-    def _count_substructure_in_smiles(self, smiles, ngram):
-        """Check if ngram is in smiles"""
-        raise NotImplementedError(
-            "_subs_in_smiles method must be implemented in subclasses."
+    def _count_pattern_occurrences(
+        self, smiles_list: list[str], pattern: str
+    ) -> int:
+        """Count occurrences of a pattern in the dataset.
+
+        Args:
+            smiles_list: List of SMILES strings.
+            pattern: Pattern to search for (interpretation depends on scorer
+                type).
+
+        Returns:
+            Number of molecules containing/matching the pattern.
+
+        Note:
+            The interpretation of 'pattern' depends on the scorer type:
+            - Fragment scorers: structural fragment
+            - N-gram scorers: string substring
+            - Similarity scorers: reference molecule for similarity comparison
+        """
+        msg = (
+            "_count_pattern_occurrences method must be implemented "
+            "in subclasses."
         )
+        raise NotImplementedError(msg)

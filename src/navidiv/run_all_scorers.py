@@ -41,7 +41,7 @@ def get_default_props(scorer_name, output_path):
         "output_path": output_path,
         "scorer_name": scorer_name,
     }
-    props["min_count_fragments"] = 2
+    
     if scorer_name == "Ngram":
         props["scorer_name"] = "Ngram"
         props["ngram_size"] = 10
@@ -55,10 +55,12 @@ def get_default_props(scorer_name, output_path):
     if scorer_name == "Fragmets_basic":
         props["tranfomation_mode"] = "basic_wire_frame"
         props["scorer_name"] = "Fragments"
+        props["min_count_fragments"] = 2
 
     if scorer_name == "Fragments_default":
         props["tranfomation_mode"] = "none"
         props["scorer_name"] = "Fragments"
+        props["min_count_fragments"] = 2
     if scorer_name == "Original":
         props["threshold"] = 0.3
         props["reference_csv"] = (

@@ -1,4 +1,3 @@
-
 import logging
 
 import numpy as np
@@ -24,6 +23,38 @@ def get_fingerprints(molecules):
     return fingerprints_array, fingerprints
 
 
+def tanimoto_distance(fp1, fp2):   
+    """Calculate the Tanimoto distance between two numpy arrays.
+    
+    The Tanimoto distance is defined as 1 - Tanimoto similarity.
+    Tanimoto similarity = |A ∩ B| / |A ∪ B|
+    
+    Args:
+        fp1 (numpy.ndarray): First fingerprint array
+        fp2 (numpy.ndarray): Second fingerprint array
+        
+    Returns:
+        float: Tanimoto distance (0 = identical, 1 = completely different)
+    """
+    # Convert to numpy arrays if not already
+    fp1 = np.array(fp1)
+    fp2 = np.array(fp2)
+    
+    # Calculate intersection (bitwise AND for binary, element-wise min for count)
+    intersection = np.sum(np.minimum(fp1, fp2))
+    
+    # Calculate union (bitwise OR for binary, element-wise max for count)
+    union = np.sum(np.maximum(fp1, fp2))
+    
+    # Handle edge case where both fingerprints are all zeros
+    if union == 0:
+        return 0.0  # Identical empty fingerprints
+    
+    # Calculate Tanimoto similarity
+    tanimoto_similarity = intersection / union
+    
+    # Return Tanimoto distance (1 - similarity)
+    return 1.0 - tanimoto_similarity 
 def perform_tsne(fingerprints_array):
     """Perform t-SNE dimensionality reduction, with options to save or load the model."""
     # Perform t-SNE using sklearn
@@ -38,6 +69,7 @@ def perform_tsne(fingerprints_array):
         learning_rate=10,
         random_state=42,
         method="barnes_hut",
+        metric=lambda x, y: tanimoto_distance(x, y),
     )
     tsne_results = tsne.fit_transform(fingerprints_array)
 

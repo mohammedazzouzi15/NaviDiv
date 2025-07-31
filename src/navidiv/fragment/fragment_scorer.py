@@ -79,15 +79,17 @@ class FragmentScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _count_substructure_in_smiles(self, smiles_list, fragment):
-        """Check if ngram is in smiles"""
-        return len(
-            [
-                smiles
-                for smiles in smiles_list
-                if self._comparison_function(smiles, fragment)
-            ]
-        )
+    def _count_pattern_occurrences(self, smiles_list: list[str], fragment: str) -> int:
+        """Count occurrences of a structural fragment in the dataset."""
+        count = 0
+        fragment_mol = Chem.MolFromSmarts(fragment)
+        if fragment_mol is None:
+            return 0
+        for smiles in smiles_list:
+            mol = Chem.MolFromSmiles(smiles)
+            if mol is not None and mol.HasSubstructMatch(fragment_mol):
+                count += 1
+        return count
 
     def get_fragments(self, smiles_list: list[str]) -> list[str]:
         """Extract fragments from a list of SMILES strings using MacFrag and fused ring fragmentation."""

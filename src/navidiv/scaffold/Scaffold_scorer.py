@@ -134,13 +134,17 @@ class Scaffold_scorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _count_substructure_in_smiles(self, smiles_list, scaffold):
-        """Check if molecule has the same scaffold"""
-        if not hasattr(self, "_scaffolds"):
-            raise ValueError(
-                "Scaffolds have not been calculated. Please run get_count first."
-            )
-        return len([i for i in self._scaffolds if scaffold == i])
+    def _count_pattern_occurrences(self, smiles_list: list[str], scaffold: str) -> int:
+        """Count occurrences of a scaffold pattern in the dataset."""
+        count = 0
+        scaffold_mol = Chem.MolFromSmarts(scaffold)
+        if scaffold_mol is None:
+            return 0
+        for smiles in smiles_list:
+            mol = Chem.MolFromSmiles(smiles)
+            if mol is not None and mol.HasSubstructMatch(scaffold_mol):
+                count += 1
+        return count
 
     def _comparison_function(
         self,
