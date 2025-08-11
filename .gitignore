@@ -12,3 +12,9 @@ outputs/*
 figures/*
 nohup.out
 reinvent_runs/TL/output/*
+
+# dev folder
+.dev/*
+.dev
+outputs
+# Jupyter Notebook checkpoints

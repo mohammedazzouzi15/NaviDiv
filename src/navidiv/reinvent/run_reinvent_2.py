@@ -4,12 +4,11 @@ import os
 import hydra
 import torch
 from omegaconf import DictConfig
-from reinvent.utils import config_parse, setup_logger
-
-from reinvent.Reinvent import setup_responder
-from run_staged_learning_2 import run_staged_learning
+from reinvent.utils import config_parse  , setup_logger
 
 from navidiv.reinvent.InputGenerator import InputGenerator
+
+from navidiv.reinvent import run_staged_learning_2
 
 LOGLEVEL_CHOICES = tuple(
     level.lower() for level in logging._nameToLevel.keys()
@@ -19,12 +18,12 @@ logger = logging.getLogger(__name__)
 
 
 @hydra.main(
-    config_path="/media/mohammed/Work/OPT_MOL_GEN/cases/SF/using_new_RL/conf_folder",
-    config_name="base",
+    config_path="/media/mohammed/Work/Navi_diversity/reinvent_runs/conf_folder",
+    config_name="test",
     version_base="1.1",  # Explicitly specify the compatibility version
 )
 def main(cfg: DictConfig):
-    
+    """Main function to run REINVENT with the given configuration."""
     input_generator = InputGenerator(cfg)
     print(cfg.diversity_scorer)
     os.chdir(input_generator.wd)
@@ -43,8 +42,7 @@ def main(cfg: DictConfig):
         tb_logdir = os.path.abspath(tb_logdir)
         logger.info(f"Writing TensorBoard summary to {tb_logdir}")
 
-
-    run_staged_learning(
+    run_staged_learning_2.run_staged_learning(
         extract_sections(input_config),
         device,
         tb_logdir=tb_logdir,

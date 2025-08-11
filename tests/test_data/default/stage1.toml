@@ -1,0 +1,149 @@
+
+    run_type = "staged_learning"
+    device = "cuda:0"
+    json_out_config = "_stage1.json"
+
+    [parameters]
+
+    prior_file = "/media/mohammed/Work/SF_generative/model/formed.prior"
+    agent_file = "/media/mohammed/Work/SF_generative/model/formed.prior"
+    avoid_file = "[]"
+    check_diversity = "True"
+    check_diverisity_every = 30
+
+    summary_csv_prefix = "default"
+
+    batch_size = 128
+
+    use_checkpoint = true
+
+    [learning_strategy]
+
+    type = "dap"
+    sigma = "64"
+    rate = "0.0001"
+
+
+    [[stage]]
+
+    max_score = 1.0
+    max_steps = 1000
+
+    chkpt_file = "default.chkpt"
+
+    [stage.scoring]
+
+    type = "geometric_mean"  # or arithmetic_mean
+    parallel = false  # do not run scoring components in parallel
+        
+    [[stage.scoring.component]]
+
+    [[stage.scoring.component.ChemPropFORMED.endpoint]] 
+    name = "energy_score"
+    weight = 1.3
+
+    params.checkpoint_dir = "/media/mohammed/Work/SF_generative/model/formed_chemprop/fold_0/model_0/"
+    params.rdkit_2d_normalized = false
+
+    transform.type = "sigmoid"
+    transform.high = 5
+    transform.low = -10
+    transform.k = 0.4
+    
+    [[stage.scoring.component]]
+
+    [[stage.scoring.component.ChemPropFORMEDT1T2.endpoint]] 
+    name = "T2-T1"
+    weight = 0.4
+
+    params.checkpoint_dir = "/media/mohammed/Work/SF_generative/model/formed_t1t2/fold_0/model_0/"
+    params.rdkit_2d_normalized = false
+
+    transform.type = "sigmoid"
+    transform.high = 10
+    transform.low = 0
+    transform.k = 0.4
+    
+    [[stage.scoring.component]]
+    [stage.scoring.component.MolecularWeight]
+    [[stage.scoring.component.MolecularWeight.endpoint]]
+    name = "Molecular weight"  # user chosen name for output
+    weight = 0.6  # weight to fine-tune the relevance of this component
+
+    # A transform ensures that the output from the scoring component ranges
+    # from 0 to 1 to serve as a proper score.  Here we use a double sigmoid
+    # to transform weights into the range 200-500 a.u.
+    transform.type = "double_sigmoid"
+    transform.high = 800.0
+    transform.low = 300.0
+    transform.coef_div = 500.0
+    transform.coef_si = 20.0
+    transform.coef_se = 20.0
+
+    
+
+    [[stage.scoring.component]]
+
+    [stage.scoring.component.SAScore]
+    [[stage.scoring.component.SAScore.endpoint]]
+    name = "SA score"
+    weight = 1
+    transform.type = "reverse_sigmoid"
+    transform.high = 10
+    transform.low = 1
+    transform.k = 0.4
+    
+    [[stage.scoring.component]]
+    [stage.scoring.component.custom_alerts_ngrams]
+    [[stage.scoring.component.custom_alerts_ngrams.endpoint]]
+    name = "custom alerts ngrams"
+    weight = 1
+    params.frag = []
+    
+    [ngram_filter]
+
+    ngram_size = 10
+    min_count_ngram_ratio = 0.1
+    
+    [diversity_filter]
+
+    type = "IdenticalMurckoScaffold"
+    bucket_size = 100
+    minscore = 0.1
+    
+    [inception]
+
+    smiles_file = ""  # no seed SMILES
+    memory_size = 500
+    sample_size = 10
+    
+    [fragment_filter]
+
+    min_count_fragments = 10
+    diff_median_score_limit = 0.1
+    [[stage.scoring.component]]
+    [stage.scoring.component.custom_alerts]
+    [[stage.scoring.component.custom_alerts.endpoint]]
+    name = "custom alerts"
+    weight = 1
+    params.frag = [
+    "[#6;R0]~[#6;R0]",
+]
+    [[stage.scoring.component]]
+    [stage.scoring.component.dissimilarity]
+    [[stage.scoring.component.dissimilarity.endpoint]]
+
+    name = "dissimilarity"
+    weight = 1
+    params.threshold = 0.2
+    params.frag = [
+    "CCCCCCCCCCCCCCC",
+]
+    [[stage.scoring.component]]
+    [stage.scoring.component.custom_alerts_scaffold]
+    [[stage.scoring.component.custom_alerts_scaffold.endpoint]]
+    name = "custom alerts scaffold"
+    weight = 1
+    params.frag = []
+    params.type = "csk_bm"
+    

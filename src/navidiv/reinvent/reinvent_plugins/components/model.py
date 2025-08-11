@@ -4,12 +4,6 @@ from hydra import (
     initialize_config_dir,
 )
 from hydra.core.global_hydra import GlobalHydra
-from OPTMOLGEN.analysis_utils.diversity.generate_scaffold_from_gnn_csv import (
-    annotate_molecule,
-    create_rdkit_mol,
-    generate_mol_scaffold,
-    get_per_atom_property,
-)
 from FORMED_PROP.trainers.Trainer3d import Trainer3d
 from FORMED_PROP.data.Dataloader3D import Dataloader3D
 import numpy as np

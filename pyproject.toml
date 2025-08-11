@@ -17,14 +17,26 @@ dependencies = [
   "streamlit",
   "scikit-learn",
   "igraph",
-  "hydra-core",
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dynamic = ["version"]
 readme = "README.rst"
 description = "Does things for you."
 
-[dependency-groups]
+[project.optional-dependencies]
+reinvent = [
+  "hydra-core",
+  "plotly",
+  "mmpdb==2.1",
+  "pydantic",
+  "tensorboard",
+  "xxhash",
+  "python-dotenv",
+  "molvs",
+  "pathos",
+  "chemprop==1.5.2",
+  "tomli",
+]
 dev = [
   "ruff",
   "mypy",

@@ -15,6 +15,7 @@ from reinvent.runmodes.RL.validation import RLConfig
 from reinvent.runmodes.setup_sampler import setup_sampler
 from reinvent.runmodes.utils import disable_gradients
 from reinvent.scoring import Scorer
+from navidiv.reinvent.reinvent3 import Reinvent3Learning
 
 if TYPE_CHECKING:
     from reinvent.models import ModelAdapter
@@ -324,7 +325,7 @@ def run_staged_learning(
     # FIXME: is there a sensible default, this is only needed by Mol2Mol
     distance_threshold = parameters.distance_threshold
 
-    model_learning = RL.Reinvent3Learning
+    model_learning = Reinvent3Learning
 
     if callable(write_config):
         write_config(config.model_dump())
