@@ -2,15 +2,31 @@
 import logging
 import time  
 from collections import Counter
+from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from rdkit import Chem
 
+# Set up logger
+logger = logging.getLogger(__name__)
+
 
 class BaseScore:
     """Handles fragment scoring and analysis for molecular datasets."""
+    
+    # Constants
+    DEFAULT_MIN_COUNT_FRAGMENTS = 3
+    DEFAULT_OVERREP_MIN_PERC = 20
+    DEFAULT_CSV_NAME = "Default"
+    DEFAULT_HISTOGRAM_BINS = 50
+    DEFAULT_SELECTION_CRITERIA = {
+        "Count_perc_per_molecule": 1,
+        "Count_perc": 1,
+        "diff_median_score": -5,
+        "median_score_fragment": 0,
+    }
 
     def __init__(
         self,
@@ -23,18 +39,46 @@ class BaseScore:
         """
         self._output_path = output_path
         self.add_num_atoms = True
-        self._csv_name = "Default"
+        self._csv_name = self.DEFAULT_CSV_NAME
         self._fragments_df = None
         self._filtered_fragments = None  # renamed from selected_fragments
-        self._min_count_fragments = 3
-        self.overrepresented_fragments_min_perc = 20
+        self._min_count_fragments = self.DEFAULT_MIN_COUNT_FRAGMENTS
+        self.overrepresented_fragments_min_perc = self.DEFAULT_OVERREP_MIN_PERC
         self.overrepresented_fragments = None
-        self.selection_criteria = {
-            "Count_perc_per_molecule": 1,
-            "Count_perc": 1,
-            "diff_median_score": -5,
-            "median_score_fragment": 0,
-        }
+        self.selection_criteria = self.DEFAULT_SELECTION_CRITERIA.copy()
+
+    def _get_output_path(self, filename_suffix: str) -> str:
+        """Generate output file path with consistent naming."""
+        return f"{self._output_path}/{self._csv_name}_{filename_suffix}.csv"
+
+    def _save_to_csv(
+        self, 
+        dataframe: pd.DataFrame, 
+        filename_suffix: str, 
+        append: bool = True
+    ) -> None:
+        """Save DataFrame to CSV with consistent formatting."""
+        if not self._output_path:
+            return
+            
+        filepath = self._get_output_path(filename_suffix)
+        try:
+            dataframe.to_csv(
+                filepath,
+                index=False,
+                mode="a" if append else "w",
+                header=not pd.io.common.file_exists(filepath) if append else True,
+            )
+        except OSError:
+            logger.exception(
+                "Error saving CSV file: %s", filepath
+            )
+
+    def _validate_fragments_df(self) -> None:
+        """Validate that fragments DataFrame is initialized."""
+        if self._fragments_df is None:
+            msg = "Fragments DataFrame is not initialized."
+            raise ValueError(msg)
 
     def update_selection_criteria(
         self,
@@ -66,9 +110,8 @@ class BaseScore:
         Returns:
             tuple: DataFrame with fragment info, None (for compatibility)
         """
-        raise NotImplementedError(
-            "get_count method must be implemented in subclasses."
-        )
+        msg = "get_count method must be implemented in subclasses."
+        raise NotImplementedError(msg)
 
     def _comparison_function(
         self,
@@ -77,11 +120,10 @@ class BaseScore:
         mol: Chem.Mol | None = None,
     ) -> bool:
         """Check if the fragment is present in the SMILES string or molecule."""
-        raise NotImplementedError(
-            "_comparison_function method must be implemented in subclasses."
-        )
+        msg = "_comparison_function method must be implemented in subclasses."
+        raise NotImplementedError(msg)
 
-    def additional_metrics(self):
+    def additional_metrics(self) -> dict[str, Any]:
         """Calculate additional metrics for the fragments."""
         return {}
 
@@ -89,17 +131,21 @@ class BaseScore:
         self,
         smiles_list: list[str],
         scores: list[float],
-        additional_columns_df: {} = {},
+        additional_columns_df: dict[str, Any] | None = None,
     ) -> pd.DataFrame:
         """Add score metrics to the DataFrame.
 
         Args:
             smiles_list (list[str]): List of generated SMILES strings.
             scores (list[float]): List of scores for the generated SMILES.
+            additional_columns_df (dict[str, Any] | None): Additional columns
+                to add to the DataFrame.
 
         Returns:
             pd.DataFrame: DataFrame with score metrics.
         """
+        if additional_columns_df is None:
+            additional_columns_df = {}
 
         def process_fragment(
             fragment: str, smiles: list[str], scores: list[float]
@@ -112,10 +158,12 @@ class BaseScore:
             ]
             scores_all = [score for _, score in molecule_scores]
             contains_fragment_dict = {}
-            for smiles, score in molecule_scores:
-                if smiles not in contains_fragment_dict:
-                    contains_fragment_dict[smiles] = self._comparison_function(
-                        smiles=smiles, fragment=fragment
+            for mol_smiles, _score in molecule_scores:
+                if mol_smiles not in contains_fragment_dict:
+                    contains_fragment_dict[mol_smiles] = (
+                        self._comparison_function(
+                            smiles=mol_smiles, fragment=fragment
+                        )
                     )
 
             scores_with_fragment = [
@@ -143,7 +191,7 @@ class BaseScore:
                 median_score_not_fragment = np.median(scores_without_fragment)
                 smiles_with_fragment = molecules_with_fragment
             except (ValueError, TypeError):
-                logging.exception(
+                logger.exception(
                     "Error calculating score metrics for fragment: %s",
                     fragment,
                 )
@@ -159,7 +207,7 @@ class BaseScore:
             self._fragments_df["Count"] > self._min_count_fragments
         ]  # select fragments with count greater than min_count_fragments
         if self._fragments_df.shape[0] == 0:
-            logging.warning(
+            logger.warning(
                 "No fragments found with count greater than %d",
                 self._min_count_fragments,
             )
@@ -222,10 +270,9 @@ class BaseScore:
             ylabel (str): Label for the y-axis.
             bins (int): Number of bins in the histogram.
         """
-        if self._fragments_df is None:
-            raise ValueError("Fragments DataFrame is not initialized.")
+        self._validate_fragments_df()
         fig, ax = plt.subplots()
-        ax = self._fragments_df["Count"].plot.hist(
+        self._fragments_df["Count"].plot.hist(
             bins=bins,
             alpha=0.7,
             color="blue",
@@ -238,58 +285,57 @@ class BaseScore:
         plt.savefig(f"{self._output_path}/{self._csv_name}_histogram.png")
         plt.close(fig)
 
-    def select_overrepresented_fragments(self):
+    def select_overrepresented_fragments(self) -> pd.DataFrame:
         """Select overrepresented fragments based on the defined criteria."""
+        self._validate_fragments_df()
         self._filtered_fragments = self._fragments_df.copy()
-        if self._fragments_df is None:
-            raise ValueError("Fragments DataFrame is not initialized.")
         for col, value in self.selection_criteria.items():
             if col not in self._filtered_fragments.columns:
                 continue
             self._filtered_fragments = self._filtered_fragments[
                 self._filtered_fragments[col] > value
             ]
-        self._filtered_fragments.to_csv(
-            f"{self._output_path}/{self._csv_name}_selected_fragments.csv",
-            index=False,
-            mode="a",
-            header=not pd.io.common.file_exists(
-                f"{self._output_path}/{self._csv_name}_selected_fragments.csv"
-            ),
-        )
+        self._save_to_csv(self._filtered_fragments, "selected_fragments")
         return self._filtered_fragments
 
     def get_score(
         self,
         smiles_list: list[str],
         scores: list[float],
-        additional_columns_df: {} = {},
-    ) -> pd.DataFrame:
+        additional_columns_df: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Get the score for the fragments.
 
         Args:
             smiles_list (list[str]): List of generated SMILES strings.
             scores (list[float]): List of scores for the generated SMILES.
+            additional_columns_df (dict[str, Any] | None): Additional columns
+                to add to the DataFrame.
 
         Returns:
-            pd.DataFrame: DataFrame with score metrics.
+            dict[str, Any]: Dictionary with score metrics.
         """
+        if additional_columns_df is None:
+            additional_columns_df = {}
+
         start_time = time.time()
         self.get_count(smiles_list)
         time_to_get_count = time.time()
-        print(
-            f"time to get count: {time_to_get_count - start_time:.2f} seconds"
+        logger.info(
+            "Time to get count: %.2f seconds",
+            time_to_get_count - start_time
         )
         unique_fragments = self._fragments_df["Substructure"].to_list()
         self.add_score_metrics(smiles_list, scores, additional_columns_df)
-        if self.total_number_of_fragments == 0:
-            unicity_ratio = 0.0
-        else:
-            unicity_ratio = (
-                len(unique_fragments) / self.total_number_of_fragments * 100
-            )
+        
+        unicity_ratio = (
+            0.0 if self.total_number_of_fragments == 0
+            else len(unique_fragments) / self.total_number_of_fragments * 100
+        )
+        
         for col, value in additional_columns_df.items():
             self._fragments_df[col] = value
+            
         dict_results = {
             "Percentage of Unique Fragments": unicity_ratio,
             "Total Number of Fragments": self.total_number_of_fragments,
@@ -297,9 +343,10 @@ class BaseScore:
             "Unique Fragments": unique_fragments,
         }
         dict_results = {**dict_results, **self.additional_metrics()}
+        
         elapsed_time = time.time() - time_to_get_count
-        logging.info(
-            f"time to get added score metrics {elapsed_time:.2f} seconds"
+        logger.info(
+            "Time to get added score metrics: %.2f seconds", elapsed_time
         )
 
         return dict_results
@@ -339,7 +386,7 @@ class BaseScore:
                     index=False,
                 )
             except OSError:
-                logging.exception(
+                logger.exception(
                     "Error saving fragments CSV for output_path: %s",
                     self._output_path,
                 )

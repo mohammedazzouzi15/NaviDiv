@@ -1,10 +1,8 @@
-
-
-
 import logging
-import time  
+import os
+import time
 
-from rdkit import Chem  
+from rdkit import Chem
 from rdkit.Chem import Draw
 
 from navidiv.fragment import (
@@ -58,10 +56,10 @@ def test_fragment_scorer():
         for frag in fragement:
             num_atoms = Chem.MolFromSmiles(frag).GetNumAtoms()
             fragemnt_dict[f"num_atoms {num_atoms}"] = frag
-
+        os.makedirs(os.path.dirname(f"tests/fragmentation/fragment_test_{transformation_mode}.png"), exist_ok=True)
         plot_scaffolds(
             fragemnt_dict,
-            filename=f"tests/fragment_test_{transformation_mode}.png",
+            filename=f"tests/fragmentation/fragment_test_{transformation_mode}.png",
         )
 
 

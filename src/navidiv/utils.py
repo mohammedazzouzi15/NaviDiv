@@ -142,9 +142,20 @@ def initialize_scorer(scorer_props: dict):
     elif scorer_name == "Cluster":
         from navidiv.simlarity import cluster_similarity_scorer
 
+        # Get cluster configuration from scorer_props if available
+        cluster_config = scorer_props.get("cluster_config", {})
+
         scorer = cluster_similarity_scorer.ClusterSimScorer(
             output_path=scorer_props.get("output_path"),
-            threshold=scorer_props.get("threshold", 0.25),
+            similarity_metric=cluster_config.get(
+                "similarity_metric", "tanimoto"
+            ),
+            clustering_method=cluster_config.get(
+                "clustering_method", "threshold"
+            ),
+            fingerprint_type=cluster_config.get("fingerprint_type", "morgan"),
+            fingerprint_radius=cluster_config.get("fingerprint_radius", 2),
+            **cluster_config.get("clustering_params", {}),
         )
     elif scorer_name == "RingScorer":
         from navidiv.fragment import ring_scorer

@@ -1,5 +1,3 @@
-
-
 import argparse
 import os
 
@@ -22,7 +20,7 @@ SCORERS = [
     # "Fragments Match",
     "Fragmets_basic",
     "Fragments_default",
-    #"ScaffoldGNN",
+    # "ScaffoldGNN",
 ]
 
 
@@ -36,12 +34,11 @@ def cumulative_unique_count(list_of_lists):
 
 
 def get_default_props(scorer_name, output_path):
-    
     props = {
         "output_path": output_path,
         "scorer_name": scorer_name,
     }
-    
+
     if scorer_name == "Ngram":
         props["scorer_name"] = "Ngram"
         props["ngram_size"] = 10
@@ -94,18 +91,23 @@ def run_scorer(steps, df, scorer, scorer_name, output_path):
 
     if scores_list:
         df_scores = pd.DataFrame(scores_list)
+        if "Unique Fragments" in df_scores.columns:
+            df_scores["Cumulative Number of unique Fragments"] = (
+                cumulative_unique_count(df_scores["Unique Fragments"].tolist())
+            )
+            df_scores = df_scores.drop(
+                "Unique Fragments", axis=1, errors="ignore"
+            )
+        if "Total Number of Fragments" in df_scores.columns:
+            df_scores["Cumulative Number of Fragments"] = df_scores[
+                "Total Number of Fragments"
+            ].cumsum()
+        if "Cumulative Number of unique Fragments" in df_scores.columns:
+            df_scores["Cumulative Percentage of Unique Fragments"] = (
+                df_scores["Cumulative Number of unique Fragments"]
+                / df_scores["Cumulative Number of Fragments"]
+            ) * 100
 
-        df_scores["Cumulative Number of unique Fragments"] = (
-            cumulative_unique_count(df_scores["Unique Fragments"].tolist())
-        )
-        df_scores["Cumulative Number of Fragments"] = df_scores[
-            "Total Number of Fragments"
-        ].cumsum()
-        df_scores["Cumulative Percentage of Unique Fragments"] = (
-            df_scores["Cumulative Number of unique Fragments"]
-            / df_scores["Cumulative Number of Fragments"]
-        ) * 100
-        df_scores = df_scores.drop("Unique Fragments", axis=1, errors="ignore")
         dict_mean = add_mean_of_numeric_columns(df, succesfull_steps)
         for col, mean in dict_mean.items():
             df_scores[col] = mean
@@ -134,7 +136,7 @@ def run_scorer(steps, df, scorer, scorer_name, output_path):
                 scorer._fragments_df.to_csv(
                     f"{output_path}/{scorer._csv_name}/groupby_aggregated_clusters_with_score.csv",
                     index=False,
-                )  
+                )
             except Exception as e:
                 print(f"Error aggregating clusters for {scorer_name}.")
                 print(f"Exception: {e}")

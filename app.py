@@ -1,8 +1,16 @@
+"""Streamlit web application for molecular diversity analysis.
+
+This module provides a user-friendly interface for molecular diversity analysis
+using various scoring functions including frequency-based, similarity-based,
+and cluster-based approaches.
+"""
 import subprocess
 from pathlib import Path
+from typing import Any
 
 import plotly.io as pio
 import streamlit as st
+from rdkit import RDLogger
 
 from navidiv.app_utils.file_name_registry import initiate_file_name_registry
 from navidiv.app_utils.plot_generated_molecules import (
@@ -11,6 +19,9 @@ from navidiv.app_utils.plot_generated_molecules import (
 )
 from navidiv.app_utils.plot_results import plot_results, plot_step_results
 from navidiv.utils import get_smiles_column
+
+
+RDLogger.logger().setLevel(RDLogger.ERROR)
 
 # Create a global registry instance (or inject as needed)
 file_name_registry = initiate_file_name_registry()
@@ -230,15 +241,20 @@ def run_all_scorers(file_path: str) -> bool:
 
         # Create a nice overview of what will be run
         selected_scorers = [
+            "Frequency", "tSNE", "Similarity", "Activity", "UMap",
             "Ngram", "Scaffold", "Cluster", "Original", "RingScorer",
             "FGscorer", "Fragmets_basic", "Fragments_default"
         ]
 
-        for scorer in selected_scorers:
-            if scorer in scorer_descriptions:
-                st.markdown(
-                    f"• **{scorer}**: {scorer_descriptions[scorer]['title']}"
-                )
+        # Show scorer descriptions in an expandable section
+        if selected_scorers:
+            with st.expander("📋 View Selected Scorers", expanded=False):
+                for scorer in selected_scorers:
+                    if scorer in scorer_descriptions:
+                        st.markdown(
+                            f"• **{scorer}**: "
+                            f"{scorer_descriptions[scorer]['title']}"
+                        )
 
     if st.sidebar.button(
         "🚀 Run All Scorers",
@@ -284,7 +300,7 @@ def load_file_section() -> str:
                 "📄 Enter path to your CSV file containing SMILES data",
                 key="file_path_input",
                 on_change=on_change_file_path,
-                placeholder="/path/to/your/molecules.csv",
+                placeholder="/media/mohammed/Work/Navi_diversity/tests/test_data/default/default_1_TSNE.csv",
                 help="CSV should contain SMILES strings and optionally "
                      "'step' and 'Score' columns for analysis"
             )
@@ -353,7 +369,9 @@ def create_analysis_tools_section(file_path: str) -> None:
                 "specific structural fragments."
             )
             if (
-                hasattr(st.session_state, "list_of_molecules_containing_fragment")
+                hasattr(
+                    st.session_state, "list_of_molecules_containing_fragment"
+                )
                 and st.session_state.list_of_molecules_containing_fragment
             ):
                 filtered_data["Molecules containing fragment"] = (
@@ -379,7 +397,7 @@ def create_analysis_tools_section(file_path: str) -> None:
         st.info("💡 Please ensure your CSV contains valid SMILES strings.")
 
 
-def create_results_section(col3) -> None:
+def create_results_section(col3: Any) -> None:
     """Create the results analysis section."""
     st.markdown("### 📊 Analysis Results")
 

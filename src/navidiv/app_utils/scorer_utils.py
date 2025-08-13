@@ -61,7 +61,7 @@ def run_scorer_on_dataframe(
 
         if "Unique Fragments" in df_scores.columns:
             df_scores["Cumulative Number of unique Fragments"] = (
-            cumulative_unique_count(df_scores["Unique Fragments"].tolist())
+                cumulative_unique_count(df_scores["Unique Fragments"].tolist())
             )
             df_scores["Cumulative Number of Fragments"] = df_scores[
                 "Total Number of Fragments"
@@ -70,7 +70,9 @@ def run_scorer_on_dataframe(
                 df_scores["Cumulative Number of unique Fragments"]
                 / df_scores["Cumulative Number of Fragments"]
             ) * 100
-            df_scores = df_scores.drop("Unique Fragments", axis=1, errors="ignore")
+            df_scores = df_scores.drop(
+                "Unique Fragments", axis=1, errors="ignore"
+            )
         dict_mean = add_mean_of_numeric_columns(data, succesfull_steps)
         for col, mean in dict_mean.items():
             df_scores[col] = mean
@@ -86,10 +88,11 @@ def run_scorer_on_dataframe(
         )
         try:
             groupby_results_df = groupby_results(df_fragments)
-            groupby_results_df.to_csv(
-                f"{st.session_state.output_path}/{scorer._csv_name}/groupby_results_{scorer._csv_name}.csv",
-                index=False,
-            )
+            if scorer_name != "Cluster":
+                groupby_results_df.to_csv(
+                    f"{st.session_state.output_path}/{scorer._csv_name}/groupby_results_{scorer._csv_name}.csv",
+                    index=False,
+                )
         except Exception as e:
             st.error(f"Error grouping results: {e}")
             groupby_results_df = None
@@ -99,7 +102,7 @@ def run_scorer_on_dataframe(
                     f"Aggregating clusters for {scorer_name} with {len(groupby_results_df)} groups."
                 )
                 groupby_results_df.to_csv(
-                    f"{st.session_state.output_path}/{scorer._csv_name}/_groupby_results_aggregated_clusters.csv",
+                    f"{st.session_state.output_path}/{scorer._csv_name}/_results_before_aggregated_clusters.csv",
                     index=False,
                 )
                 scores_cluster = scorer.aggregate_df(groupby_results_df)
@@ -144,13 +147,105 @@ def get_scorer_properties_ui(scorer_name):
             index=0,
         )
     if scorer_name == "Cluster":
-        props["threshold"] = st.sidebar.number_input(
-            "Cluster threshold",
-            min_value=0.0,
-            max_value=1.0,
-            value=0.25,
-            step=0.01,
+        # Create a comprehensive cluster configuration
+        cluster_config = {}
+
+        # Similarity metric selection
+        similarity_metric = st.sidebar.selectbox(
+            "Similarity Metric",
+            ["tanimoto", "dice"],
+            index=0,
+            help="Similarity metric for comparing molecules",
         )
+        cluster_config["similarity_metric"] = similarity_metric
+
+        # Fingerprint configuration
+        fingerprint_type = st.sidebar.selectbox(
+            "Fingerprint Type",
+            ["morgan", "rdkit"],
+            index=0,
+            help="Type of molecular fingerprint",
+        )
+        cluster_config["fingerprint_type"] = fingerprint_type
+
+        if fingerprint_type == "morgan":
+            fingerprint_radius = st.sidebar.number_input(
+                "Fingerprint Radius",
+                min_value=1,
+                max_value=4,
+                value=2,
+                step=1,
+                help="Radius for Morgan fingerprints",
+            )
+            cluster_config["fingerprint_radius"] = fingerprint_radius
+
+        # Clustering method selection
+        clustering_method = st.sidebar.selectbox(
+            "Clustering Method",
+            ["threshold"],
+            index=0,
+            help="Algorithm for clustering molecules",
+        )
+        cluster_config["clustering_method"] = clustering_method
+
+        # Method-specific parameters
+        clustering_params = {}
+
+        if clustering_method == "threshold":
+            threshold = st.sidebar.number_input(
+                "Similarity Threshold",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.25,
+                step=0.01,
+                help="Molecules with similarity above this are clustered "
+                "together",
+            )
+            clustering_params["threshold"] = threshold
+
+        elif clustering_method == "hierarchical":
+            n_clusters = st.sidebar.number_input(
+                "Number of Clusters",
+                min_value=2,
+                max_value=50,
+                value=10,
+                step=1,
+                help="Target number of clusters to create",
+            )
+            clustering_params["n_clusters"] = n_clusters
+
+            linkage = st.sidebar.selectbox(
+                "Linkage Method",
+                ["average", "complete", "single"],
+                index=0,
+                help="Linkage criterion for hierarchical clustering",
+            )
+            clustering_params["linkage"] = linkage
+
+        elif clustering_method == "dbscan":
+            eps = st.sidebar.number_input(
+                "DBSCAN eps",
+                min_value=0.01,
+                max_value=2.0,
+                value=0.5,
+                step=0.01,
+                help="Maximum distance for molecules to be neighbors",
+            )
+            clustering_params["eps"] = eps
+
+            min_samples = st.sidebar.number_input(
+                "Minimum Samples",
+                min_value=2,
+                max_value=20,
+                value=5,
+                step=1,
+                help="Minimum samples in a neighborhood for core points",
+            )
+            clustering_params["min_samples"] = min_samples
+
+        cluster_config["clustering_params"] = clustering_params
+        props["cluster_config"] = cluster_config
+
     if scorer_name == "Original":
         props["threshold"] = st.sidebar.number_input(
             "Original similarity threshold",

@@ -65,7 +65,7 @@ def perform_tsne(fingerprints_array):
     tsne = TSNE(
         n_components=2,
         perplexity=40,
-        n_iter=1000,
+        #n_iter=1000,
         learning_rate=10,
         random_state=42,
         method="barnes_hut",

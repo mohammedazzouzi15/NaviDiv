@@ -66,11 +66,11 @@ To install the Navi_diversity package, follow these steps:
 Usage
 -----
 
-To run the example script:
+To run the app with all the features, use the following command in the root directory of the project:
 
 .. code-block:: bash
 
-   python examples/test.py
+   streamlit run app.py
 
 This script demonstrates how to score molecules using both fragment and n-gram methods.
 
