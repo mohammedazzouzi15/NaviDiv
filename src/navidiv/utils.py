@@ -119,8 +119,8 @@ def initialize_scorer(scorer_props: dict):
         scorer = fragment_scorer.FragmentScorer(
             output_path=scorer_props.get("output_path"),
             min_count_fragments=scorer_props.get("min_count_fragments"),
-            tranfomation_mode=scorer_props.get(
-                "tranfomation_mode", "basic_wire_frame"
+            transformation_mode=scorer_props.get(
+                "transformation_mode", "basic_wire_frame"
             ),
         )
     elif scorer_name == "Ngram":

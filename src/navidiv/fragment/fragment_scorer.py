@@ -1,4 +1,3 @@
-
 import logging
 
 import pandas as pd
@@ -26,7 +25,7 @@ class FragmentScorer(BaseScore):
         self,
         min_count_fragments: int = MIN_COUNT_FRAGMENTS,
         output_path: str | None = None,
-        tranfomation_mode: str = "none",
+        transformation_mode: str = "none",
     ) -> None:
         """Initialize FragmentScore.
 
@@ -34,7 +33,7 @@ class FragmentScorer(BaseScore):
             min_count_fragments (int): Minimum count for fragments to be
                 considered.
             output_path (str | None): Path to save output files.
-            tranfomation_mode (str): Transformation mode for fragments.
+            transformation_mode (str): Transformation mode for fragments.
                 the different modes are:
                 - "none": No transformation
                 - "basic_framework": Anonymize atoms and set all bonds to single.
@@ -46,9 +45,9 @@ class FragmentScorer(BaseScore):
         super().__init__(output_path=output_path)
         self._min_count_fragments = min_count_fragments
         self._min_num_atoms_fragments = MIN_FRAG_ATOMS
-        self.tranfomation_mode = tranfomation_mode
+        self.transformation_mode = transformation_mode
         self.fragment_dict = {}
-        self._csv_name = f"fragments_{self.tranfomation_mode}"
+        self._csv_name = f"fragments_{self.transformation_mode}"
 
     def update_transformation_mode(self, transformation_mode: str) -> None:
         """Update the transformation mode for fragment scoring.
@@ -56,8 +55,8 @@ class FragmentScorer(BaseScore):
         Args:
             transformation_mode (str): The new transformation mode.
         """
-        self.tranfomation_mode = transformation_mode
-        self._csv_name = f"fragments_{self.tranfomation_mode}"
+        self.transformation_mode = transformation_mode
+        self._csv_name = f"fragments_{self.transformation_mode}"
         self.fragment_dict = {}
 
     def get_count(self, smiles_list: list[str]) -> tuple[pd.DataFrame, None]:
@@ -71,7 +70,6 @@ class FragmentScorer(BaseScore):
         """
         fragments = []
         fragments = self.get_fragments(smiles_list)
-
         fragments, over_represented_fragments = self._from_list_to_count_df(
             smiles_list,
             fragments,
@@ -79,7 +77,9 @@ class FragmentScorer(BaseScore):
         self._fragments_df = fragments
         return fragments, over_represented_fragments
 
-    def _count_pattern_occurrences(self, smiles_list: list[str], fragment: str) -> int:
+    def _count_pattern_occurrences(
+        self, smiles_list: list[str], fragment: str
+    ) -> int:
         """Count occurrences of a structural fragment in the dataset."""
         count = 0
         fragment_mol = Chem.MolFromSmarts(fragment)
@@ -105,36 +105,39 @@ class FragmentScorer(BaseScore):
             if smiles in self.fragment_dict:
                 fragments.extend(self.fragment_dict[smiles])
                 continue
+
             mol = Chem.MolFromSmiles(smiles)
             if mol is None:
                 self.fragment_dict[smiles] = []
                 continue
             fragments_mol = self._get_fragment(mol)
+
             self.fragment_dict[smiles] = fragments_mol
             fragments.extend(fragments_mol)
         self._fragments = fragments
         return fragments
 
-    def _get_fragment(self, mol: Chem.Mol) -> list[str]:
+    def _get_fragment(self, mol: Chem.Mol, rings_transform=True) -> list[str]:
         """Get fragments from a molecule."""
         fragments_mol = []
         new_nodes_copy = get_fragment_not_in_scaffolds(
             mol, self._min_num_atoms_fragments
         )
-        rings = GetRingSystems(mol)
-        for new_nodes in rings:
-            mol_node = Chem.MolFromSmiles(new_nodes)
-            if mol_node is None:
-                logging.warning(
-                    "Ring transformation failed for: %s", new_nodes
-                )
-                continue
-            if mol_node.GetNumAtoms() > self._min_num_atoms_fragments:
-                new_nodes_copy.append(new_nodes)
+        if rings_transform:
+            rings = GetRingSystems(mol)
+            for new_nodes in rings:
+                mol_node = Chem.MolFromSmiles(new_nodes)
+                if mol_node is None:
+                    logging.warning(
+                        "Ring transformation failed for: %s", new_nodes
+                    )
+                    continue
+                if mol_node.GetNumAtoms() > self._min_num_atoms_fragments:
+                    new_nodes_copy.append(new_nodes)
         for fragment in new_nodes_copy:
             mol_fragment = Chem.MolFromSmiles(fragment)
             mol_fragment = transform_molecules(
-                mol_fragment, self.tranfomation_mode
+                mol_fragment, self.transformation_mode
             )
             if mol_fragment is None:
                 logging.warning(

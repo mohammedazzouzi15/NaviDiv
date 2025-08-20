@@ -27,7 +27,7 @@ scorer_dicts:
       scorer_name: Fragments
       output_path: results/tmp/
       min_count_fragments: 2
-      tranfomation_mode: none
+      transformation_mode: none
     score_every: 10
     groupby_every: 20
     selection_criteria:

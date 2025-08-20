@@ -18,7 +18,7 @@ SCORERS = [
     "RingScorer",
     "FGscorer",
     # "Fragments Match",
-    "Fragmets_basic",
+    "Fragments_basic",
     "Fragments_default",
     # "ScaffoldGNN",
 ]
@@ -47,17 +47,22 @@ def get_default_props(scorer_name, output_path):
         props["min_count_fragments"] = 0
     if scorer_name == "Scaffold":
         props["scaffold_type"] = "basic_framework"
+        props["min_count_fragments"] = 1
+
     if scorer_name == "Cluster":
+        props["similarity_metric"] = "tanimoto"
+        props["fingerprint_type"] = "morgan"
+        props["fingerprint_radius"] = 2
         props["threshold"] = 0.25
-    if scorer_name == "Fragmets_basic":
-        props["tranfomation_mode"] = "basic_wire_frame"
+    if scorer_name == "Fragments_basic":
+        props["transformation_mode"] = "basic_wire_frame"
         props["scorer_name"] = "Fragments"
-        props["min_count_fragments"] = 2
+        props["min_count_fragments"] = 3
 
     if scorer_name == "Fragments_default":
-        props["tranfomation_mode"] = "none"
+        props["transformation_mode"] = "none"
         props["scorer_name"] = "Fragments"
-        props["min_count_fragments"] = 2
+        props["min_count_fragments"] = 3
     if scorer_name == "Original":
         props["threshold"] = 0.3
         props["reference_csv"] = (

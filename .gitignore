@@ -17,4 +17,5 @@ reinvent_runs/TL/output/*
 .dev/*
 .dev
 outputs
+tests/test_data/default/scorer_output/*
 # Jupyter Notebook checkpoints

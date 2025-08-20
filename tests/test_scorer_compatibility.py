@@ -25,7 +25,7 @@ class TestScorerPatternCompatibility:
         self.fragment_scorer = FragmentScorer(
             min_count_fragments=1,
             output_path=None,
-            tranfomation_mode="none"
+            transformation_mode="none"
         )
         
         self.ngram_scorer = NgramScorer(
@@ -187,7 +187,7 @@ class TestScorerConfigurationCompatibility:
             scorer = FragmentScorer(
                 min_count_fragments=1,
                 output_path=None,
-                tranfomation_mode=mode
+                transformation_mode=mode
             )
             
             fragments_df, _ = scorer.get_count(test_smiles)

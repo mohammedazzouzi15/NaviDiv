@@ -1,6 +1,5 @@
-
 import logging
-import time  
+import time
 from collections import Counter
 from typing import Any
 
@@ -15,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class BaseScore:
     """Handles fragment scoring and analysis for molecular datasets."""
-    
+
     # Constants
     DEFAULT_MIN_COUNT_FRAGMENTS = 3
     DEFAULT_OVERREP_MIN_PERC = 20
@@ -52,27 +51,27 @@ class BaseScore:
         return f"{self._output_path}/{self._csv_name}_{filename_suffix}.csv"
 
     def _save_to_csv(
-        self, 
-        dataframe: pd.DataFrame, 
-        filename_suffix: str, 
-        append: bool = True
+        self,
+        dataframe: pd.DataFrame,
+        filename_suffix: str,
+        append: bool = True,
     ) -> None:
         """Save DataFrame to CSV with consistent formatting."""
         if not self._output_path:
             return
-            
+
         filepath = self._get_output_path(filename_suffix)
         try:
             dataframe.to_csv(
                 filepath,
                 index=False,
                 mode="a" if append else "w",
-                header=not pd.io.common.file_exists(filepath) if append else True,
+                header=not pd.io.common.file_exists(filepath)
+                if append
+                else True,
             )
         except OSError:
-            logger.exception(
-                "Error saving CSV file: %s", filepath
-            )
+            logger.exception("Error saving CSV file: %s", filepath)
 
     def _validate_fragments_df(self) -> None:
         """Validate that fragments DataFrame is initialized."""
@@ -322,29 +321,32 @@ class BaseScore:
         self.get_count(smiles_list)
         time_to_get_count = time.time()
         logger.info(
-            "Time to get count: %.2f seconds",
-            time_to_get_count - start_time
+            "Time to get count: %.2f seconds", time_to_get_count - start_time
         )
         unique_fragments = self._fragments_df["Substructure"].to_list()
         self.add_score_metrics(smiles_list, scores, additional_columns_df)
-        
+
         unicity_ratio = (
-            0.0 if self.total_number_of_fragments == 0
+            0.0
+            if self.total_number_of_fragments == 0
             else len(unique_fragments) / self.total_number_of_fragments * 100
         )
-        
+
         for col, value in additional_columns_df.items():
             self._fragments_df[col] = value
-            
+
+        elapsed_time = time.time() - start_time
+
         dict_results = {
             "Percentage of Unique Fragments": unicity_ratio,
             "Total Number of Fragments": self.total_number_of_fragments,
             "Number of Unique Fragments": len(unique_fragments),
             "Unique Fragments": unique_fragments,
+            "Elapsed Time": elapsed_time,
+            "Elapsed Time_to get count": time_to_get_count
         }
         dict_results = {**dict_results, **self.additional_metrics()}
-        
-        elapsed_time = time.time() - time_to_get_count
+
         logger.info(
             "Time to get added score metrics: %.2f seconds", elapsed_time
         )
@@ -367,6 +369,9 @@ class BaseScore:
                 "Count": list(ngrams_counter.values()),
             }
         )
+        ngrams_df = ngrams_df[
+            ngrams_df["Count"] > self._min_count_fragments
+        ]  # select fragments with count greater than min_count_fragments
         ngrams_df["Count ratio"] = (
             ngrams_df["Count"] / total_number_of_ngrams
         ) * 100

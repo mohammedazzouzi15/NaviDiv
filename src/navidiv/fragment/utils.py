@@ -36,6 +36,7 @@ def get_fragments(mols: list[Chem.Mol], min_num_atoms) -> list[str]:
     for mol in mols:
         new_nodes_copy = get_fragment_not_in_scaffolds(mol, min_num_atoms)
         fragments.extend(new_nodes_copy)
+        
     return fragments
 
 
@@ -80,6 +81,8 @@ def get_fragment_not_in_scaffolds(mol, min_num_atoms) -> list[str]:
     Returns a list of fragments (as SMARTS).
     .
     """
+    #import time
+    #start_time = time.time()    
     params = rdScaffoldNetwork.ScaffoldNetworkParams()
     params.includeGenericBondScaffolds = False
     params.includeGenericScaffolds = False
@@ -112,6 +115,7 @@ def get_fragment_not_in_scaffolds(mol, min_num_atoms) -> list[str]:
     fragments = [
         smi for smi in fragments if Chem.MolFromSmiles(smi) is not None
     ]
+    #print(f"elapsed time: {time.time() - start_time:.3f} seconds")
     return fragments
 
 

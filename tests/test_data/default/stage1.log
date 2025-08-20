@@ -95,7 +95,7 @@ RNN(
 15:55:43 <INFO> Creating filter component custom_alerts_scaffold
 15:55:43 <INFO> Scorer dicts: {'scorer_name': 'Scaffold', 'scaffold_type': 'basic_wire_frame', 'output_path': 'results/tmp/', 'min_count_fragments': 1, 'selection_criteria': {'diff_median_score': 0.1}}
 15:55:43 <INFO> Scorer dicts: {'scorer_name': 'Ngram', 'ngram_size': 10, 'output_path': 'results/tmp/', 'min_count_fragments': 3}
-15:55:43 <INFO> Scorer dicts: {'scorer_name': 'Fragments', 'output_path': 'results/tmp/', 'min_count_fragments': 2, 'tranfomation_mode': 'none'}
+15:55:43 <INFO> Scorer dicts: {'scorer_name': 'Fragments', 'output_path': 'results/tmp/', 'min_count_fragments': 2, 'transformation_mode': 'none'}
 15:55:43 <INFO> Scorer dicts: {'scorer_name': 'Cluster', 'output_path': 'results/tmp/', 'threshold': 0.25, 'min_count_fragments': 0}
 15:55:44 <INFO> Step 0 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 91.59663865546219, 'Total Number of Fragments': 119, 'Number of Unique Fragments': 109, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 0, 'Appeared once': 104}
 15:55:44 <INFO> Updating custom alert customalertsscaffold with fragments: []

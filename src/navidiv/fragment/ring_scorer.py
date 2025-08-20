@@ -38,7 +38,7 @@ class RingScorer(FragmentScorer):
         for fragment in new_nodes_copy:
             mol_fragment = Chem.MolFromSmiles(fragment)
             mol_fragment = transform_molecules(
-                mol_fragment, self.tranfomation_mode
+                mol_fragment, self.transformation_mode
             )
             if mol_fragment is None:
                 logging.warning(

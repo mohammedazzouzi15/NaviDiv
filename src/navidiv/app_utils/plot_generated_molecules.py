@@ -38,58 +38,6 @@ def get_data_from_file(file_path):
     filtered_data = data_filter(data)
     filtered_data.reset_index(drop=True, inplace=True)
 
-    # --- Scorer UI ---
-
-    st.sidebar.markdown("## Run Scorer on DataFrame ")
-    scorer_options = [
-        "Ngram",
-        "Scaffold",
-        "Cluster",
-        "Original",
-        "Fragments",
-        "Fragments Match",
-        "RingScorer",
-        "FGscorer",
-    ]
-    scorer_name = st.sidebar.selectbox(
-        "Scorer", scorer_options, key="scorer_select"
-    )
-    step_col = "step" if "step" in filtered_data.columns else None
-    steps = []
-    if step_col:
-        min_step = int(filtered_data[step_col].min())
-        max_step = int(filtered_data[step_col].max())
-        steps = st.sidebar.slider(
-            "Step range",
-            min_value=min_step,
-            max_value=max_step,
-            value=(min_step, max_step),
-            step=1,
-        )
-        steps_increment = st.sidebar.number_input(
-            "Step increment",
-            min_value=1,
-            max_value=max_step - min_step,
-            value=10,
-            step=1,
-        )
-
-        steps = list(range(steps[0], steps[1] + 1, steps_increment))
-    # --- Scorer properties UI ---
-    scorer_props = get_scorer_properties_ui(scorer_name)
-    scorer_props["selection_criteria"] = {}  # selection_criteria_ui()
-    scorer_props["scorer_name"] = scorer_name
-
-    run_scorer = st.sidebar.button("Run scorer")
-    if run_scorer and step_col:
-        run_scorer_on_dataframe(
-            filtered_data,
-            scorer_name,
-            steps,
-            scorer_props,
-        )
-    elif run_scorer and not step_col:
-        st.warning("No 'step' column found in data. Cannot run scorer.")
 
     # Select columns for x-axis and y-axis
     # st.write("#### Select Columns for Plotting")
