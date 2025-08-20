@@ -181,13 +181,16 @@ def do_tsne(file_path: str) -> bool:
     )
 
     with st.sidebar.container():
-        st.markdown("""
-        **About t-SNE:**
-
-        t-SNE creates 2D visualizations of molecular diversity by reducing
-        high-dimensional chemical space to an interactive plot. Points that
-        are close together represent structurally similar molecules.
-        """)
+        with st.expander(
+        "ℹ️ **About t-SNE:**",
+            expanded=False
+        ):
+            st.markdown("""
+        
+            t-SNE creates 2D visualizations of molecular diversity by reducing
+            high-dimensional chemical space to an interactive plot. Points that
+            are close together represent structurally similar molecules.
+            """)
 
     if st.sidebar.button(
         "🔬 Run t-SNE Analysis",
