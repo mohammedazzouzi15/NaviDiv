@@ -1,0 +1,105 @@
+diversity_scorer:
+  scorer_dicts:
+  - prop_dict:
+      scorer_name: Scaffold
+      scaffold_type: basic_wire_frame
+      output_path: results/tmp/
+      min_count_fragments: 1
+      selection_criteria:
+        diff_median_score: 0.1
+    score_every: 10
+    groupby_every: 20
+    selection_criteria:
+      count_perc_ratio: 5
+      Total Number of Molecules with Substructure: 50
+    custom_alert_name: customalertsscaffold
+  - prop_dict:
+      scorer_name: Ngram
+      ngram_size: 10
+      output_path: results/tmp/
+      min_count_fragments: 3
+    score_every: 10
+    groupby_every: 30
+    selection_criteria:
+      count_perc_ratio: 3
+      Total Number of Molecules with Substructure: 100
+    custom_alert_name: customalertsngrams
+  - prop_dict:
+      scorer_name: Fragments
+      output_path: results/tmp/
+      min_count_fragments: 2
+      transformation_mode: none
+    score_every: 10
+    groupby_every: 20
+    selection_criteria:
+      count_perc_ratio: 5
+      Total Number of Molecules with Substructure: 50
+    custom_alert_name: customalerts
+  - prop_dict:
+      scorer_name: Cluster
+      output_path: results/tmp/
+      threshold: 0.25
+      min_count_fragments: 0
+    score_every: 10
+    groupby_every: 10
+    selection_criteria:
+      count_perc_ratio: 10
+      Total Number of Molecules with Substructure: 10
+    custom_alert_name: dissimilarity
+reinvent_common:
+  run_type: staged_learning
+  smart_list_path: None
+  prior_filename: /media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed.prior
+  agent_filename: /media/mohammed/Work/Navi_diversity/reinvent_runs/SF_files/model/formed.prior
+  avoid_filename: []
+  max_steps: 100
+  batch_size: 128
+  include_inception: true
+  diversity_filter:
+    div_type: IdenticalMurckoScaffold
+    minscore: 0.1
+    bucket_size: 1000
+  learning_strategy:
+    type: dap
+    sigma: 64
+    lr: 0.001
+  include_rdkit_requirements: false
+  include_scaffold_score: false
+  include_molecular_weight: false
+  include_SA_score: false
+  ngram_filter:
+    include: true
+    ngram_size: 10
+    min_count_ngram_ratio: 0.1
+  fragment_filter:
+    include: true
+    min_count_fragments: 10
+    diff_median_score_limit: 0.1
+    smart_list:
+    - '[#6;R0]~[#6;R0]'
+  scaffold_filter:
+    include: true
+    type: csk_bm
+  dissimilarity_filter:
+    include: true
+    threshold: 0.2
+    frag:
+    - CCCCCCCCCCCCCCC
+  check_diversity: true
+  check_diversity_every: 30
+stage_comp:
+  model_params_rdkit_physchem:
+    params_list:
+    - QED
+    lower_bound:
+    - 0.0
+    higher_bound:
+    - 1.0
+    weight:
+    - 1.0
+wd: /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/runs/test_case_3/
+name: All_constraints
+generate_input_only: false
+input_generator:
+  file_path: /media/mohammed/Work/Navi_diversity/example_other_cases/InputGenerator_custom.py
+  class_name: InputGeneratorCustom

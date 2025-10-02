@@ -14,13 +14,10 @@ SCORERS = [
     "Ngram",
     "Scaffold",
     "Cluster",
-    "Original",
     "RingScorer",
     "FGscorer",
-    # "Fragments Match",
     "Fragments_basic",
     "Fragments_default",
-    # "ScaffoldGNN",
 ]
 
 
@@ -58,16 +55,11 @@ def get_default_props(scorer_name, output_path):
         props["transformation_mode"] = "basic_wire_frame"
         props["scorer_name"] = "Fragments"
         props["min_count_fragments"] = 3
-
     if scorer_name == "Fragments_default":
         props["transformation_mode"] = "none"
         props["scorer_name"] = "Fragments"
         props["min_count_fragments"] = 3
-    if scorer_name == "Original":
-        props["threshold"] = 0.3
-        props["reference_csv"] = (
-            "/media/mohammed/Work/Navi_diversity/data/formed/Molecules_found_by_thanapat.csv"
-        )
+
     return props
 
 

@@ -1,0 +1,4 @@
+- name=ngram_only
+- wd=/media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/runs/test_case_3/
+- reinvent_common.max_steps=100
+- diversity_scorer=ngram_only

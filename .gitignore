@@ -17,7 +17,13 @@ examples/*
 # dev folder
 .dev/*
 .dev
-outputs
+outputs/*
 tests/test_data/default/scorer_output/*
 example_other_cases/*
+data/*
+Tutorials/Running_Reinvent/example/figures/*
+Tutorials/Running_Reinvent/example/outputs/*
+Tutorials/Running_Reinvent/example/runs/*
+*.out
+Tutorials/Using_The_app/example/scorer_output/*
 # Jupyter Notebook checkpoints

@@ -1,0 +1,1446 @@
+[2025-10-02 13:28:22,425][navidiv.reinvent.run_staged_learning_2][INFO] - Starting 1 stage of Reinforcement Learning
+[2025-10-02 13:28:22,425][navidiv.reinvent.run_staged_learning_2][INFO] - Using prior model /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior, agent model /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior
+[2025-10-02 13:28:22,425][navidiv.reinvent.run_staged_learning_2][INFO] - Using avoid model(s) []
+[2025-10-02 13:28:22,433][reinvent.runmodes.create_adapter][WARNING] - /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior does not contain metadata
+[2025-10-02 13:28:22,531][reinvent.runmodes.create_adapter][INFO] - Number of network parameters: 5,886,347
+[2025-10-02 13:28:22,531][reinvent.runmodes.create_adapter][INFO] - Network architecture:
+RNN(
+  (_embedding): Embedding(139, 256)
+  (_rnn): LSTM(256, 512, num_layers=3, batch_first=True)
+  (_linear): Linear(in_features=512, out_features=139, bias=True)
+)
+[2025-10-02 13:28:22,539][reinvent.runmodes.create_adapter][WARNING] - /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior does not contain metadata
+[2025-10-02 13:28:22,543][reinvent.runmodes.create_adapter][INFO] - Number of network parameters: 5,886,347
+[2025-10-02 13:28:22,543][reinvent.runmodes.create_adapter][INFO] - Network architecture:
+RNN(
+  (_embedding): Embedding(139, 256)
+  (_rnn): LSTM(256, 512, num_layers=3, batch_first=True)
+  (_linear): Linear(in_features=512, out_features=139, bias=True)
+)
+[2025-10-02 13:28:22,543][navidiv.reinvent.run_staged_learning_2][INFO] - Using generator Reinvent
+[2025-10-02 13:28:22,543][navidiv.reinvent.run_staged_learning_2][INFO] - Prior read from /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior
+[2025-10-02 13:28:22,543][navidiv.reinvent.run_staged_learning_2][INFO] - Agent read from /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior
+[2025-10-02 13:28:22,544][navidiv.reinvent.run_staged_learning_2][INFO] - Using reward strategy dap
+[2025-10-02 13:28:22,544][navidiv.reinvent.run_staged_learning_2][INFO] - Using diversity filter IdenticalMurckoScaffold
+[2025-10-02 13:28:22,545][navidiv.reinvent.run_staged_learning_2][INFO] - Purging diversity filter memories after each stage
+[2025-10-02 13:28:22,545][navidiv.reinvent.run_staged_learning_2][INFO] - No SMILES for inception. Populating from first sampled batch.
+[2025-10-02 13:28:22,545][navidiv.reinvent.run_staged_learning_2][INFO] - Global SMILES deduplication for inception memory
+[2025-10-02 13:28:22,545][navidiv.reinvent.run_staged_learning_2][INFO] - Using inception memory
+[2025-10-02 13:28:22,548][reinvent.scoring.importer][INFO] - Registered scoring component CustomAlerts
+[2025-10-02 13:28:22,548][reinvent.scoring.importer][INFO] - Registered scoring component CustomAlertsNgrams
+[2025-10-02 13:28:22,549][reinvent.scoring.importer][INFO] - Registered scoring component CustomAlertsScaffold
+[2025-10-02 13:28:22,550][reinvent.scoring.importer][INFO] - Registered scoring component Dissimilarity
+[2025-10-02 13:28:22,550][reinvent.scoring.importer][ERROR] - Component reinvent_plugins.components.comp_fairchem could not be imported: No module named 'FORMED_PROP'
+[2025-10-02 13:28:22,550][reinvent.scoring.importer][ERROR] - Component reinvent_plugins.components.comp_fairchemG could not be imported: No module named 'FORMED_PROP'
+[2025-10-02 13:28:22,551][reinvent.scoring.importer][ERROR] - Component reinvent_plugins.components.comp_fairchem_S1_T1 could not be imported: No module named 'FORMED_PROP'
+[2025-10-02 13:28:22,551][reinvent.scoring.importer][INFO] - Registered scoring component rdkitrequirement
+[2025-10-02 13:28:22,552][reinvent.scoring.importer][ERROR] - Component reinvent_plugins.components.comp_scaffoldscore could not be imported: No module named 'FORMED_PROP'
+[2025-10-02 13:28:22,748][py.warnings][WARNING] - pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2025-10-02 13:28:22,799][reinvent.scoring.importer][INFO] - Registered scoring component ChemPropFORMED
+[2025-10-02 13:28:22,799][reinvent.scoring.importer][INFO] - Registered scoring component ChemPropFORMEDT1T2
+[2025-10-02 13:28:22,799][reinvent.scoring.importer][INFO] - Registered scoring component ChemPropFORMEDSTI
+[2025-10-02 13:28:22,800][reinvent.scoring.importer][INFO] - Registered scoring component RotRingBond
+[2025-10-02 13:28:22,800][reinvent.scoring.importer][INFO] - Registered scoring component CountRings
+[2025-10-02 13:28:23,142][reinvent.scoring.importer][INFO] - Registered scoring component ROCSSimilarity
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component GroupCount
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentQed
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentSlogP
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentMolecularWeight
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentTPSA
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentDistanceMatrix
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumAtomStereoCenters
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentHBondAcceptors
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentHBondDonors
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumRotBond
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentCsp3
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component Fragmentnumsp
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component Fragmentnumsp2
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component Fragmentnumsp3
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentEffectiveLength
+[2025-10-02 13:28:23,143][reinvent.scoring.importer][INFO] - Registered scoring component FragmentGraphLength
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentLengthRatio
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumHeavyAtoms
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumHeteroAtoms
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumRings
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumAromaticRings
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentNumAliphaticRings
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component FragmentSlogP
+[2025-10-02 13:28:23,144][reinvent.scoring.importer][INFO] - Registered scoring component MatchingSubstructure
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component MolVolume
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component Qed
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component SlogP
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component MolecularWeight
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component GraphLength
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component NumAtomStereoCenters
+[2025-10-02 13:28:23,145][reinvent.scoring.importer][INFO] - Registered scoring component HBondAcceptors
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component HBondDonors
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumRotBond
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component Csp3
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component numsp
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component numsp2
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component numsp3
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumHeavyAtoms
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumHeteroAtoms
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumRings
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumAromaticRings
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component NumAliphaticRings
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component SlogP
+[2025-10-02 13:28:23,146][reinvent.scoring.importer][INFO] - Registered scoring component PMI
+[2025-10-02 13:28:23,148][reinvent.scoring.importer][INFO] - Registered scoring component RDKitDescriptors
+[2025-10-02 13:28:23,148][reinvent.scoring.importer][INFO] - Registered scoring component TanimotoSimilarity
+[2025-10-02 13:28:23,148][reinvent.scoring.importer][INFO] - Registered scoring component TanimotoDistance
+[2025-10-02 13:28:23,149][reinvent.scoring.importer][INFO] - Registered scoring component TPSA
+[2025-10-02 13:28:23,149][reinvent.scoring.importer][INFO] - Registered scoring component SAScore
+[2025-10-02 13:28:23,151][reinvent.scoring.importer][INFO] - Registered scoring component ChemProp
+[2025-10-02 13:28:23,151][reinvent.scoring.importer][INFO] - Registered scoring component DockStream
+[2025-10-02 13:28:23,152][reinvent.scoring.importer][INFO] - Registered scoring component ExternalProcess
+[2025-10-02 13:28:23,153][reinvent.scoring.importer][INFO] - Registered scoring component REST
+[2025-10-02 13:28:23,154][reinvent.scoring.importer][INFO] - Registered scoring component Icolos
+[2025-10-02 13:28:23,155][reinvent.scoring.importer][INFO] - Registered scoring component Maize
+[2025-10-02 13:28:23,156][reinvent.scoring.importer][INFO] - Registered scoring component MMP
+[2025-10-02 13:28:23,156][reinvent.scoring.importer][INFO] - Registered scoring component Qptuna
+[2025-10-02 13:28:23,159][reinvent.scoring.importer][INFO] - Registered scoring component ReactionFilter
+[2025-10-02 13:28:23,159][reinvent.scoring.config][INFO] - Creating scoring component QED
+[2025-10-02 13:28:23,159][reinvent.scoring.config][INFO] - Creating filter component custom_alerts_ngrams
+[2025-10-02 13:28:23,159][reinvent.scoring.config][INFO] - Creating filter component custom_alerts
+[2025-10-02 13:28:23,159][reinvent.scoring.config][INFO] - Creating filter component dissimilarity
+[2025-10-02 13:28:23,159][reinvent.scoring.config][INFO] - Creating filter component custom_alerts_scaffold
+[2025-10-02 13:28:23,160][navidiv.reinvent.run_staged_learning_2][INFO] - Writing tabular data for stage to 1_default_1.csv
+[2025-10-02 13:28:23,160][navidiv.reinvent.run_staged_learning_2][INFO] - Starting stage 1 <<<
+[2025-10-02 13:28:23,160][navidiv.reinvent.run_staged_learning_2][INFO] - Current GPU memory usage: 17720 MiB used, 6338 MiB free
+[2025-10-02 13:28:23,160][reinvent][INFO] - Scorer dicts: {'scorer_name': 'Scaffold', 'scaffold_type': 'basic_wire_frame', 'output_path': 'results/tmp/', 'min_count_fragments': 1, 'selection_criteria': {'diff_median_score': 0.1}}
+[2025-10-02 13:28:23,363][root][INFO] - Scorer scaffold_basic_wire_frame initialized with properties: {'prop_dict': {'scorer_name': 'Scaffold', 'scaffold_type': 'basic_wire_frame', 'output_path': 'results/tmp/', 'min_count_fragments': 1, 'selection_criteria': {'diff_median_score': 0.1}}, 'score_every': 10, 'groupby_every': 20, 'selection_criteria': {'count_perc_ratio': 500, 'Total Number of Molecules with Substructure': 50000}, 'custom_alert_name': 'customalertsscaffold'}
+[2025-10-02 13:28:23,363][root][INFO] - Custom alert for customalertsscaffold exists.
+[2025-10-02 13:28:23,363][reinvent][INFO] - Scorer dicts: {'scorer_name': 'Ngram', 'ngram_size': 10, 'output_path': 'results/tmp/', 'min_count_fragments': 3}
+[2025-10-02 13:28:23,364][root][INFO] - Scorer ngrams_10 initialized with properties: {'prop_dict': {'scorer_name': 'Ngram', 'ngram_size': 10, 'output_path': 'results/tmp/', 'min_count_fragments': 3}, 'score_every': 10, 'groupby_every': 30, 'selection_criteria': {'count_perc_ratio': 3000, 'Total Number of Molecules with Substructure': 10000}, 'custom_alert_name': 'customalertsngrams'}
+[2025-10-02 13:28:23,364][root][INFO] - Custom alert for customalertsngrams exists.
+[2025-10-02 13:28:23,364][reinvent][INFO] - Scorer dicts: {'scorer_name': 'Fragments', 'output_path': 'results/tmp/', 'min_count_fragments': 2, 'transformation_mode': 'none'}
+[2025-10-02 13:28:23,368][root][INFO] - Scorer fragments_none initialized with properties: {'prop_dict': {'scorer_name': 'Fragments', 'output_path': 'results/tmp/', 'min_count_fragments': 2, 'transformation_mode': 'none'}, 'score_every': 10, 'groupby_every': 20, 'selection_criteria': {'count_perc_ratio': 500, 'Total Number of Molecules with Substructure': 50000}, 'custom_alert_name': 'customalerts'}
+[2025-10-02 13:28:23,368][root][INFO] - Custom alert for customalerts exists.
+[2025-10-02 13:28:23,368][reinvent][INFO] - Scorer dicts: {'scorer_name': 'Cluster', 'output_path': 'results/tmp/', 'threshold': 0.25, 'min_count_fragments': 0}
+[2025-10-02 13:28:23,377][root][INFO] - Scorer clusters_tanimoto_morgan_threshold_0.8.csv initialized with properties: {'prop_dict': {'scorer_name': 'Cluster', 'output_path': 'results/tmp/', 'threshold': 0.25, 'min_count_fragments': 0}, 'score_every': 10, 'groupby_every': 10, 'selection_criteria': {'count_perc_ratio': 1000, 'Total Number of Molecules with Substructure': 10000}, 'custom_alert_name': 'dissimilarity'}
+[2025-10-02 13:28:23,378][root][INFO] - Custom alert for dissimilarity exists.
+[2025-10-02 13:28:24,790][navidiv.scorer][INFO] - Time to get count: 1.15 seconds
+[2025-10-02 13:28:24,913][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,913][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,913][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,914][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,914][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,914][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,914][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,915][navidiv.scorer][INFO] - Time to get added score metrics: 1.27 seconds
+[2025-10-02 13:28:24,915][reinvent][INFO] - Step 0 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 94.0677966101695, 'Total Number of Fragments': 118, 'Number of Unique Fragments': 111, 'Elapsed Time': 1.2709333896636963, 'Elapsed Time_to get count': 1.1466903686523438, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 0, 'Appeared once': 107}
+[2025-10-02 13:28:24,915][root][INFO] - Step 0 - Grouping results
+[2025-10-02 13:28:24,920][reinvent][INFO] - Updating custom alert customalertsscaffold with fragments: []
+[2025-10-02 13:28:24,920][reinvent][INFO] - customalertsscaffold updated with set()
+[2025-10-02 13:28:24,951][navidiv.scorer][INFO] - Time to get count: 0.03 seconds
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,961][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:24,962][navidiv.scorer][INFO] - Time to get added score metrics: 0.04 seconds
+[2025-10-02 13:28:24,963][reinvent][INFO] - Step 0 - Scorer: ngrams_10 - Score: {'Percentage of Unique Fragments': 85.22585992540405, 'Total Number of Fragments': 4826, 'Number of Unique Fragments': 4113, 'Elapsed Time': 0.041692495346069336, 'Elapsed Time_to get count': 0.030534982681274414, 'Appeared more than 10 times': 3, 'Appeared more than 5 times': 34, 'Appeared once': 3772}
+[2025-10-02 13:28:24,963][root][INFO] - Step 0 - Grouping results
+[2025-10-02 13:28:24,973][reinvent][INFO] - Updating custom alert customalertsngrams with fragments: []
+[2025-10-02 13:28:24,973][reinvent][INFO] - customalertsngrams updated with set()
+[2025-10-02 13:28:25,021][root][WARNING] - Ring transformation failed for: c1cnnc1
+[2025-10-02 13:28:25,067][root][WARNING] - Ring transformation failed for: c1cc2c(co1)CCC2
+[2025-10-02 13:28:25,093][root][WARNING] - Ring transformation failed for: c1nnnn1
+[2025-10-02 13:28:25,126][root][WARNING] - Ring transformation failed for: c1ccc2nccc2c1
+[2025-10-02 13:28:25,201][root][WARNING] - Ring transformation failed for: c1cncn1
+[2025-10-02 13:28:25,205][root][WARNING] - Ring transformation failed for: c1ccc2c(c1)nc1ccccc12
+[2025-10-02 13:28:25,225][root][WARNING] - Ring transformation failed for: c1ccc2c(c1)nc1ccccc12
+[2025-10-02 13:28:25,229][root][WARNING] - Ring transformation failed for: c1ncnn1
+[2025-10-02 13:28:25,238][root][WARNING] - Ring transformation failed for: c1ccc2c(c1)nc1ccccc12
+[2025-10-02 13:28:25,262][root][WARNING] - Ring transformation failed for: c1ccnc1
+[2025-10-02 13:28:31,392][navidiv.scorer][INFO] - Time to get count: 6.42 seconds
+[2025-10-02 13:28:31,394][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,394][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,394][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,394][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,394][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,395][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,395][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:31,395][navidiv.scorer][INFO] - Time to get added score metrics: 6.42 seconds
+[2025-10-02 13:28:31,395][reinvent][INFO] - Step 0 - Scorer: fragments_none - Score: {'Percentage of Unique Fragments': 90.14492753623189, 'Total Number of Fragments': 690, 'Number of Unique Fragments': 622, 'Elapsed Time': 6.422314405441284, 'Elapsed Time_to get count': 6.419196367263794, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 2, 'Appeared once': 578}
+[2025-10-02 13:28:31,395][root][INFO] - Step 0 - Grouping results
+[2025-10-02 13:28:31,400][reinvent][INFO] - Updating custom alert customalerts with fragments: []
+[2025-10-02 13:28:31,401][reinvent][INFO] - customalerts updated with {'[#6;R0]~[#6;R0]'}
+[2025-10-02 13:28:31,418][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:31,445][navidiv.scorer][INFO] - Time to get added score metrics: 0.04 seconds
+[2025-10-02 13:28:31,445][reinvent][INFO] - Step 0 - Scorer: clusters_tanimoto_morgan_threshold_0.8.csv - Score: {'Percentage of Unique Fragments': 100.0, 'Total Number of Fragments': 118, 'Number of Unique Fragments': 118, 'Elapsed Time': 0.04420137405395508, 'Elapsed Time_to get count': 0.017857074737548828, 'mean_similarity': 0.15416349363279533, 'std_similarity': 0.06644026791005682}
+[2025-10-02 13:28:31,445][root][INFO] - Step 0 - Grouping results
+[2025-10-02 13:28:31,455][reinvent][INFO] - Updating custom alert dissimilarity with fragments: []
+[2025-10-02 13:28:31,455][reinvent][INFO] - dissimilarity updated with {'CCCCCCCCCCCCCCC'}
+[2025-10-02 13:28:31,527][reinvent][INFO] - loss: 611.7855224609375, augmented_lls: -16.359474182128906, prior_lls: -32.130279541015625, scores: 0.2464188039302826,prior_loss: 0.0
+[2025-10-02 13:28:31,613][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.25 Agent NLL: 32.13 Valid:  92% Step: 1
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 46.0697 46.0697 -46.0697 0.0000000 CCOC(=O)C12C(=O)NC3(OCCC(c4ccc(Cl)cc4)N3C1c1ccccc1Cl)C(=O)C2=O 1 O=C1NC23OCCC(c4ccccc4)N2C(c2ccccc2)C1C(=O)C3=O 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 54.6874 54.6874 -54.6874 0.0000000 c1cc2c3c4c(c5c5c(cccc5n3-c3ccccc3N(c3ccc(C)cc3)C2=O)=Nc2ccccc24)c1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 74.2011 74.2011 -74.2011 0.0000000 C#CCC1(C(C)O)C2CC(O)(C3=C4C(=C2CCl)CCC3=CC4Cl)C1C#N 1 C1=C2CCC3=CCC2=C3C2CCC1C2 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 44.0282 44.0282 -44.0282 0.0000000 C1C2(O)OOC(O)(C(C)=C2C)CC(=O)O2C(C)CC12 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.7993 26.7993 -26.7993 0.0000000 Cc1c(C=CC(=O)c2ccccc2Br)cccc1[N+](=O)[O-] 1 O=C(C=Cc1ccccc1)c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 53.2952 53.2952 -53.2952 0.0000000 Cc1cccnc1-c1ccccc1C1CN(S(=O)(=O)c2ccccc2)C(C(F)(F)F)(C(F)(F)F)OP1C(C)(C)C 1 O=S(=O)(c1ccccc1)N1COPC(c2ccccc2-c2ccccn2)C1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.2557 16.2557 26.3407 0.6655687 CC1(C)NC(=O)c2ccccc2NC1=O 1 O=C1CNC(=O)c2ccccc2N1 0.6655687 0.6656 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.6839 29.6839 6.7241 0.5688751 BrC=C1C(=Nc2ccc(Br)cc2)C=Cc2ccccc21 1 C=C1C(=Nc2ccccc2)C=Cc2ccccc21 0.5688751 0.5689 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.8295 32.8295 -32.8295 0.0000000 CC1OC1C(=O)OCC#Cc1ccc(C(=O)OCc2ccccc2)cc1 1 O=C(OCc1ccccc1)c1ccc(C#CCOC(=O)C2CO2)cc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 45.3759 45.3759 -45.3759 0.0000000 c1(-c2ccccc2)c(C(=O)OC)c(C(=O)C)c2c3c(ccc(Br)c3)[nH]n1c2C(=O)OCc1ccccc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+[2025-10-02 13:28:31,720][reinvent][INFO] - loss: 923.7841796875, augmented_lls: -6.444907188415527, prior_lls: -29.692842483520508, scores: 0.3632490038871765,prior_loss: 1.0473636388778687
+[2025-10-02 13:28:31,727][reinvent][INFO] - loss: 18964.880859375, augmented_lls: 99.0, prior_lls: 99.0, scores: 0.0,prior_loss: 18964.880859375
+[2025-10-02 13:28:31,760][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.36 Agent NLL: 29.13 Valid:  92% Step: 2
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 32.9688 33.3721 20.8884 0.8478209 O=C1CC2C3CCC4C1C(c1ccccc1)(C34)N2Cc1ccccc1 1 O=C1CC2C3CCC4C1C(c1ccccc1)(C34)N2Cc1ccccc1 0.8478209 0.8478 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.3174 16.4644 27.9297 0.6936577 COC(=O)c1cccc(C(=O)O)c1 1 c1ccccc1 0.6936577 0.6937 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.9067 26.9376 13.7960 0.6364627 COC(=O)c1[nH]c(=O)[nH]c1C(=O)c1ccc(C)cc1 1 O=C(c1ccccc1)c1c[nH]c(=O)[nH]1 0.6364627 0.6365 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 52.7280 54.0227 -54.0227 0.0000000 CCO[P-](=O)(=[O+]CC)C1C2=C(COC(C)=O)SCC(C2)C12C(=O)N(C)C(=O)N2C 1 O=C1NC(=O)C2(CC3=CSCC2C3)N1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 33.6843 34.7731 15.2099 0.7809850 O=C1Nc2ccccc2C(c2cccc(F)c2)CC1=C1CCCN1 1 O=C1Nc2ccccc2C(c2ccccc2)CC1=C1CCCN1 0.7809850 0.7810 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.2590 16.0438 25.5489 0.6498862 O=CNc1cccc(Cl)c1 1 c1ccccc1 0.6498862 0.6499 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.7829 29.4936 0.1847 0.4637232 C1=C2C(c3ccccc3)=C(c3ccc(-c4ccccc4)cc3)SC2CCC1 1 C1=C2C(c3ccccc3)=C(c3ccc(-c4ccccc4)cc3)SC2CCC1 0.4637232 0.4637 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.5665 27.7115 24.4386 0.8148446 O=C(O)C1C(c2ccccc2)Nc2ccccc2C1C(Cl)Cl 1 c1ccc(C2CCc3ccccc3N2)cc1 0.8148446 0.8148 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 42.3056 43.8988 -43.8988 0.0000000 CCC1=CC(CC)=[N+]2C1=C(c1ccccc1)c1cccn1[B-]13C(=O)CCN1C2=C3c1ccccc1 1 O=C1CCN2C3=C(c4ccccc4)[B-]12n1cccc1C(c1ccccc1)=C1C=CC=[N+]13 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 24.8948 25.9602 14.3357 0.6296220 Cl[As]1ON=C(c2cccc3ccccc23)N1c1ccccc1 1 c1ccc(N2[AsH]ON=C2c2cccc3ccccc23)cc1 0.6296220 0.6296 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:31,872][reinvent][INFO] - loss: 943.8905639648438, augmented_lls: -4.346498489379883, prior_lls: -29.997726440429688, scores: 0.4008004069328308,prior_loss: 3.0042243003845215
+[2025-10-02 13:28:31,875][reinvent][INFO] - loss: 7305.890625, augmented_lls: 37.88951873779297, prior_lls: 21.517438888549805, scores: 0.2558137774467468,prior_loss: 6535.2666015625
+[2025-10-02 13:28:31,908][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.40 Agent NLL: 28.92 Valid:  93% Step: 3
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.2450 15.2944 8.9897 0.3794397 C[Si](C)(C)[Si]1([Si](C)(C)C)S[Si]([Si](C)(C)C)([Si](C)(C)C)[Si](C)(C)[Si]1(C)C 1 [SiH2]1[SiH2][SiH2]S[SiH2]1 0.3794397 0.3794 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.2850 29.1774 24.5882 0.8400879 COc1ccc(CN2C(=O)C3CCC(C3)C23C2CCC3CC2)cc1 1 O=C1C2CCC(C2)C2(C3CCC2CC3)N1Cc1ccccc1 0.8400879 0.8401 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.7231 26.9021 -26.9021 0.0000000 C=C(c1ccccc1)C1C(=O)N(c2ccccc2)O[S+]1[O-] 1 C=C(c1ccccc1)C1[SH+]ON(c2ccccc2)C1=O 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.0473 28.9943 27.9709 0.8900812 O=S1(=O)N=C(NCc2ccccc2)C2Nc3ccccc3C21 1 O=S1(=O)N=C(NCc2ccccc2)C2Nc3ccccc3C21 0.8900812 0.8901 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 42.9173 44.4198 -7.1144 0.5828967 CN(C#N)CC1CCC2C3CCC(C)(NS(=O)(=O)c4ccccc4)C3CCC12C 1 O=S(=O)(NC1CCC2C3CCCC3CCC12)c1ccccc1 0.5828967 0.5829 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.5991 17.0308 -17.0308 0.0000000 CN(C)c1ccc(C=CC(=O)c2ccc(N(C)C)cc2)cc1 1 O=C(C=Cc1ccccc1)c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 24.5388 25.6912 20.8030 0.7264712 CC1CC(=O)Nc2cc3ccccc3c(O)c21 1 O=C1CCc2cc3ccccc3cc2N1 0.7264712 0.7265 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.9452 19.2965 30.7691 0.7822759 O=C1CC(c2ccccc2)CC(=O)N1c1ccccc1 1 O=C1CC(c2ccccc2)CC(=O)N1c1ccccc1 0.7822759 0.7823 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.0552 35.0657 -7.6913 0.4277250 CC1=C(C)C2(C)C(C)P(c3ccccc3)(c3ccccc3)=C1C1C=CCC12C 1 C1=CC2C3=P(c4ccccc4)(c4ccccc4)CC(C=C3)C2C1 0.4277250 0.4277 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.3147 24.6532 18.7085 0.6775268 COC(=O)C12OC(CC1C)c1ccccc12 1 c1ccc2c(c1)C1CCC2O1 0.6775268 0.6775 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,020][reinvent][INFO] - loss: 1118.0712890625, augmented_lls: -0.23302149772644043, prior_lls: -29.693431854248047, scores: 0.4603188633918762,prior_loss: 6.96002197265625
+[2025-10-02 13:28:32,022][reinvent][INFO] - loss: 3907.302001953125, augmented_lls: 12.960028648376465, prior_lls: -5.784667491912842, scores: 0.2928858697414398,prior_loss: 3172.47802734375
+[2025-10-02 13:28:32,053][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.46 Agent NLL: 27.94 Valid:  91% Step: 4
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 33.7382 31.5726 -3.3414 0.4411117 COC(=O)C1=CC2C(C(=O)OC)C(=O)CC2C(c2ccccc2)C1C(=O)OC 1 O=C1CC2C=CCC(c3ccccc3)C2C1 0.4411117 0.4411 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.2267 16.7687 26.5420 0.6767298 c1ccc(Cn2ccnc2-c2ccccc2)cc1 1 c1ccc(Cn2ccnc2-c2ccccc2)cc1 0.6767298 0.6767 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.7642 16.2509 18.2380 0.5388896 COC(=O)c1cccnc1 1 c1ccncc1 0.5388896 0.5389 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.0638 35.8697 -0.2472 0.5566021 C1=CC2C3CC4C=CC3C2C2C(=C1)C1=C(CCCC1)C42 1 C1=CC2C3CC4C=CC3C2C2C(=C1)C1=C(CCCC1)C42 0.5566021 0.5566 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 34.1329 37.5671 -6.0330 0.4927210 CC1(C)OC2OC3OC([O+]=[P-]4(=O)OC=CCO4)C(O)C(O)C3C2O1 1 O=[P-]1(=[O+]C2CCC3C(O2)OC2OCOC23)OC=CCO1 0.4927210 0.4927 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.5602 23.7857 13.6824 0.5854393 CC1(C)OC2COC(=O)C3=CCCCC32O1 1 O=C1OCC2OCOC23CCCC=C13 0.5854393 0.5854 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.6113 29.6464 20.9471 0.7905229 CC1(C)N2C(=O)CCC2(C)N1C(=O)Oc1ccccc1 1 O=C1CCC2N1CN2C(=O)Oc1ccccc1 0.7905229 0.7905 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.3842 25.1085 18.7901 0.6859161 O=C1OC2OC1C1c3ccccc3C2c2ccccc21 1 O=C1OC2OC1C1c3ccccc3C2c2ccccc21 0.6859161 0.6859 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.0248 15.7444 15.9886 0.4958270 CSc1[n-]c2ccccc2[s+]1 1 c1ccc2[s+]c[n-]c2c1 0.4958270 0.4958 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3558 16.7843 15.4502 0.5036642 c1ccc(N2c3ccccc3Nc3ccccc32)cc1 1 c1ccc(N2c3ccccc3Nc3ccccc32)cc1 0.5036642 0.5037 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,160][reinvent][INFO] - loss: 1032.883056640625, augmented_lls: 2.1429998874664307, prior_lls: -27.072307586669922, scores: 0.4564892053604126,prior_loss: 7.511000156402588
+[2025-10-02 13:28:32,162][reinvent][INFO] - loss: 2607.833251953125, augmented_lls: 10.441712379455566, prior_lls: -15.324437141418457, scores: 0.4025960862636566,prior_loss: 1514.258056640625
+[2025-10-02 13:28:32,191][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.46 Agent NLL: 25.20 Valid:  95% Step: 5
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 14.6467 18.0672 23.2480 0.6455504 c1ccc(-c2ccc(-n3cccn3)cc2)cc1 1 c1ccc(-c2ccc(-n3cccn3)cc2)cc1 0.6455504 0.6456 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.5541 23.2716 26.8634 0.7833589 COc1ccc2c(=O)[nH]nc(-c3ccc(Br)cc3)c2c1 1 O=c1[nH]nc(-c2ccccc2)c2ccccc12 0.7833589 0.7834 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.8791 29.4131 17.3965 0.7314009 COc1ccc2c(c1)C(c1cc3ccccc3cc1O)OC2=O 1 O=C1OC(c2ccc3ccccc3c2)c2ccccc21 0.7314009 0.7314 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.5465 30.5176 -4.7262 0.4029914 CC1=[S+]C(C2c3ccccc3C=Cc3ccccc32)N=C(c2ccccc2)[N-]1 1 C1=Cc2ccccc2C(C2N=C(c3ccccc3)[N-]C=[S+]2)c2ccccc21 0.4029914 0.4030 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 44.0574 48.2268 -33.3337 0.2327050 Cc1cccc(Br)c1C1C(c2ccccc2Br)CC2C3c4ccccc4Oc4cccc(c43)OC21 1 c1ccc(C2CC3C4c5ccccc5Oc5cccc(c54)OC3C2c2ccccc2)cc1 0.2327050 0.2327 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.6596 29.3996 -9.7395 0.3071894 NN(n1cn[nH]c1=N[N+](=O)[O-])[N+](=O)[O-] 1 N=c1[nH]cn[nH]1 0.3071894 0.3072 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.3578 31.7249 12.6696 0.6936645 CC1C2OS(=O)(=O)NC23CCCCCC3N1C 1 O=S1(=O)NC23CCCCCC2NCC3O1 0.6936645 0.6937 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.7008 15.8535 -15.8535 0.0000000 OCCCCCO 1  0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.2354 17.1693 -17.1693 0.0000000 CC(=O)Oc1ccccc1O 1 c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.0023 17.6697 11.4499 0.4549929 C1=CC(=C[N-]Nc2ccccc2)[S+]=C1 1 C1=CC(=C[N-]Nc2ccccc2)[S+]=C1 0.4549929 0.4550 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,297][reinvent][INFO] - loss: 1185.73583984375, augmented_lls: 4.079824447631836, prior_lls: -28.664138793945312, scores: 0.5116244554519653,prior_loss: 13.966859817504883
+[2025-10-02 13:28:32,299][reinvent][INFO] - loss: 2794.765625, augmented_lls: -2.9515321254730225, prior_lls: -20.005611419677734, scores: 0.2664699852466583,prior_loss: 2177.908935546875
+[2025-10-02 13:28:32,328][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.51 Agent NLL: 25.82 Valid:  97% Step: 6
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 19.6029 24.9119 -24.9119 0.0000000 CCN(CC)C(=O)c1ccccc1N=NN(C)C 1 c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 30.1584 32.1470 6.6434 0.6061002 c1ccc2c(c1)CCN1N2Cc2cccc3ccp1c23 1 c1ccc2c(c1)CCN1N2Cc2cccc3ccp1c23 0.6061002 0.6061 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.2454 28.5111 13.1629 0.6511564 CC12CCC(C1)C(O)C1(O)CCC(=O)CC21 1 O=C1CCC2CC3CCC(C3)C2C1 0.6511564 0.6512 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.9303 29.0991 19.3269 0.7566561 O=C1c2ccccc2CN2CCN3C(c4ccccc4)C=CC123 1 O=C1c2ccccc2CN2CCN3C(c4ccccc4)C=CC123 0.7566561 0.7567 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.2151 27.1165 22.1564 0.7698891 O=C1N=C2CCc3ccccc3C2N1c1ccccc1 1 O=C1N=C2CCc3ccccc3C2N1c1ccccc1 0.7698891 0.7699 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.6271 24.4725 19.3758 0.6851298 O=C1OCCN1c1nnn2ccccc12 1 O=C1OCCN1c1nnn2ccccc12 0.6851298 0.6851 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.0511 22.4763 21.7676 0.6913099 c1ccc(C2COC3(c4ccccc4)OCC(c4ccccc4)N23)cc1 1 c1ccc(C2COC3(c4ccccc4)OCC(c4ccccc4)N23)cc1 0.6913099 0.6913 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.4182 27.3216 6.7862 0.5329343 O=C(c1ccccc1)C1C(O)Oc2ccccc2C1[N+](=O)[O-] 1 O=C(c1ccccc1)C1COc2ccccc2C1 0.5329343 0.5329 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.5748 21.6986 13.9718 0.5573503 COc1cc(C)c2ccc3ccccc3c2c1 1 c1ccc2c(c1)ccc1ccccc12 0.5573503 0.5574 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.3694 24.9058 17.9289 0.6692923 Nn1c(-c2ccncc2)nc2cc(Cl)ccc21 1 c1ccc2[nH]c(-c3ccncc3)nc2c1 0.6692923 0.6693 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,431][reinvent][INFO] - loss: 1196.887451171875, augmented_lls: 4.813494682312012, prior_lls: -28.120534896850586, scores: 0.5145941972732544,prior_loss: 17.922386169433594
+[2025-10-02 13:28:32,432][reinvent][INFO] - loss: 1464.9820556640625, augmented_lls: 8.43126106262207, prior_lls: -29.332910537719727, scores: 0.5900651812553406,prior_loss: 22.123275756835938
+[2025-10-02 13:28:32,460][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.51 Agent NLL: 24.90 Valid:  95% Step: 7
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 24.0093 29.9213 18.1568 0.7512211 CC1C(c2ccc(Cl)cc2)C2C=CC1N(S(=O)(=O)c1ccccc1)C2 1 O=S(=O)(c1ccccc1)N1CC2C=CC1CC2c1ccccc1 0.7512211 0.7512 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.0498 26.2292 -1.0107 0.3940388 COc1ccc2cccnc2c1C=NN=Cc1ccc2ccccc2c1 1 C(=NN=Cc1cccc2cccnc12)c1ccc2ccccc2c1 0.3940388 0.3940 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.9979 25.5404 17.1636 0.6672487 CN1C2C(=O)CCC2=CC1c1ccccc1 1 O=C1CCC2=CC(c3ccccc3)NC12 0.6672487 0.6672 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.0421 32.0870 22.1146 0.8468993 COc1ccc2c(c1)C1(C)CCC3(O)CC1CCC23C 1 c1ccc2c(c1)C1CCC3CC1CCC23 0.8468993 0.8469 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.6041 16.6349 20.1785 0.5752095 c1ccc2c(c1)Nc1ccccc1O2 1 c1ccc2c(c1)Nc1ccccc1O2 0.5752095 0.5752 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.5028 27.2693 -27.2693 0.0000000 O=C1OC2C3CCC(C3)C2C1C=Cc1ccccc1 1 O=C1OC2C3CCC(C3)C2C1C=Cc1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.5339 31.6977 25.6427 0.8959443 c1ccc(COC2CC3NC(N2)c2ccccc23)cc1 1 c1ccc(COC2CC3NC(N2)c2ccccc23)cc1 0.8959443 0.8959 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.3845 29.1988 -29.1988 0.0000000 c1c2cccc3c2nc2c4c(cccc4)n(c2c1)c1ccccc31 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 20.0394 20.0331 18.1689 0.5969059 CC1(C)C(=O)NC(=O)C12CCCCC2 1 O=C1CC2(CCCCC2)C(=O)N1 0.5969059 0.5969 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.3363 22.6955 17.2534 0.6242018 c1ccc2c(c1)COCC21CCCO1 1 c1ccc2c(c1)COCC21CCCO1 0.6242018 0.6242 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,565][reinvent][INFO] - loss: 1246.5714111328125, augmented_lls: 4.836989402770996, prior_lls: -29.574811935424805, scores: 0.5376843810081482,prior_loss: 32.86726379394531
+[2025-10-02 13:28:32,567][reinvent][INFO] - loss: 1734.538330078125, augmented_lls: 14.675086975097656, prior_lls: -25.50995445251465, scores: 0.6278913021087646,prior_loss: 23.578540802001953
+[2025-10-02 13:28:32,595][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.54 Agent NLL: 25.46 Valid:  95% Step: 8
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 66.5474 78.9534 -78.9534 0.0000000 C1=C(C2=CC=CC35C25S3(=O)=N6)OC23C1=C1C=CC(OS(=O)(=O)C)C12C1c2ccccc2OC31[N+]([O-])=O 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.4051 31.3531 18.6583 0.7814289 O=S(=O)(Nc1cc(Cl)cc2c(Cl)ccn12)c1ccccc1 1 O=S(=O)(Nc1cccc2cccn12)c1ccccc1 0.7814289 0.7814 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7862 25.9519 10.3686 0.5675087 CC1CC(O)C2(CCCC2)C1 1 C1CCC2(C1)CCCC2 0.5675087 0.5675 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.0519 17.1070 20.9521 0.5946735 CN(C)c1ccccc1C=O 1 c1ccccc1 0.5946735 0.5947 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 31.1549 35.7373 11.7680 0.7422705 Clc1cccc2c1NNCCCCCCCO2 1 c1ccc2c(c1)NNCCCCCCCO2 0.7422705 0.7423 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.0400 36.4632 12.4113 0.7636641 CC12CC3C(=O)Nc4cc(O)ccc4C3CC1CCO2 1 O=C1Nc2ccccc2C2CC3CCOC3CC12 0.7636641 0.7637 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.9617 24.6938 13.7968 0.6014162 O=C(OC1c2ccccc2-c2ccccc21)c1cccc(Cl)c1 1 O=C(OC1c2ccccc2-c2ccccc21)c1ccccc1 0.6014162 0.6014 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.6774 22.5443 -22.5443 0.0000000 CC(C)(C#C[Si](C)(C)C)O[Si](C)(C)C(C)(C)C 1  0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 17.4891 18.7454 15.4338 0.5340505 Cc1ccc(NC2=[S+]CC[N-]2)cc1 1 c1ccc(NC2=[S+]CC[N-]2)cc1 0.5340505 0.5341 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.4103 34.8469 19.5151 0.8494061 O=C1CC(NCc2ccccc2)(c2ccccc2)CC2OC12O 1 O=C1CC(NCc2ccccc2)(c2ccccc2)CC2OC12 0.8494061 0.8494 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,695][reinvent][INFO] - loss: 1108.593505859375, augmented_lls: 2.36502742767334, prior_lls: -29.549976348876953, scores: 0.4986719489097595,prior_loss: 28.757043838500977
+[2025-10-02 13:28:32,697][reinvent][INFO] - loss: 1742.2554931640625, augmented_lls: 16.777339935302734, prior_lls: -24.25752830505371, scores: 0.6411698460578918,prior_loss: 22.74445343017578
+[2025-10-02 13:28:32,724][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.50 Agent NLL: 25.25 Valid:  92% Step: 9
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 29.0371 35.1314 -1.3495 0.5278417 CN1C(=O)OC2CC3(C)C=C2C13C 1 O=C1NC2C3=CC2CC3O1 0.5278417 0.5278 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.4935 27.3012 7.2286 0.5395284 c1cc2cc(c1)COCc1cccc(c1)COc1ccc(cc1)COCCOC2 1 c1cc2cc(c1)COCc1cccc(c1)COc1ccc(cc1)COCCOC2 0.5395284 0.5395 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.5749 23.4744 24.7020 0.7527558 O=C1CCC2(Cc3ccccc3)CCC1CC2 1 O=C1CCC2(Cc3ccccc3)CCC1CC2 0.7527558 0.7528 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.8488 32.8117 -7.4173 0.3967876 C[Si](C)(C)C1C=CC2(Br)CCCCC1O2 1 C1=CC2CCCCC(C1)O2 0.3967876 0.3968 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.8070 23.2820 19.9525 0.6755404 COC(=O)c1cn2ccccc2c1Cl 1 c1ccn2cccc2c1 0.6755404 0.6755 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.1547 33.9625 8.6085 0.6651723 COC(=O)C1=CN2CCCC3CC4CCC(C14)C32 1 C1=CN2CCCC3CC4CCC(C14)C32 0.6651723 0.6652 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.2554 30.1423 -30.1423 0.0000000 C=C[Si]12c3ccccc3OC1C(C)c1ccccc12 1 c1ccc2c(c1)CC1Oc3ccccc3[SiH]21 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.9160 17.6445 26.7331 0.6933989 COc1c(O)cccc1C(=O)O 1 c1ccccc1 0.6933989 0.6934 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.9798 19.8301 -19.8301 0.0000000 CC(C)(O)Cc1ccccc1 1 c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 22.7930 26.0153 21.5529 0.7432536 c1ccc(C2OCCCC2=C2CCCCO2)cc1 1 c1ccc(C2OCCCC2=C2CCCCO2)cc1 0.7432536 0.7433 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:32,817][reinvent][INFO] - loss: 1280.3914794921875, augmented_lls: 9.248220443725586, prior_lls: -26.89413070678711, scores: 0.5647242069244385,prior_loss: 24.936817169189453
+[2025-10-02 13:28:32,819][reinvent][INFO] - loss: 2091.112060546875, augmented_lls: 16.867956161499023, prior_lls: -28.299848556518555, scores: 0.7057469487190247,prior_loss: 35.92206954956055
+[2025-10-02 13:28:32,844][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.56 Agent NLL: 22.86 Valid:  98% Step: 10
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 41.9297 43.8978 -43.8978 0.0000000 O=C1Oc2ccccc2C2(OCCOO)C1C1(Cl)CC2(Cl)C(Cl)=C1Cl 1 O=C1Oc2ccccc2C2C3C=CC(C3)C12 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 43.9511 52.1166 -52.1166 0.0000000 CC12CCC(=CCO)C3(C)C(CC1)C1(C)C=C2COCC3(C)CCCC1 1 C=C1CCC2CCC3C4C=C2COCC(CCCC4)C13 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 18.8804 22.3045 37.6663 0.9370425 O=S1(=O)N=C(c2ccccc2)C(Cc2ccccc2)N1 1 O=S1(=O)N=C(c2ccccc2)C(Cc2ccccc2)N1 0.9370425 0.9370 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.3198 27.7945 13.6480 0.6475389 COC1=NC2CCC1Oc1ccccc12 1 C1=NC2CCC1Oc1ccccc12 0.6475389 0.6475 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.4648 34.0825 11.1885 0.7073599 COC1C=C2C3CCCC2(CC1)c1c(ccc2ccccc12)O3 1 C1=C2C3CCCC2(CCC1)c1c(ccc2ccccc12)O3 0.7073599 0.7074 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.2165 18.4014 26.9242 0.7082135 O=S(=O)(c1ccccc1)n1cnc2ccccc21 1 O=S(=O)(c1ccccc1)n1cnc2ccccc21 0.7082135 0.7082 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.6798 28.0763 27.8377 0.8736560 O=S(=O)(ONc1ccccn1)c1ccccc1Cl 1 O=S(=O)(ONc1ccccn1)c1ccccc1 0.8736560 0.8737 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.6856 32.2547 -0.2576 0.4999558 CC1=C2C3CC2(C1)CC3O 1 C1=C2C3CCC2(C1)C3 0.4999558 0.5000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.3005 39.9416 -0.9770 0.6088210 CC1=CC2CCCC1C1=C(NCC1)N2C 1 C1=CC2CCCC1NC1=C2CCN1 0.6088210 0.6088 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 31.1017 38.0663 -2.4914 0.5558578 C=C1C2CCC(CC34CCC3C14)N2 1 C=C1C2CCC(CC34CCC3C14)N2 0.5558578 0.5559 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:33,756][navidiv.scorer][INFO] - Time to get count: 0.82 seconds
+[2025-10-02 13:28:34,006][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,008][navidiv.scorer][INFO] - Time to get added score metrics: 1.07 seconds
+[2025-10-02 13:28:34,008][reinvent][INFO] - Step 10 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 86.0655737704918, 'Total Number of Fragments': 122, 'Number of Unique Fragments': 105, 'Elapsed Time': 1.071115493774414, 'Elapsed Time_to get count': 0.8187758922576904, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 1, 'Appeared once': 94}
+[2025-10-02 13:28:34,024][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:34,026][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,026][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,026][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,026][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,027][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,027][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:34,027][navidiv.scorer][INFO] - Time to get added score metrics: 0.02 seconds
+[2025-10-02 13:28:34,027][reinvent][INFO] - Step 10 - Scorer: ngrams_10 - Score: {'Percentage of Unique Fragments': 91.27147766323024, 'Total Number of Fragments': 2910, 'Number of Unique Fragments': 2656, 'Elapsed Time': 0.01904606819152832, 'Elapsed Time_to get count': 0.01629352569580078, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 5, 'Appeared once': 2490}
+[2025-10-02 13:28:34,041][root][WARNING] - Ring transformation failed for: c1nncn1
+[2025-10-02 13:28:34,045][root][WARNING] - Ring transformation failed for: c1ccc2c(c1)CCCC13CCCC2(C1)Oc1cssc13
+[2025-10-02 13:28:34,053][root][WARNING] - Ring transformation failed for: c1ccc2nc[nH]cc2c1
+[2025-10-02 13:28:34,076][root][WARNING] - Ring transformation failed for: c1coc2c(c1)CCC1C2CCC2NC21
+[2025-10-02 13:28:34,078][root][WARNING] - Ring transformation failed for: c1nnc[n+]1
+[2025-10-02 13:28:34,100][root][WARNING] - Ring transformation failed for: c1cnnn1
+[2025-10-02 13:28:34,106][root][WARNING] - Ring transformation failed for: c1cnnc1
+[2025-10-02 13:28:34,107][root][WARNING] - Ring transformation failed for: c1ccc2c[nH]ncc2c1
+[2025-10-02 13:28:34,111][root][WARNING] - Ring transformation failed for: C1=NCCc2cnnc21
+[2025-10-02 13:28:34,117][root][WARNING] - Ring transformation failed for: c1ccc2nccc2c1
+[2025-10-02 13:28:34,122][root][WARNING] - Ring transformation failed for: c1c[n+]nn1
+[2025-10-02 13:28:34,134][root][WARNING] - Ring transformation failed for: c1ccc2onc3ccccc3[nH]cc2c1
+[2025-10-02 13:28:37,647][navidiv.scorer][INFO] - Time to get count: 3.62 seconds
+[2025-10-02 13:28:37,648][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,648][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,648][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,649][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,649][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,649][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,649][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:37,649][navidiv.scorer][INFO] - Time to get added score metrics: 3.62 seconds
+[2025-10-02 13:28:37,650][reinvent][INFO] - Step 10 - Scorer: fragments_none - Score: {'Percentage of Unique Fragments': 88.10916179337231, 'Total Number of Fragments': 513, 'Number of Unique Fragments': 452, 'Elapsed Time': 3.6221861839294434, 'Elapsed Time_to get count': 3.6198744773864746, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 0, 'Appeared once': 396}
+[2025-10-02 13:28:37,665][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:37,695][navidiv.scorer][INFO] - Time to get added score metrics: 0.05 seconds
+[2025-10-02 13:28:37,695][reinvent][INFO] - Step 10 - Scorer: clusters_tanimoto_morgan_threshold_0.8.csv - Score: {'Percentage of Unique Fragments': 100.0, 'Total Number of Fragments': 122, 'Number of Unique Fragments': 122, 'Elapsed Time': 0.045079946517944336, 'Elapsed Time_to get count': 0.01583576202392578, 'mean_similarity': 0.14693054396899735, 'std_similarity': 0.0755851186749278}
+[2025-10-02 13:28:37,695][root][INFO] - Step 10 - Grouping results
+[2025-10-02 13:28:37,712][reinvent][INFO] - Updating custom alert dissimilarity with fragments: []
+[2025-10-02 13:28:37,712][reinvent][INFO] - dissimilarity updated with {'CCCCCCCCCCCCCCC'}
+[2025-10-02 13:28:37,723][reinvent][INFO] - loss: 1272.1514892578125, augmented_lls: 7.208311080932617, prior_lls: -29.579090118408203, scores: 0.5748031735420227,prior_loss: 34.849151611328125
+[2025-10-02 13:28:37,725][reinvent][INFO] - loss: 1946.507080078125, augmented_lls: 18.790414810180664, prior_lls: -26.279010772705078, scores: 0.7042098045349121,prior_loss: 50.61420822143555
+[2025-10-02 13:28:37,754][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.57 Agent NLL: 24.63 Valid:  95% Step: 11
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.9600 16.8609 27.8349 0.6983713 O=C1C(=Cc2ccccc2)CCC1=Cc1ccc(Cl)cc1 1 O=C1C(=Cc2ccccc2)CCC1=Cc1ccccc1 0.6983713 0.6984 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.5240 40.9003 -28.6616 0.1912303 CN1CCOc2ccccc2NCc2cccc(c2O)Cc2ccccc2OCc2cccc(c2)COc2ccccc2OC1 1 c1cc2cc(c1)COc1ccccc1OCNCCOc1ccccc1NCc1cccc(c1)Cc1ccccc1OC2 0.1912303 0.1912 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.6268 31.6588 0.1789 0.4974630 COC(=O)c1ccccc1NC(=S)N(C)Nc1ccccc1Cl 1 S=C(NNc1ccccc1)Nc1ccccc1 0.4974630 0.4975 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 53.1584 57.9366 -42.9258 0.2345436 [N-2]N=NC(N=NC1=C2C(=[OH+])C=CC(Br)=C2OC1)=[NH+]Cn1cnnc1N 1 [OH+]=C1C=CC=C2OCC(N=NC=[NH+]Cn3cnnc3)=C12 0.2345436 0.2345 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.8847 34.0189 25.6045 0.9316159 COc1ccc(CN2CCC3OC4(CCCCC34)C2O)cc1 1 c1ccc(CN2CCC3OC4(CCCCC34)C2)cc1 0.9316159 0.9316 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.0523 28.8225 9.1195 0.5928430 O=C1CCC2C(O)C3=CCC(C3)C2C1 1 O=C1CCC2CC3=CCC(C3)C2C1 0.5928430 0.5928 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 37.9174 39.3221 2.8948 0.6596381 O=c1ssc2c1OC13CCCC2(CCCc2ccccc21)C3 1 O=c1ssc2c1OC13CCCC2(CCCc2ccccc21)C3 0.6596381 0.6596 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.2540 31.4709 6.4437 0.5924160 CC1CC2OCCCC3(C)CC2(C1)O3 1 C1COC2CCCC23CC(C1)O3 0.5924160 0.5924 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 46.2108 46.8903 -46.8903 0.0000000 CC(N1[Se+3]2([C-]3[CH-][CH+][CH-][CH+][CH-]3)N(C(C)(C)C)[Si+2]123(O[C+](C)[O-])OCC(C)(C)CO3)C 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 23.3937 27.4824 19.1577 0.7287513 COc1ccc(N2CCCC2C2CC2c2ccc(Br)cc2)cc1 1 c1ccc(C2CC2C2CCCN2c2ccccc2)cc1 0.7287513 0.7288 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:37,861][reinvent][INFO] - loss: 1190.26611328125, augmented_lls: 6.499894142150879, prior_lls: -28.339378356933594, scores: 0.5443636178970337,prior_loss: 38.80964660644531
+[2025-10-02 13:28:37,863][reinvent][INFO] - loss: 2309.198974609375, augmented_lls: 16.658832550048828, prior_lls: -29.450769424438477, scores: 0.7204625010490417,prior_loss: 36.409912109375
+[2025-10-02 13:28:37,890][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.54 Agent NLL: 23.17 Valid:  93% Step: 12
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 36.4434 44.0855 9.4408 0.8363479 CC12CC3(Cc4ccccc4)OC1CC1(CC1S2(=O)=O)O3 1 O=S1(=O)C2CC3(Cc4ccccc4)OC2CC2(CC21)O3 0.8363479 0.8363 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.0343 26.5493 10.9362 0.5857101 OC1C=C2CC2CCCCCCCC1 1 C1=C2CC2CCCCCCCCC1 0.5857101 0.5857 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.2397 25.5279 14.2395 0.6213663 O=[N+]([O-])c1ccc(C2CSC2c2ccccc2)cc1 1 c1ccc(C2CSC2c2ccccc2)cc1 0.6213663 0.6214 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.1106 27.3536 -27.3536 0.0000000 c1cccc2n(n1)c(P(c1ccccc1)c1ccccc1)cc2 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.7687 36.3772 -6.4296 0.4679314 O=CC1C=CC2C3CC4C5CC(C35)C4C12 1 C1=CC2C(C1)C1C3CC2C2C3CC12 0.4679314 0.4679 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.6106 23.9298 18.8271 0.6680764 O=C(Nc1ccccc1)n1c(=S)ccc2ccccc21 1 O=C(Nc1ccccc1)n1c(=S)ccc2ccccc21 0.6680764 0.6681 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.1369 28.7945 -0.2123 0.4465958 N=C1CC2CC(CC2O)N1 1 N=C1CC2CCC(C2)N1 0.4465958 0.4466 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.2321 21.6743 20.2174 0.6545587 c1cnc(CN2CCOCC2)nc1 1 c1cnc(CN2CCOCC2)nc1 0.6545587 0.6546 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 31.5339 37.6105 1.0347 0.6038311 c1ccc(C2=N[N+]34c5ccccc5OC3c3ccccc3C24)cc1 1 c1ccc(C2=N[N+]34c5ccccc5OC3c3ccccc3C24)cc1 0.6038311 0.6038 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.6535 18.7534 5.2205 0.3745929 NNC(=O)c1cccc(Cl)c1 1 c1ccccc1 0.3745929 0.3746 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:37,998][reinvent][INFO] - loss: 1221.40234375, augmented_lls: 9.342683792114258, prior_lls: -27.431411743164062, scores: 0.5745952725410461,prior_loss: 44.56409454345703
+[2025-10-02 13:28:38,000][reinvent][INFO] - loss: 2286.780029296875, augmented_lls: 25.776905059814453, prior_lls: -23.502187728881836, scores: 0.7699857950210571,prior_loss: 7.522360324859619
+[2025-10-02 13:28:38,026][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.57 Agent NLL: 21.91 Valid:  95% Step: 13
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 22.4770 23.4241 29.3966 0.8253228 Nc1cccn1C(=O)C12CC3CC(CC(C3)C1)C2 1 O=C(n1cccc1)C12CC3CC(CC(C3)C1)C2 0.8253228 0.8253 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.0336 18.5926 -18.5926 0.0000000 O=C1c2ccccc2CN1CCO 1 O=C1NCc2ccccc21 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 33.8471 35.3144 3.5502 0.6072586 CC1=CCC2C(=O)NCC3NC(=O)CCC32C1 1 O=C1CCC23CC=CCC2C(=O)NCC3N1 0.6072586 0.6073 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.5723 33.5895 -0.7039 0.5138376 CC1(C)CCC=C2CC=C1c1ccccc1OC2=O 1 O=C1Oc2ccccc2C2=CCC1=CCCC2 0.5138376 0.5138 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.4614 26.5864 11.7368 0.5987994 COC(=O)C1=COC=CC2CCCC12 1 C1=CC2CCCC2C=CO1 0.5987994 0.5988 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.7922 29.9911 10.0738 0.6260151 O=C1OCCN1C12CCC=CC1N2S(=O)(=O)c1ccccc1 1 O=C1OCCN1C12CCC=CC1N2S(=O)(=O)c1ccccc1 0.6260151 0.6260 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.1493 28.2507 10.8597 0.6110999 COc1ccc2[nH]nc(COc3ccc4ccccc4c3)c2c1 1 c1ccc2cc(OCc3n[nH]c4ccccc34)ccc2c1 0.6110999 0.6111 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.1028 26.2529 6.5303 0.5122370 CC12CCC3C(CC1)C3OC2=O 1 O=C1OC2C3CCC1CCC32 0.5122370 0.5122 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.3081 25.9661 9.4459 0.5533136 CC1CCC2(O)CC3OC3CC12 1 C1CC2CC3OC3CC2C1 0.5533136 0.5533 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 36.6177 37.9503 -9.3153 0.4474221 CC12c3ccccc3CC(c3cccc(F)c3)C1C1CCC2c2ccccc21 1 c1ccc(C2Cc3ccccc3C3C4CCC(c5ccccc54)C23)cc1 0.4474221 0.4474 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,135][reinvent][INFO] - loss: 1299.743896484375, augmented_lls: 9.407970428466797, prior_lls: -29.084980010986328, scores: 0.6014523506164551,prior_loss: 53.85713195800781
+[2025-10-02 13:28:38,137][reinvent][INFO] - loss: 2189.726318359375, augmented_lls: 23.148462295532227, prior_lls: -25.916589736938477, scores: 0.7666414380073547,prior_loss: 24.636932373046875
+[2025-10-02 13:28:38,165][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.60 Agent NLL: 22.92 Valid:  97% Step: 14
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.6966 24.1959 17.5779 0.6527160 CC1(c2ccc[nH]2)COC(=O)N1 1 O=C1NC(c2ccc[nH]2)CO1 0.6527160 0.6527 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.0980 17.5727 17.2155 0.5435652 O=c1[nH]c2cccnc2[nH]1 1 O=c1[nH]c2cccnc2[nH]1 0.5435652 0.5436 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 31.5167 37.9536 0.6094 0.6025470 CC12CCSC3(C)C(CC1)C1CCCC2C13 1 C1CC2C3CCSC4C(CC3)C(C1)C24 0.6025470 0.6025 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.0813 14.7597 13.6074 0.4432362 c1ccc(N2c3ccccc3Sc3ccccc32)cc1 1 c1ccc(N2c3ccccc3Sc3ccccc32)cc1 0.4432362 0.4432 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.2980 35.4117 20.3914 0.8719230 COC1Oc2ccccc2OC1OC1COc2ccccc21 1 c1ccc2c(c1)OCC(OC1COc3ccccc31)O2 0.8719230 0.8719 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.4605 35.5921 -35.5921 0.0000000 CC1C(=O)N2CCCC2=NC1CCc1ccccc1Cl 1 O=C1CC(CCc2ccccc2)N=C2CCCN12 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 26.1043 28.9114 13.8497 0.6681415 ClC1(c2ccccc2)C2CC3C4CC(C4)C1C32Cl 1 c1ccc(C2C3CC4C5CC(C5)C2C43)cc1 0.6681415 0.6681 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.3007 35.1196 5.6009 0.6362572 NN1C(=O)C2Cc3ccccc3OC2C1C1CCCCC1 1 O=C1NC(C2CCCCC2)C2Oc3ccccc3CC12 0.6362572 0.6363 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.7218 18.6510 23.8943 0.6647702 COc1cc(O)cc(CO)c1 1 c1ccccc1 0.6647702 0.6648 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 38.0680 38.4662 16.2588 0.8550787 OC1c2ccccc2OC12CCC1(Cc3cccc(Cl)c3)OC12 1 c1ccc(CC23CCC4(Cc5ccccc5O4)C2O3)cc1 0.8550787 0.8551 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,264][reinvent][INFO] - loss: 1257.051513671875, augmented_lls: 10.130302429199219, prior_lls: -28.630592346191406, scores: 0.6056389808654785,prior_loss: 49.467899322509766
+[2025-10-02 13:28:38,266][reinvent][INFO] - loss: 1907.9400634765625, augmented_lls: 18.640155792236328, prior_lls: -29.3396053314209, scores: 0.7496837973594666,prior_loss: 27.691009521484375
+[2025-10-02 13:28:38,292][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.61 Agent NLL: 22.59 Valid:  97% Step: 15
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 9.8864 19.3351 26.7405 0.7199309 O=S(=O)(c1ccccc1)N1c2ccccc2CC1c1ccccc1 1 O=S(=O)(c1ccccc1)N1c2ccccc2CC1c1ccccc1 0.7199309 0.7199 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.7116 25.5711 -25.5711 0.0000000 COC(=O)CC1(C)NC(=O)OC1(C)c1ccccc1 1 O=C1NCC(c2ccccc2)O1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 19.7134 21.4445 9.3024 0.4804217 C1SCC2=C1C1CCC2C1 1 C1SCC2=C1C1CCC2C1 0.4804217 0.4804 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.9419 32.7358 12.1997 0.7021174 CC1(C)C2CCC1(C1C(=O)N1S(C)(=O)=O)CC2 1 O=C1NC1C12CCC(CC1)C2 0.7021174 0.7021 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.1345 30.4332 6.4965 0.5770278 Cc1cccc2c1-c1ccccc1C(=C1C(=O)Nc3ccccc31)N2 1 O=C1Nc2ccccc2C1=C1Nc2ccccc2-c2ccccc21 0.5770278 0.5770 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.1630 29.8464 13.2111 0.6727738 O=C1NC(=NO)C(c2ccccc2)N1OCc1ccccc1 1 N=C1NC(=O)N(OCc2ccccc2)C1c1ccccc1 0.6727738 0.6728 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.7049 17.7375 8.5421 0.4106174 O=S1(=O)CCS1(=O)=O 1 O=S1(=O)CCS1(=O)=O 0.4106174 0.4106 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.8259 25.6637 9.4339 0.5483996 O=S1(=O)CC23CCCCC21C3 1 O=S1(=O)CC23CCCCC21C3 0.5483996 0.5484 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.7513 26.4363 23.0093 0.7725874 c1ccc(C2Nc3ccccc3N2c2ccncc2)nc1 1 c1ccc(C2Nc3ccccc3N2c2ccncc2)nc1 0.7725874 0.7726 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.1703 26.9738 21.2905 0.7541305 O=C1C(Br)=CCC12C(Br)=C2c1ccccc1 1 O=C1C=CCC12C=C2c1ccccc1 0.7541305 0.7541 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,393][reinvent][INFO] - loss: 1123.018798828125, augmented_lls: 8.534318923950195, prior_lls: -27.86774444580078, scores: 0.5687822103500366,prior_loss: 54.5019645690918
+[2025-10-02 13:28:38,395][reinvent][INFO] - loss: 2444.573974609375, augmented_lls: 23.607425689697266, prior_lls: -26.36855125427246, scores: 0.7808746099472046,prior_loss: 19.470523834228516
+[2025-10-02 13:28:38,421][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.57 Agent NLL: 21.36 Valid:  97% Step: 16
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 22.9721 31.2406 7.1203 0.5993891 CSC12CC(=O)CCC1(C)C(=O)O2 1 O=C1CCC2C(=O)OC2C1 0.5993891 0.5994 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.2081 38.0459 -1.0816 0.5775667 CC12C(O)CCCC1[N+]([O-])=C1Oc3ccccc3OC12 1 c1ccc2c(c1)OC1=[NH+]C3CCCCC3C1O2 0.5775667 0.5776 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.4105 29.9072 22.3235 0.8161047 COC([O-])=C1c2ccccc2SC1c1ccccc1OC 1 C=C1c2ccccc2SC1c1ccccc1 0.8161047 0.8161 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.6876 30.0009 -30.0009 0.0000000 CC(O)(O)C1C(O)OC2CC(=O)OC21 1 O=C1CC2OCCC2O1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 11.2717 17.0195 27.7483 0.6994966 COc1ccc(O)c(OC)c1 1 c1ccccc1 0.6994966 0.6995 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.0295 23.0725 7.3912 0.4759952 O=C1NCN2CCCC12 1 O=C1NCN2CCCC12 0.4759952 0.4760 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 41.1812 44.5708 -23.6537 0.3268299 CC1([S+]=[N+]([O-])[O-])CCN(S(=O)(=O)c2ccc([N+](=O)[O-])cc2)C2OC21 1 O=S(=O)(c1ccccc1)N1CCCC2OC21 0.3268299 0.3268 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.1008 27.3530 32.8848 0.9412149 COc1ccc2c(c1)CCC(O)N2S(=O)(=O)c1ccccc1 1 O=S(=O)(c1ccccc1)N1CCCc2ccccc21 0.9412149 0.9412 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.8484 26.4650 -0.3838 0.4075189 NNc1ccc(S(N)(=O)=O)nc1 1 c1ccncc1 0.4075189 0.4075 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.8925 22.5495 -22.5495 0.0000000 Cc1nnnn1CCc1ccncc1 1 c1cc(CCn2cnnn2)ccn1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+[2025-10-02 13:28:38,521][reinvent][INFO] - loss: 1256.4276123046875, augmented_lls: 10.790139198303223, prior_lls: -28.249719619750977, scores: 0.6099978089332581,prior_loss: 66.5387954711914
+[2025-10-02 13:28:38,523][reinvent][INFO] - loss: 2338.593017578125, augmented_lls: 23.796762466430664, prior_lls: -27.325428009033203, scores: 0.7987841963768005,prior_loss: 31.4134464263916
+[2025-10-02 13:28:38,549][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.61 Agent NLL: 21.39 Valid:  95% Step: 17
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 24.2145 30.8814 5.5099 0.5686143 C=C1c2ccccc2-c2ccccc2C12c1ccccc1OS2(=O)=O 1 C=C1c2ccccc2-c2ccccc2C12c1ccccc1OS2(=O)=O 0.5686143 0.5686 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.1859 18.3688 39.6235 0.9061289 Cc1ccccc1NS(=O)(=O)c1ccccc1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.9061289 0.9061 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.6652 26.7167 7.1451 0.5290906 O=C1Oc2ccccc2C23Cc4ccccc4C2C13 1 O=C1Oc2ccccc2C23Cc4ccccc4C2C13 0.5290906 0.5291 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.2239 43.9539 11.3311 0.8638281 OC1CC2ON=C(c3ccccc3)C13OC23c1ccccc1 1 c1ccc(C2=NOC3CCC24OC34c2ccccc2)cc1 0.8638281 0.8638 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.7372 20.6318 26.9477 0.7434288 COc1oc2ccccc2c(=O)c1O 1 O=c1ccoc2ccccc12 0.7434288 0.7434 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.2137 27.6413 12.6550 0.6296293 c1csc(NC2=NC3[N-]C23)c1 1 c1csc(NC2=NC3[N-]C23)c1 0.6296293 0.6296 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.9870 30.8150 19.4244 0.7849910 O=S(=O)(c1ccccc1)N1CC2=CC3C(CCCC23)C1 1 O=S(=O)(c1ccccc1)N1CC2=CC3C(CCCC23)C1 0.7849910 0.7850 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.5006 28.3120 13.3496 0.6509625 CC1(C)C(C(=O)O)C2CCC21C 1 C1CC2CCC12 0.6509625 0.6510 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.7605 18.4545 20.5726 0.6097985 COc1cccc2c1OC(=O)CC2c1ccccc1 1 O=C1CC(c2ccccc2)c2ccccc2O1 0.6097985 0.6098 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.0467 21.9806 38.2139 0.9405390 O=S(=O)(Nc1ccc(Cl)c(F)c1)c1ccccc1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.9405390 0.9405 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,648][reinvent][INFO] - loss: 1262.870361328125, augmented_lls: 11.835235595703125, prior_lls: -26.8289852142334, scores: 0.6041284799575806,prior_loss: 59.22380065917969
+[2025-10-02 13:28:38,650][reinvent][INFO] - loss: 2335.090576171875, augmented_lls: 23.54096794128418, prior_lls: -27.105375289916992, scores: 0.7913491129875183,prior_loss: 30.637319564819336
+[2025-10-02 13:28:38,676][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.60 Agent NLL: 20.06 Valid:  96% Step: 18
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 15.4071 21.7440 16.5947 0.5990425 O=S1(=O)c2ccccc2CC1Cl 1 O=S1(=O)CCc2ccccc21 0.5990425 0.5990 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.5792 30.8949 15.9607 0.7321177 CC12CCC3CCC[Si](c4ccccc4)(OC1=O)N32 1 O=C1O[Si]2(c3ccccc3)CCCC3CCC1N32 0.7321177 0.7321 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.9037 32.8282 25.3316 0.9087477 O=S(=O)(c1ccccc1)N1CCC2CC21C1(O)CC1 1 O=S(=O)(c1ccccc1)N1CCC2CC21C1CC1 0.9087477 0.9087 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.1017 23.6549 12.9066 0.5712732 O=c1c2ccccc2[nH]c2nccn12 1 O=c1c2ccccc2[nH]c2nccn12 0.5712732 0.5713 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.8952 20.7871 25.3808 0.7213730 c1ccc2c(c1)NC1c3ccccc3NC1O2 1 c1ccc2c(c1)NC1c3ccccc3NC1O2 0.7213730 0.7214 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.2420 20.5076 17.6067 0.5955360 Cc1cccc2c1ccc(=O)n2C 1 O=c1ccc2ccccc2[nH]1 0.5955360 0.5955 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.3577 28.0678 16.1716 0.6912415 [O-][S+](c1ccccc1)N1CC2CCC21 1 c1ccc([SH+]N2CC3CCC32)cc1 0.6912415 0.6912 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 9.3481 14.3786 17.3617 0.4959428 O=c1cc[nH]cc1 1 O=c1cc[nH]cc1 0.4959428 0.4959 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.4741 27.8614 12.9504 0.6376836 O=C1NC(O)(c2ccccc2)O1 1 O=C1NC(c2ccccc2)O1 0.6376836 0.6377 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.4471 18.4493 29.3883 0.7474617 Cc1ccccc1Nc1ccccc1 1 c1ccc(Nc2ccccc2)cc1 0.7474617 0.7475 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,770][reinvent][INFO] - loss: 1406.201416015625, augmented_lls: 15.93032455444336, prior_lls: -25.378084182739258, scores: 0.645443856716156,prior_loss: 57.80809783935547
+[2025-10-02 13:28:38,771][reinvent][INFO] - loss: 2386.28125, augmented_lls: 23.997543334960938, prior_lls: -27.8826847076416, scores: 0.8106285333633423,prior_loss: 23.69740867614746
+[2025-10-02 13:28:38,796][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.65 Agent NLL: 18.60 Valid:  97% Step: 19
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.7799 22.2727 17.6844 0.6243290 c1ccc(C2OC3OC2C2OC32)cc1 1 c1ccc(C2OC3OC2C2OC32)cc1 0.6243290 0.6243 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.0926 22.7168 -22.7168 0.0000000 CC(=O)Oc1ccccc1OS(=O)(=O)c1ccccc1 1 O=S(=O)(Oc1ccccc1)c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 14.0639 17.5477 13.2931 0.4818863 COC(=O)c1ccccc1N 1 c1ccccc1 0.4818863 0.4819 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.2944 24.5675 29.9905 0.8524696 COc1ccc(C2=CC(OC)Oc3ccccc32)cc1 1 C1=C(c2ccccc2)c2ccccc2OC1 0.8524696 0.8525 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 9.9236 21.8713 23.3745 0.7069654 O=S(=O)(c1ccccc1)N1c2ccccc2COc2ccccc21 1 O=S(=O)(c1ccccc1)N1c2ccccc2COc2ccccc21 0.7069654 0.7070 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.9370 19.2204 25.4614 0.6981530 COc1ccc(N(c2ccccc2)c2ccccn2)cc1 1 c1ccc(N(c2ccccc2)c2ccccn2)cc1 0.6981530 0.6982 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.8594 26.5446 24.5260 0.7979779 O=S(=O)(c1ccccc1)N1C2CC21c1ccc(Br)cc1 1 O=S(=O)(c1ccccc1)N1C2CC21c1ccccc1 0.7979779 0.7980 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.6485 25.8316 22.6804 0.7579993 O=S(=O)(c1ccccc1)N1NC(c2ccccc2)Nc2ccccc21 1 O=S(=O)(c1ccccc1)N1NC(c2ccccc2)Nc2ccccc21 0.7579993 0.7580 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.9188 29.6272 11.7404 0.6463676 FC1(C23CCCC2C3)CC1(Br)Br 1 C1CC2CC2(C2CC2)C1 0.6463676 0.6464 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.2779 25.0492 31.9707 0.8909361 COc1cc(CN2CC3CCCC3C2)ccc1O 1 c1ccc(CN2CC3CCCC3C2)cc1 0.8909361 0.8909 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:38,892][reinvent][INFO] - loss: 1423.8682861328125, augmented_lls: 14.398370742797852, prior_lls: -26.293270111083984, scores: 0.6358069181442261,prior_loss: 67.95166015625
+[2025-10-02 13:28:38,894][reinvent][INFO] - loss: 2710.84765625, augmented_lls: 25.902734756469727, prior_lls: -28.24268913269043, scores: 0.8460222482681274,prior_loss: 29.83306312561035
+[2025-10-02 13:28:38,919][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.64 Agent NLL: 19.44 Valid:  97% Step: 20
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 23.2782 37.0774 -2.9721 0.5328957 O=S1(=O)C(Cl)=CC2C3=CC1C32 1 O=S1(=O)C=CC2C3=CC1C32 0.5328957 0.5329 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.8680 19.0496 21.4313 0.6325139 O=S(=O)(c1ccccc1)N1CC1 1 O=S(=O)(c1ccccc1)N1CC1 0.6325139 0.6325 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.5365 26.1105 -0.8473 0.3947381 c1ccc(CN2c3ccccc3CCN(c3ccccc3)C2c2ccccc2)cc1 1 c1ccc(CN2c3ccccc3CCN(c3ccccc3)C2c2ccccc2)cc1 0.3947381 0.3947 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.3163 15.4823 30.6652 0.7210537 COc1ccc2cc(OC)ccc2c1 1 c1ccc2ccccc2c1 0.7210537 0.7211 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.9913 17.2228 28.3365 0.7118647 c1ccc(N2CN(c3ccccc3)N(c3ccccc3)C2)cc1 1 c1ccc(N2CN(c3ccccc3)N(c3ccccc3)C2)cc1 0.7118647 0.7119 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.1224 32.7781 11.0190 0.6843310 CN1COC2C1Oc1ccccc1N2O 1 c1ccc2c(c1)NC1OCNC1O2 0.6843310 0.6843 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7198 30.9997 17.9188 0.7643515 c1cncc(C2Nc3ccccc3CN2c2cccs2)c1 1 c1cncc(C2Nc3ccccc3CN2c2cccs2)c1 0.7643515 0.7644 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.7577 19.6769 1.2928 0.3276520 O=[N+]([O-])c1cc(O)c(O)c(O)c1 1 c1ccccc1 0.3276520 0.3277 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3542 21.1310 33.1449 0.8480601 CC1=C(c2ccccc2)OC(c2ccccc2)S1(=O)=O 1 O=S1(=O)C=C(c2ccccc2)OC1c1ccccc1 0.8480601 0.8481 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.6524 23.8744 23.7400 0.7439754 c1ccc(CC2Oc3ccccc3C2Nc2ccccc2)cc1 1 c1ccc(CC2Oc3ccccc3C2Nc2ccccc2)cc1 0.7439754 0.7440 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:39,695][navidiv.scorer][INFO] - Time to get count: 0.69 seconds
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,981][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,982][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:39,982][navidiv.scorer][INFO] - Time to get added score metrics: 0.97 seconds
+[2025-10-02 13:28:39,982][reinvent][INFO] - Step 20 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 75.0, 'Total Number of Fragments': 120, 'Number of Unique Fragments': 90, 'Elapsed Time': 0.9725756645202637, 'Elapsed Time_to get count': 0.6854171752929688, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 2, 'Appeared once': 77}
+[2025-10-02 13:28:39,982][root][INFO] - Step 20 - Grouping results
+[2025-10-02 13:28:39,987][reinvent][INFO] - Updating custom alert customalertsscaffold with fragments: []
+[2025-10-02 13:28:39,988][reinvent][INFO] - customalertsscaffold updated with set()
+[2025-10-02 13:28:40,001][navidiv.scorer][INFO] - Time to get count: 0.01 seconds
+[2025-10-02 13:28:40,007][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,008][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,008][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,008][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,008][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,008][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:40,009][navidiv.scorer][INFO] - Time to get added score metrics: 0.02 seconds
+[2025-10-02 13:28:40,009][reinvent][INFO] - Step 20 - Scorer: ngrams_10 - Score: {'Percentage of Unique Fragments': 81.87569780424265, 'Total Number of Fragments': 2687, 'Number of Unique Fragments': 2200, 'Elapsed Time': 0.02123284339904785, 'Elapsed Time_to get count': 0.013463497161865234, 'Appeared more than 10 times': 1, 'Appeared more than 5 times': 19, 'Appeared once': 1952}
+[2025-10-02 13:28:40,041][root][WARNING] - Ring transformation failed for: c1cnnc1
+[2025-10-02 13:28:40,110][root][WARNING] - Ring transformation failed for: c1c[nH]c[nH]1
+[2025-10-02 13:28:40,114][root][WARNING] - Ring transformation failed for: c1cc[nH]cc1
+[2025-10-02 13:28:40,150][root][WARNING] - Ring transformation failed for: c1ccc2nccc2c1
+[2025-10-02 13:28:40,183][root][WARNING] - Ring transformation failed for: c1nncn1
+[2025-10-02 13:28:40,184][root][WARNING] - Ring transformation failed for: c1cncn1
+[2025-10-02 13:28:40,212][root][WARNING] - Ring transformation failed for: c1cncn1
+[2025-10-02 13:28:43,733][navidiv.scorer][INFO] - Time to get count: 3.72 seconds
+[2025-10-02 13:28:43,735][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,735][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,735][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,735][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,736][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,736][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,736][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:43,736][navidiv.scorer][INFO] - Time to get added score metrics: 3.73 seconds
+[2025-10-02 13:28:43,736][reinvent][INFO] - Step 20 - Scorer: fragments_none - Score: {'Percentage of Unique Fragments': 88.61940298507463, 'Total Number of Fragments': 536, 'Number of Unique Fragments': 475, 'Elapsed Time': 3.727350950241089, 'Elapsed Time_to get count': 3.7241194248199463, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 4, 'Appeared once': 442}
+[2025-10-02 13:28:43,737][root][INFO] - Step 20 - Grouping results
+[2025-10-02 13:28:43,743][reinvent][INFO] - Updating custom alert customalerts with fragments: []
+[2025-10-02 13:28:43,743][reinvent][INFO] - customalerts updated with {'[#6;R0]~[#6;R0]'}
+[2025-10-02 13:28:43,758][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:43,786][navidiv.scorer][INFO] - Time to get added score metrics: 0.04 seconds
+[2025-10-02 13:28:43,787][reinvent][INFO] - Step 20 - Scorer: clusters_tanimoto_morgan_threshold_0.8.csv - Score: {'Percentage of Unique Fragments': 100.0, 'Total Number of Fragments': 120, 'Number of Unique Fragments': 120, 'Elapsed Time': 0.04352259635925293, 'Elapsed Time_to get count': 0.015556812286376953, 'mean_similarity': 0.1898090279138653, 'std_similarity': 0.08185763620068463}
+[2025-10-02 13:28:43,787][root][INFO] - Step 20 - Grouping results
+[2025-10-02 13:28:43,808][reinvent][INFO] - Updating custom alert dissimilarity with fragments: []
+[2025-10-02 13:28:43,808][reinvent][INFO] - dissimilarity updated with {'CCCCCCCCCCCCCCC'}
+[2025-10-02 13:28:43,818][reinvent][INFO] - loss: 1339.6943359375, augmented_lls: 13.063238143920898, prior_lls: -26.2134952545166, scores: 0.6136989593505859,prior_loss: 73.8814697265625
+[2025-10-02 13:28:43,820][reinvent][INFO] - loss: 2349.923583984375, augmented_lls: 21.945093154907227, prior_lls: -31.40042495727539, scores: 0.8335237503051758,prior_loss: 53.68525314331055
+[2025-10-02 13:28:43,846][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.61 Agent NLL: 18.99 Valid:  94% Step: 21
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 19.9394 25.2548 28.7381 0.8436391 OC1(c2ccccn2)CCNC1c1ccccc1 1 c1ccc(C2NCCC2c2ccccn2)cc1 0.8436391 0.8436 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.9263 21.4587 14.4560 0.5611668 c1ccc(NN=Nc2ccc[nH]2)cc1 1 c1ccc(NN=Nc2ccc[nH]2)cc1 0.5611668 0.5612 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.4672 19.4208 21.1472 0.6338738 C1CCC([Se]C2CCCC2)CC1 1 C1CCC([Se]C2CCCC2)CC1 0.6338738 0.6339 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.8673 24.0970 29.4895 0.8372888 O=S(=O)(c1ccc(Cl)cc1)N1COc2ccc(Cl)cc2C1 1 O=S(=O)(c1ccccc1)N1COc2ccccc2C1 0.8372888 0.8373 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.8624 24.4711 31.0706 0.8678378 CN(C1(c2ccccc2)CCC1)S(=O)(=O)c1ccccc1 1 O=S(=O)(NC1(c2ccccc2)CCC1)c1ccccc1 0.8678378 0.8678 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.8123 19.8227 5.1495 0.3901902 O=C1NC2CCNC2N1 1 O=C1NC2CCNC2N1 0.3901902 0.3902 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.8154 27.8238 16.3721 0.6905609 CC1=CC(=O)C2(C)C=CC1c1cccc(O)c12 1 O=C1C=CC2C=CC1c1ccccc12 0.6905609 0.6906 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.2343 38.0484 6.0063 0.6883552 CC1(C)CCC2(CC(c3ccccc3)OC2(C)C)OC2(CC2)C1 1 c1ccc(C2CC3(CCCCC4(CC4)O3)CO2)cc1 0.6883552 0.6884 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.9939 34.3443 -34.3443 0.0000000 O=S(N)(=O)N(c1ccccc1)N=C1c2ccccc2ccc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 12.5691 17.4694 -17.4694 0.0000000 O=C1NC2CCCC2O1 1 O=C1NC2CCCC2O1 0.5184201 0.5184 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:43,953][reinvent][INFO] - loss: 1253.178466796875, augmented_lls: 11.414627075195312, prior_lls: -27.097827911376953, scores: 0.6017571091651917,prior_loss: 77.34449768066406
+[2025-10-02 13:28:43,954][reinvent][INFO] - loss: 2290.997314453125, augmented_lls: 25.553955078125, prior_lls: -27.204946517944336, scores: 0.8243579268455505,prior_loss: 43.468360900878906
+[2025-10-02 13:28:43,981][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.60 Agent NLL: 19.44 Valid:  94% Step: 22
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 23.5481 31.0512 19.6752 0.7926003 O=C1C2c3ccccc3N2C=CC=CN1c1ccccc1 1 O=C1C2c3ccccc3N2C=CC=CN1c1ccccc1 0.7926003 0.7926 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.2234 21.0528 30.8377 0.8107885 CC1C(Cc2ccccc2)N1S(=O)(=O)c1ccccc1 1 O=S(=O)(c1ccccc1)N1CC1Cc1ccccc1 0.8107885 0.8108 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.6930 24.5534 31.7132 0.8791650 COC(=O)C1C(c2ccccc2)CNC1c1ccccc1 1 c1ccc(C2CNC(c3ccccc3)C2)cc1 0.8791650 0.8792 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.1989 16.2838 19.4627 0.5585391 O=C(O)c1c(O)cccc1O 1 c1ccccc1 0.5585391 0.5585 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.6648 19.9116 19.6702 0.6184655 O=S(=O)(O)c1ccccc1 1 c1ccccc1 0.6184655 0.6185 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.0340 25.9612 -25.9612 0.0000000 O=c1n(C)c2ccccc2c(O)cc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 14.7016 18.0303 28.4226 0.7258264 Oc1ccc2ccccc2c1Br 1 c1ccc2ccccc2c1 0.7258264 0.7258 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.4353 32.3827 23.3820 0.8713235 COc1cccc(N2[N-]N(C)C(=O)C2Cc2ccccc2)c1 1 O=C1N[N-]N(c2ccccc2)C1Cc1ccccc1 0.8713235 0.8713 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.0500 15.6181 -15.6181 0.0000000 O=C(NCc1ccccc1)c1ccccc1 1 O=C(NCc1ccccc1)c1ccccc1 0.8303445 0.8303 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.2031 15.7129 19.0977 0.5439156 c1ccc2[nH]ccc2c1 1 c1ccc2[nH]ccc2c1 0.5439156 0.5439 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,081][reinvent][INFO] - loss: 1247.850341796875, augmented_lls: 11.404845237731934, prior_lls: -25.356958389282227, scores: 0.5744031667709351,prior_loss: 58.049583435058594
+[2025-10-02 13:28:44,083][reinvent][INFO] - loss: 2781.710693359375, augmented_lls: 29.393997192382812, prior_lls: -25.281328201293945, scores: 0.854301929473877,prior_loss: 36.65283203125
+[2025-10-02 13:28:44,109][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.57 Agent NLL: 18.75 Valid:  93% Step: 23
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.4794 20.9468 -20.9468 0.0000000 CC(=O)Nc1cccc2ccncc12 1 c1ccc2cnccc2c1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 21.3331 30.7424 15.9705 0.7298883 CN1C(=O)c2ccccc2OC2C1=Cc1ccccc12 1 O=C1NC2=Cc3ccccc3C2Oc2ccccc21 0.7298883 0.7299 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3202 19.4986 27.3262 0.7316375 O=S(=O)(Cc1nnnn1-c1ccccc1)c1ccccc1 1 O=S(=O)(Cc1nnnn1-c1ccccc1)c1ccccc1 0.7316375 0.7316 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.0345 23.0240 24.5075 0.7426791 O=c1c(Cl)nccn1N=Cc1ccccc1 1 O=c1cnccn1N=Cc1ccccc1 0.7426791 0.7427 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.2566 28.6924 -28.6924 0.0000000 COc1cc2c(cc3c(OC)c(OC)c(OC)cc3cc2)cc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 22.5407 23.0906 27.0545 0.7835182 CC1(C)OC(=O)OC1N(Cc1ccccc1)Cc1ccccc1 1 O=C1OCC(N(Cc2ccccc2)Cc2ccccc2)O1 0.7835182 0.7835 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.7928 31.1233 17.3613 0.7575714 O=C1C=C(Nc2ccccc2O)C(c2ccccc2)C=C1O 1 O=C1C=CC(c2ccccc2)C(Nc2ccccc2)=C1 0.7575714 0.7576 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 52.7437 63.7955 -49.2159 0.2278067 ClC1=NC2(OCc3ccccc3)Oc3ccccc3ON(c3ccccc3)C(C(Cl)c3ccccc3)C=C2O1 1 C1=NC2(OCc3ccccc3)Oc3ccccc3ON(c3ccccc3)C(Cc3ccccc3)C=C2O1 0.2278067 0.2278 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.4640 16.4708 22.1806 0.6039270 COC(=O)c1ccccc1Cl 1 c1ccccc1 0.6039270 0.6039 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3235 22.4606 -22.4606 0.0000000 O=S(=O)(c1ccccc1)n1cccc1O 1 O=S(=O)(c1ccccc1)n1cccc1 0.8374212 0.8374 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,210][reinvent][INFO] - loss: 1273.0985107421875, augmented_lls: 11.435297966003418, prior_lls: -26.217693328857422, scores: 0.588327944278717,prior_loss: 58.190223693847656
+[2025-10-02 13:28:44,212][reinvent][INFO] - loss: 2340.127197265625, augmented_lls: 27.95624351501465, prior_lls: -25.552907943725586, scores: 0.8360804915428162,prior_loss: 49.145992279052734
+[2025-10-02 13:28:44,237][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.59 Agent NLL: 19.55 Valid:  93% Step: 24
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.0715 23.1581 26.6857 0.7788096 CC1CCCCC1OS(=O)(=O)c1ccccc1 1 O=S(=O)(OC1CCCCC1)c1ccccc1 0.7788096 0.7788 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.5380 27.0464 19.3617 0.7251263 O=S(=O)(c1cccnc1)N1Cc2ccccc2OC1c1ccccc1 1 O=S(=O)(c1cccnc1)N1Cc2ccccc2OC1c1ccccc1 0.7251263 0.7251 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.7189 30.4085 12.0539 0.6634758 COc1ccc2c(c1)C(c1cccc(Cl)c1)Nc1ccccc1C(=O)N2 1 O=C1Nc2ccccc2C(c2ccccc2)Nc2ccccc21 0.6634758 0.6635 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.1414 32.1245 11.4933 0.6815282 COc1ccc(CC2CN(O[Si](C)(C)C)C(c3ccccc3)CC2=O)cc1 1 O=C1CC(c2ccccc2)NCC1Cc1ccccc1 0.6815282 0.6815 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.7865 35.1841 -35.1841 0.0000000 COc1cccc2c1CCNC(=O)c1cccc(OC)n12 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 29.7685 34.8538 -1.3514 0.5234749 COC(=O)c1cc(OC)c2c(c1O)CC(c1ccccc1O)NC2c1ccc(OC)cc1 1 c1ccc(C2Cc3ccccc3C(c3ccccc3)N2)cc1 0.5234749 0.5235 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.5491 26.7228 26.6834 0.8344716 COc1ccc(C2CC3CC(c4ccccc4)N2C3)cc1 1 c1ccc(C2CC3CC(c4ccccc4)N2C3)cc1 0.8344716 0.8345 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.7313 29.8566 18.3881 0.7538220 COC(=O)c1ccccc1CC1(C)CCCCC1 1 c1ccc(CC2CCCCC2)cc1 0.7538220 0.7538 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.3169 20.5078 35.1844 0.8701911 COc1ccc(C(=O)N2CCN(Cc3ccccc3)CC2)cc1 1 O=C(c1ccccc1)N1CCN(Cc2ccccc2)CC1 0.8701911 0.8702 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.8310 25.1651 15.7780 0.6397345 COc1ccc(C2OC(=O)c3ccccc3N2N=O)cc1 1 O=C1OC(c2ccccc2)Nc2ccccc21 0.6397345 0.6397 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,342][reinvent][INFO] - loss: 1335.926025390625, augmented_lls: 12.56887435913086, prior_lls: -26.468345642089844, scores: 0.6099566221237183,prior_loss: 60.01235580444336
+[2025-10-02 13:28:44,345][reinvent][INFO] - loss: 2327.149169921875, augmented_lls: 28.6267147064209, prior_lls: -24.9171199798584, scores: 0.836622416973114,prior_loss: 54.713844299316406
+[2025-10-02 13:28:44,372][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.61 Agent NLL: 19.86 Valid:  97% Step: 25
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.7426 22.6184 20.3707 0.6717055 O=C1Nc2ccccc2C2NCCCC12 1 O=C1Nc2ccccc2C2NCCCC12 0.6717055 0.6717 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.6741 16.5715 20.5092 0.5793868 O=C(O)c1cncnc1 1 c1cncnc1 0.5793868 0.5794 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.1783 18.8617 2.3823 0.3319375 O=CNc1cc(O)ccc1O 1 c1ccccc1 0.3319375 0.3319 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.4088 32.4027 24.5773 0.8903126 COc1ccc(OC)c(OC2OC(C)CC(OC)C2O)c1 1 c1ccc(OC2CCCCO2)cc1 0.8903126 0.8903 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.3314 24.5740 17.2435 0.6533990 O=C1c2ccccc2OC(c2cccc(Cl)c2)N1c1ccccc1 1 O=C1c2ccccc2OC(c2ccccc2)N1c1ccccc1 0.6533990 0.6534 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.4879 23.6026 32.2590 0.8728373 COc1ccc(N2CCN(C)C(=O)C2c2ccccc2)cc1 1 O=C1NCCN(c2ccccc2)C1c1ccccc1 0.8728373 0.8728 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.4572 19.8529 17.2468 0.5796830 O=C(N1CCCCC1)N1CCOCC1 1 O=C(N1CCCCC1)N1CCOCC1 0.5796830 0.5797 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.0940 30.0301 12.1990 0.6598294 COc1ccccc1C1Oc2ccccc2C1Nc1cccc(Cl)c1 1 c1ccc(NC2c3ccccc3OC2c2ccccc2)cc1 0.6598294 0.6598 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.3951 26.0925 12.0293 0.5956522 O=C1Nc2ccccc2C12CC(c1ccccc1)CC2c1ccc(Cl)cc1 1 O=C1Nc2ccccc2C12CC(c1ccccc1)CC2c1ccccc1 0.5956522 0.5957 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.1062 17.5061 10.6681 0.4402208 O=C(O)c1cc[n+]([O-])cc1 1 c1cc[nH+]cc1 0.4402208 0.4402 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,481][reinvent][INFO] - loss: 1332.974609375, augmented_lls: 11.863971710205078, prior_lls: -28.145118713378906, scores: 0.6251420378684998,prior_loss: 73.59573364257812
+[2025-10-02 13:28:44,483][reinvent][INFO] - loss: 2224.896484375, augmented_lls: 28.29545021057129, prior_lls: -26.58905601501465, scores: 0.857570469379425,prior_loss: 67.4017562866211
+[2025-10-02 13:28:44,511][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.63 Agent NLL: 20.57 Valid:  96% Step: 26
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 14.3353 29.1215 21.1531 0.7855407 COC1Oc2ccccc2C=Nc2ccccc2O1 1 C1=Nc2ccccc2OCOc2ccccc21 0.7855407 0.7855 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 9.1685 16.0125 14.8523 0.4822616 COC(=O)c1ccc(O)c(O)c1 1 c1ccccc1 0.4822616 0.4823 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.1447 24.4665 4.7150 0.4559598 Sc1cc[nH]c1 1 c1cc[nH]c1 0.4559598 0.4560 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.7689 13.4964 25.0001 0.6015078 Cc1ccc(S(F)(F)(F)(F)F)cc1 1 c1ccccc1 0.6015078 0.6015 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 37.4910 42.7725 8.8772 0.8070258 O=C1CCC2CC12C1=CNC(c2ccc(Br)cc2)c2ccccc21 1 O=C1CCC2CC12C1=CNC(c2ccccc2)c2ccccc21 0.8070258 0.8070 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.9323 24.2595 13.9971 0.5977585 S=C(Nc1ccccc1)N1c2ccccc2SC1c1ccccc1 1 S=C(Nc1ccccc1)N1c2ccccc2SC1c1ccccc1 0.5977585 0.5978 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.3288 26.4613 15.6879 0.6585814 COc1ccc(NS(=O)(=O)c2ccccc2)c(NCc2ccccc2)c1 1 O=S(=O)(Nc1ccccc1NCc1ccccc1)c1ccccc1 0.6585814 0.6586 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.9105 17.2331 17.4134 0.5413509 O=C(O)c1cc[nH]n1 1 c1cn[nH]c1 0.5413509 0.5414 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.0771 15.5025 26.7578 0.6603168 COc1ccc(NC=O)cc1 1 c1ccccc1 0.6603168 0.6603 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 54.4086 63.0107 -31.1141 0.4983850 COc1cc(Cl)c2c(c1OCc1ccccc1)OC13CCC(C)(CC=C(CC1=O)C2)CC3 1 O=C1CC2=CCC3CCC1(CC3)Oc1c(cccc1OCc1ccccc1)C2 0.4983850 0.4984 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,612][reinvent][INFO] - loss: 1359.55078125, augmented_lls: 13.58315658569336, prior_lls: -26.653034210205078, scores: 0.6286904215812683,prior_loss: 70.45244598388672
+[2025-10-02 13:28:44,614][reinvent][INFO] - loss: 2441.416015625, augmented_lls: 22.83091926574707, prior_lls: -30.723669052124023, scores: 0.8367905020713806,prior_loss: 36.22994613647461
+[2025-10-02 13:28:44,641][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.63 Agent NLL: 19.37 Valid:  97% Step: 27
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.3219 23.4441 21.9805 0.7097591 O=C1c2ccccc2CN2CCCC2C1O 1 O=C1CC2CCCN2Cc2ccccc21 0.7097591 0.7098 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.3409 23.2157 29.8688 0.8294465 O=[SH](=O)c1ccccc1Oc1ccccc1 1 c1ccc(Oc2ccccc2)cc1 0.8294465 0.8294 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.1258 24.1933 29.6466 0.8412492 COc1ccc(O)c(NS(=O)(=O)c2ccccc2)c1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.8412492 0.8412 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.8108 28.3575 27.3541 0.8704930 CN(C)C1OC(=O)NC1Sc1ccccc1 1 O=C1NC(Sc2ccccc2)CO1 0.8704930 0.8705 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.5524 12.8531 -12.8531 0.0000000 c1cncnc1 1 c1cncnc1 0.4525571 0.4526 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.0174 16.2803 35.3634 0.8069326 COc1ccc(OS(=O)(=O)c2ccc(C)cc2)cc1 1 O=S(=O)(Oc1ccccc1)c1ccccc1 0.8069326 0.8069 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.5737 25.0935 24.6160 0.7767116 OC12CCCCCC1C(c1ccccc1)CCCC2 1 c1ccc(C2CCCCC3CCCCCC32)cc1 0.7767116 0.7767 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.8687 30.4311 19.4262 0.7790203 O=C1NC(c2ccccc2)(c2ccccc2)C(F)(F)C1c1ccccn1 1 O=C1NC(c2ccccc2)(c2ccccc2)CC1c1ccccn1 0.7790203 0.7790 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.2238 15.3897 -15.3897 0.0000000 O=Cc1ccc(O)cc1O 1 c1ccccc1 0.5668602 0.5669 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.7038 35.5422 23.7317 0.9261543 O=C1Nc2nccc(F)c2C1(c1ccccc1)N1CCCC1 1 O=C1Nc2ncccc2C1(c1ccccc1)N1CCCC1 0.9261543 0.9262 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,742][reinvent][INFO] - loss: 1292.5457763671875, augmented_lls: 11.634308815002441, prior_lls: -27.54593276977539, scores: 0.6121913194656372,prior_loss: 69.998779296875
+[2025-10-02 13:28:44,744][reinvent][INFO] - loss: 2459.700439453125, augmented_lls: 28.36820411682129, prior_lls: -25.975446701049805, scores: 0.8491194844245911,prior_loss: 29.547285079956055
+[2025-10-02 13:28:44,770][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.61 Agent NLL: 20.20 Valid:  98% Step: 28
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 8.6563 17.9957 26.3818 0.6933989 COc1cc(O)ccc1C(=O)O 1 c1ccccc1 0.6933989 0.6934 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 34.1997 38.3926 -38.3926 0.0000000 CCC12CCCCCNC(=O)CCCC1CC(C)CC2O 1 O=C1CCCC2CCCCC2CCCCCN1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 11.7952 15.2522 16.1401 0.4905054 Cc1n[nH]c(=S)[nH]1 1 S=c1[nH]cn[nH]1 0.4905054 0.4905 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.8197 37.4301 13.8199 0.8007821 CC1C2CCCC2CCCN1S(=O)(=O)OC1CCCCC1 1 O=S(=O)(OC1CCCCC1)N1CCCC2CCCC2C1 0.8007821 0.8008 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.6148 26.4880 13.2386 0.6207283 COc1ccc(N(c2ccccc2)c2ccccc2)c(OC)c1OC 1 c1ccc(N(c2ccccc2)c2ccccc2)cc1 0.6207283 0.6207 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.9526 29.3810 -29.3810 0.0000000 Oc1ccccc1Cn1c2ccccc2cnc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 28.9372 40.1419 -2.3171 0.5910120 COc1ccc(OC)c(C2Nc3ccc(OC)cc3C23C(=O)OCCN3c2ccccc2)c1 1 O=C1OCCN(c2ccccc2)C12c1ccccc1NC2c1ccccc1 0.5910120 0.5910 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.2846 23.5081 15.7780 0.6138454 O=C1CCCCCCCC2OCCCC12 1 O=C1CCCCCCCC2OCCCC12 0.6138454 0.6138 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.4049 14.9339 -14.9339 0.0000000 O=S(=O)(Nc1ccccc1)c1ccccc1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.8848709 0.8849 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.0889 34.4685 19.3777 0.8413478 O=C1CCN(Cc2ccccn2)Cc2ccncc2OC1 1 O=C1CCN(Cc2ccccn2)Cc2ccncc2OC1 0.8413478 0.8413 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:44,884][reinvent][INFO] - loss: 1450.4427490234375, augmented_lls: 15.085417747497559, prior_lls: -27.786876678466797, scores: 0.6698796153068542,prior_loss: 77.85134887695312
+[2025-10-02 13:28:44,885][reinvent][INFO] - loss: 2389.033935546875, augmented_lls: 30.024953842163086, prior_lls: -25.56134033203125, scores: 0.8685358166694641,prior_loss: 50.32111358642578
+[2025-10-02 13:28:44,914][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.67 Agent NLL: 19.90 Valid: 100% Step: 29
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 24.2905 30.8320 23.8229 0.8539826 COc1ccc(CN2CCCC2c2ccncc2C)cc1 1 c1ccc(CN2CCCC2c2ccncc2)cc1 0.8539826 0.8540 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.1126 25.4436 23.3008 0.7616313 COC(=O)c1ccc(OC)c(Oc2c(OC)cccc2OC)c1 1 c1ccc(Oc2ccccc2)cc1 0.7616313 0.7616 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.5320 18.5368 25.7150 0.6914349 c1cncc([Se]c2ccncc2)c1 1 c1cncc([Se]c2ccncc2)c1 0.6914349 0.6914 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 46.6258 60.3960 -14.4896 0.7172877 COC(=O)N1c2ccccc2N(C)C2COCCCC3CCN1C2O3 1 c1ccc2c(c1)NC1COCCCC3CCN(N2)C1O3 0.7172877 0.7173 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.8662 18.6160 28.9350 0.7429831 O=C(Nc1ccccc1O)c1cnccn1 1 O=C(Nc1ccccc1)c1cnccn1 0.7429831 0.7430 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.4162 32.5946 9.1956 0.6529707 CC1OC2(C)CCC1(C)CCc1ccccc12 1 c1ccc2c(c1)CCC1CCC2OC1 0.6529707 0.6530 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.7278 24.7162 25.2077 0.7800615 Oc1ccc(C2c3ccccc3OCN2Cc2ccccc2)cc1 1 c1ccc(CN2COc3ccccc3C2c2ccccc2)cc1 0.7800615 0.7801 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.8010 35.7470 9.6404 0.7091777 O=C1OC2CCNCCCOC1c1ccccc12 1 O=C1OC2CCNCCCOC1c1ccccc12 0.7091777 0.7092 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.4117 16.7323 38.6042 0.8646333 O=C(Nc1cccc(Cl)c1)c1ccc(Cl)cc1 1 O=C(Nc1ccccc1)c1ccccc1 0.8646333 0.8646 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.2913 37.0231 -9.4665 0.4305728 COc1ccc2c(c1)OC(c1ccccc1)C(Cc1ccccc1)NN2C(=O)c1ccccc1 1 O=C(c1ccccc1)N1NC(Cc2ccccc2)C(c2ccccc2)Oc2ccccc21 0.4305728 0.4306 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:45,015][reinvent][INFO] - loss: 1423.593017578125, augmented_lls: 14.104623794555664, prior_lls: -27.271148681640625, scores: 0.6464964151382446,prior_loss: 63.34725570678711
+[2025-10-02 13:28:45,016][reinvent][INFO] - loss: 2608.109375, augmented_lls: 31.213836669921875, prior_lls: -24.996274948120117, scores: 0.8782830238342285,prior_loss: 32.6831169128418
+[2025-10-02 13:28:45,044][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.65 Agent NLL: 20.25 Valid:  97% Step: 30
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 10.6402 19.2163 32.5612 0.8090236 COc1ccc(C2Oc3ccccc3C2=O)cc1 1 O=C1c2ccccc2OC1c1ccccc1 0.8090236 0.8090 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.3215 38.8872 -4.6813 0.5344660 COc1ccc2nccnc2c1NC(=O)c1c(O)[nH]c2ccccc12 1 O=C(Nc1cccc2nccnc12)c1c[nH]c2ccccc12 0.5344660 0.5345 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.3290 36.9701 10.4048 0.7402328 OC1Oc2ccccc2C(c2ccc(Cl)cn2)C1(O)c1ccccc1 1 c1ccc(C2COc3ccccc3C2c2ccccn2)cc1 0.7402328 0.7402 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.6429 20.4974 29.4395 0.7802642 COc1ccccc1C=C1C(=O)N(C)c2ccccc21 1 O=C1Nc2ccccc2C1=Cc1ccccc1 0.7802642 0.7803 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.3917 30.8538 20.1998 0.7977128 COC(=O)C1C2CCCCC2(C#N)CCN1c1ccc(OC)cc1 1 c1ccc(N2CCC3CCCCC3C2)cc1 0.7977128 0.7977 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.9981 26.5037 21.0562 0.7431242 COC(=O)c1ccncc1C1COC(=O)N1 1 O=C1NC(c2cccnc2)CO1 0.7431242 0.7431 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.5415 30.7181 11.6009 0.6612339 COC(=O)c1ccccc1Nc1ccccc1NCc1ccncc1 1 c1ccc(Nc2ccccc2NCc2ccncc2)cc1 0.6612339 0.6612 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.4684 31.2721 -31.2721 0.0000000 CC(=O)C12C(=O)CCNC1Oc1ccccc12 1 O=C1CCNC2Oc3ccccc3C12 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.0031 20.8744 25.6196 0.7264696 Cc1ccccc1C1CC1c1ccc(Br)cc1 1 c1ccc(C2CC2c2ccccc2)cc1 0.7264696 0.7265 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.8470 26.2574 25.1175 0.8027335 COC(=O)c1c(NCc2ccc(OC)cc2)nc[nH]c1=O 1 O=c1cc(NCc2ccccc2)nc[nH]1 0.8027335 0.8027 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:45,983][navidiv.scorer][INFO] - Time to get count: 0.85 seconds
+[2025-10-02 13:28:46,258][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,258][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,258][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,258][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,258][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,259][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,259][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,259][navidiv.scorer][INFO] - Time to get added score metrics: 1.13 seconds
+[2025-10-02 13:28:46,259][reinvent][INFO] - Step 30 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 85.9504132231405, 'Total Number of Fragments': 121, 'Number of Unique Fragments': 104, 'Elapsed Time': 1.1258537769317627, 'Elapsed Time_to get count': 0.849245548248291, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 0, 'Appeared once': 93}
+[2025-10-02 13:28:46,275][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,280][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:46,281][navidiv.scorer][INFO] - Time to get added score metrics: 0.02 seconds
+[2025-10-02 13:28:46,281][reinvent][INFO] - Step 30 - Scorer: ngrams_10 - Score: {'Percentage of Unique Fragments': 83.73777616805505, 'Total Number of Fragments': 2761, 'Number of Unique Fragments': 2312, 'Elapsed Time': 0.021721839904785156, 'Elapsed Time_to get count': 0.015220880508422852, 'Appeared more than 10 times': 1, 'Appeared more than 5 times': 12, 'Appeared once': 2054}
+[2025-10-02 13:28:46,281][root][INFO] - Step 30 - Grouping results
+[2025-10-02 13:28:46,296][reinvent][INFO] - Updating custom alert customalertsngrams with fragments: []
+[2025-10-02 13:28:46,296][reinvent][INFO] - customalertsngrams updated with set()
+[2025-10-02 13:28:46,328][root][WARNING] - Ring transformation failed for: c1cncn1
+[2025-10-02 13:28:46,426][root][WARNING] - Ring transformation failed for: C1CCc2ccnc21
+[2025-10-02 13:28:46,429][root][WARNING] - Ring transformation failed for: c1cncn1
+[2025-10-02 13:28:46,430][root][WARNING] - Ring transformation failed for: c1nncn1
+[2025-10-02 13:28:46,458][root][WARNING] - Ring transformation failed for: c1ccc2ccc3ccccc3c2cc1
+[2025-10-02 13:28:50,496][navidiv.scorer][INFO] - Time to get count: 4.20 seconds
+[2025-10-02 13:28:50,498][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,498][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,498][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,498][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,499][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,499][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,499][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:50,500][navidiv.scorer][INFO] - Time to get added score metrics: 4.20 seconds
+[2025-10-02 13:28:50,500][reinvent][INFO] - Step 30 - Scorer: fragments_none - Score: {'Percentage of Unique Fragments': 87.3015873015873, 'Total Number of Fragments': 567, 'Number of Unique Fragments': 495, 'Elapsed Time': 4.203166246414185, 'Elapsed Time_to get count': 4.199891090393066, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 2, 'Appeared once': 449}
+[2025-10-02 13:28:50,515][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:50,544][navidiv.scorer][INFO] - Time to get added score metrics: 0.04 seconds
+[2025-10-02 13:28:50,544][reinvent][INFO] - Step 30 - Scorer: clusters_tanimoto_morgan_threshold_0.8.csv - Score: {'Percentage of Unique Fragments': 100.0, 'Total Number of Fragments': 121, 'Number of Unique Fragments': 121, 'Elapsed Time': 0.04386425018310547, 'Elapsed Time_to get count': 0.015458822250366211, 'mean_similarity': 0.18429150670462385, 'std_similarity': 0.07723433613321228}
+[2025-10-02 13:28:50,544][root][INFO] - Step 30 - Grouping results
+[2025-10-02 13:28:50,571][reinvent][INFO] - Updating custom alert dissimilarity with fragments: []
+[2025-10-02 13:28:50,571][reinvent][INFO] - dissimilarity updated with {'CCCCCCCCCCCCCCC'}
+[2025-10-02 13:28:50,581][reinvent][INFO] - loss: 1411.710693359375, augmented_lls: 12.89173698425293, prior_lls: -27.597898483276367, scores: 0.6326504945755005,prior_loss: 73.7195816040039
+[2025-10-02 13:28:50,583][reinvent][INFO] - loss: 2614.69921875, augmented_lls: 26.916778564453125, prior_lls: -27.43427848815918, scores: 0.8492352366447449,prior_loss: 35.390682220458984
+[2025-10-02 13:28:50,609][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.63 Agent NLL: 20.40 Valid:  95% Step: 31
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.9716 28.5712 19.5918 0.7525466 O=C1Nc2ccccc2CC2C(=O)C1Cc1ccccc12 1 O=C1Nc2ccccc2CC2C(=O)C1Cc1ccccc12 0.7525466 0.7525 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.9026 36.8854 18.8274 0.8705120 CN1CCC2C1CCC2N(c1ccccc1)c1cnccn1 1 c1ccc(N(c2cnccn2)C2CCC3NCCC32)cc1 0.8705120 0.8705 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.5835 17.7249 25.2837 0.6720092 COc1cccc(OC)c1C=NNC(=O)c1ccncc1 1 O=C(NN=Cc1ccccc1)c1ccncc1 0.6720092 0.6720 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.5227 32.5638 8.2127 0.6371327 OC1C(OCc2ccccc2)C2CCN(Cc3ccccc3)C12Cc1ccccc1 1 c1ccc(COC2CC3(Cc4ccccc4)C2CCN3Cc2ccccc2)cc1 0.6371327 0.6371 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.4722 29.2420 23.8378 0.8293731 COc1ccc(OC)c(C2N(C)CCC(=O)N2C)c1 1 O=C1CCNC(c2ccccc2)N1 0.8293731 0.8294 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7007 26.2185 31.6821 0.9046975 COc1ccc(CC2(O)CCC(=O)CC2)c(OC)c1 1 O=C1CCC(Cc2ccccc2)CC1 0.9046975 0.9047 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 38.8418 41.6110 10.5252 0.8146284 CC1CCC2NC1CCC1C3CCCC3(C(=O)c3ccccc3)C21 1 O=C(c1ccccc1)C12CCCC1C1CCC3CCCC(N3)C12 0.8146284 0.8146 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.0547 30.3695 6.7139 0.5794286 COc1cccc(C(Nc2ccc(OC)c(OC)c2)Nc2ccccn2)c1 1 c1ccc(NC(Nc2ccccn2)c2ccccc2)cc1 0.5794286 0.5794 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.8629 23.2528 23.2351 0.7263747 COc1ccc(C2(C)CCC(C)(C)CC2)cc1 1 c1ccc(C2CCCCC2)cc1 0.7263747 0.7264 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.6479 28.8441 11.5694 0.6314613 O=C1c2ccccc2CC12C(=O)c1ccccc1OC2c1ccncc1 1 O=C1c2ccccc2CC12C(=O)c1ccccc1OC2c1ccncc1 0.6314613 0.6315 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:50,722][reinvent][INFO] - loss: 1445.333984375, augmented_lls: 15.1571044921875, prior_lls: -27.186357498168945, scores: 0.6616165637969971,prior_loss: 73.580078125
+[2025-10-02 13:28:50,724][reinvent][INFO] - loss: 2411.924072265625, augmented_lls: 29.97308921813965, prior_lls: -26.270898818969727, scores: 0.8788122534751892,prior_loss: 65.85628509521484
+[2025-10-02 13:28:50,752][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.66 Agent NLL: 19.59 Valid:  98% Step: 32
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 20.4287 29.1501 24.9087 0.8446674 O=S(=O)(Oc1ccccc1)N1CCCCC1=C1CCCCC1 1 O=S(=O)(Oc1ccccc1)N1CCCCC1=C1CCCCC1 0.8446674 0.8447 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.2869 35.3049 9.6565 0.7025209 c1ccc(N2CCCC3(CC2)CC2CCCC3C2)cc1 1 c1ccc(N2CCCC3(CC2)CC2CCCC3C2)cc1 0.7025209 0.7025 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.6914 25.9987 -25.9987 0.0000000 CCOC(=O)c1c2cnccc2cc2ncccc12 1 c1cnc2cc3ccncc3cc2c1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 45.3417 53.4904 -25.4997 0.4373547 CC1(C)CCCC1OC1CCC23CC1C(O)c1cc(Cl)ccc1N2C3c1ccc(Br)cc1 1 c1ccc(C2N3c4ccccc4CC4CC23CCC4OC2CCCC2)cc1 0.4373547 0.4374 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.3752 25.6610 24.1960 0.7790165 COc1cc(Cc2c[nH]c3ccccc23)c(OC)c(OC)c1 1 c1ccc(Cc2c[nH]c3ccccc23)cc1 0.7790165 0.7790 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.6117 15.5670 25.2896 0.6383852 COc1ccc(OC)c(C=O)c1 1 c1ccccc1 0.6383852 0.6384 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.7721 30.8618 11.8359 0.6671512 O=C1CCC2CCCCC(O)C1CCC2 1 O=C1CCC2CCCCCC1CCC2 0.6671512 0.6672 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.5485 30.0151 20.9142 0.7957711 O=C1CCN(c2ccccc2)C1C12CCCCC1CCCC2 1 O=C1CCN(c2ccccc2)C1C12CCCCC1CCCC2 0.7957711 0.7958 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 32.5691 52.6763 -4.1257 0.7586027 CC12CCC3C4CCCN=C4CCN1C3CCC21CNc2ccccc21 1 c1ccc2c(c1)NCC21CCC2C3CCC1N2CCC1=NCCCC13 0.7586027 0.7586 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.7994 16.8113 -16.8113 0.0000000 COc1ccc(OC)c(OC)c1 1 c1ccccc1 0.6872626 0.6873 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:50,853][reinvent][INFO] - loss: 1547.99853515625, augmented_lls: 16.362028121948242, prior_lls: -27.083511352539062, scores: 0.6788365840911865,prior_loss: 77.48274230957031
+[2025-10-02 13:28:50,855][reinvent][INFO] - loss: 2564.217529296875, augmented_lls: 25.916711807250977, prior_lls: -29.926721572875977, scores: 0.8725536465644836,prior_loss: 60.014198303222656
+[2025-10-02 13:28:50,881][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.68 Agent NLL: 19.49 Valid:  96% Step: 33
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 8.7522 16.5972 42.3900 0.9216748 COc1ccc(NS(=O)(=O)c2ccccc2)cc1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.9216748 0.9217 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.0221 26.6759 25.5474 0.8159903 Fc1ccc(C2ON3CC2CCC3c2ccccc2)cc1 1 c1ccc(C2ON3CC2CCC3c2ccccc2)cc1 0.8159903 0.8160 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.2563 24.2553 13.3726 0.5879364 CC12CCOC1CCC1OCCOC12 1 C1CC2C(CCC3OCCOC32)O1 0.5879364 0.5879 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.3871 23.3359 31.3336 0.8542107 COc1cccc(C2CCCCN2C(=O)c2ccccc2)c1 1 O=C(c1ccccc1)N1CCCCC1c1ccccc1 0.8542107 0.8542 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.4888 33.9998 22.7668 0.8869774 COc1cccc(CC2C(=O)N3CCc4ccccc4C23)c1O 1 O=C1C(Cc2ccccc2)C2c3ccccc3CCN12 0.8869774 0.8870 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.1107 29.4402 20.8989 0.7865485 COC(=O)c1cn(Cc2ccc(OC)cc2OC)ccc1=O 1 O=c1ccn(Cc2ccccc2)cc1 0.7865485 0.7865 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.6728 18.4114 -18.4114 0.0000000 O=C1CCCCN1Cc1ccccc1 1 O=C1CCCCN1Cc1ccccc1 0.6980658 0.6981 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 34.2993 45.8316 -45.8316 0.0000000 CCOC1=NC(c2ccccc2O)c2c3ccc(OC)cc3n12 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 14.0030 21.6874 33.3259 0.8595822 COc1ccc(CN2COc3ccccc3C2=O)cc1 1 O=C1c2ccccc2OCN1Cc1ccccc1 0.8595822 0.8596 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.9693 30.7700 13.2609 0.6879826 COc1ccc(N2Cc3ccccc3OC2c2c(O)cc(OC)cc2OC)cc1 1 c1ccc(C2Oc3ccccc3CN2c2ccccc2)cc1 0.6879826 0.6880 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:50,985][reinvent][INFO] - loss: 1471.1785888671875, augmented_lls: 16.013938903808594, prior_lls: -27.49892807006836, scores: 0.6798886060714722,prior_loss: 81.98782348632812
+[2025-10-02 13:28:50,987][reinvent][INFO] - loss: 2789.265380859375, augmented_lls: 21.816558837890625, prior_lls: -33.6788215637207, scores: 0.867115318775177,prior_loss: 35.803829193115234
+[2025-10-02 13:28:51,013][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.68 Agent NLL: 19.46 Valid:  96% Step: 34
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 22.1711 22.3836 -22.3836 0.0000000 Oc1ccccc1CCn1cnc2ccccc21 1 c1ccc(CCn2cnc3ccccc32)cc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 28.8527 41.9027 6.4489 0.7554944 O=C1N(c2ccccc2O)N=C2c3ccccc3C2N1c1ccccc1 1 O=C1N(c2ccccc2)N=C2c3ccccc3C2N1c1ccccc1 0.7554944 0.7555 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.8621 32.7444 27.5212 0.9416513 COc1ccc(N2CCN3C(C(O)c4ccccc4)CC23)cc1 1 c1ccc(CC2CC3N(c4ccccc4)CCN23)cc1 0.9416513 0.9417 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.3638 21.8585 38.0391 0.9359001 COc1ccc(OC)c(NC(=O)c2cccc(Cl)c2)c1 1 O=C(Nc1ccccc1)c1ccccc1 0.9359001 0.9359 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.1155 31.9240 22.1691 0.8452055 COc1ccccc1C1CCCN1C1=Cc2ccccc2OC1 1 C1=C(N2CCCC2c2ccccc2)COc2ccccc21 0.8452055 0.8452 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.4970 23.3616 12.4792 0.5600118 CN(N=Nn1cnnc1)c1ccccc1 1 c1ccc(NN=Nn2cnnc2)cc1 0.5600118 0.5600 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.1507 24.0916 26.0343 0.7832168 CN1CCNC(c2cccc(Cl)c2)C1=O 1 O=C1NCCNC1c1ccccc1 0.7832168 0.7832 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7417 30.4393 24.4108 0.8570337 COC1C(=O)C(O)(c2ccc(Cl)cc2)C1C 1 O=C1CCC1c1ccccc1 0.8570337 0.8570 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.7678 27.4717 -27.4717 0.0000000 CC=C1Nc2c(Cl)cccc2NC1=O 1 C=C1Nc2ccccc2NC1=O 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 14.6350 31.8333 10.6873 0.6643841 CNc1cc(SSc2ccccc2)ncn1 1 c1ccc(SSc2ccncn2)cc1 0.6643841 0.6644 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,114][reinvent][INFO] - loss: 1422.885498046875, augmented_lls: 14.654480934143066, prior_lls: -26.35512351989746, scores: 0.6407750844955444,prior_loss: 71.69403839111328
+[2025-10-02 13:28:51,116][reinvent][INFO] - loss: 2583.90625, augmented_lls: 30.408340454101562, prior_lls: -24.695941925048828, scores: 0.8610043525695801,prior_loss: 26.764394760131836
+[2025-10-02 13:28:51,142][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.64 Agent NLL: 18.81 Valid:  95% Step: 35
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 32.1320 38.4204 10.4633 0.7638079 COC1CC2CC(=O)CC2OCc2cn(C)cc21 1 O=C1CC2CCc3c[nH]cc3COC2C1 0.7638079 0.7638 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.4420 29.8171 5.1834 0.5468816 COc1ccc(C2C(=O)C(c3ccc(Cl)cc3)NC2c2ccc(Cl)cc2)cc1OC 1 O=C1C(c2ccccc2)NC(c2ccccc2)C1c1ccccc1 0.5468816 0.5469 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.8515 39.9843 1.5044 0.6482601 O=C1NCCNC2C1CCC1CCCCC12 1 O=C1NCCNC2C1CCC1CCCCC12 0.6482601 0.6483 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.5550 34.9918 14.0208 0.7658228 COc1ccc(NC(=O)C2CCCCC2)c(NS(N)(=O)=O)c1 1 O=C(Nc1ccccc1)C1CCCCC1 0.7658228 0.7658 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.0675 21.7479 21.9562 0.6828761 O=C(c1cccc(O)c1O)N1CCCC1 1 O=C(c1ccccc1)N1CCCC1 0.6828761 0.6829 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 7.7141 18.4651 -18.4651 0.0000000 O=C1c2ccccc2NC1c1ccc(Cl)cc1 1 O=C1c2ccccc2NC1c1ccccc1 0.8277332 0.8277 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.6383 23.9943 34.6132 0.9157426 COc1ccc(OC2CC(O)c3ccccc32)cc1 1 c1ccc(OC2CCc3ccccc32)cc1 0.9157426 0.9157 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.2607 26.8112 33.5451 0.9430672 COc1ccc(C2=CC(c3ccccc3OC)NC2=O)cc1 1 O=C1NC(c2ccccc2)C=C1c1ccccc1 0.9430672 0.9431 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.2499 23.6055 32.1661 0.8714308 O=S(=O)(Oc1ccccc1)N1CCCC1c1ccccc1 1 O=S(=O)(Oc1ccccc1)N1CCCC1c1ccccc1 0.8714308 0.8714 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.0756 24.8114 23.6453 0.7571374 Oc1cccc2cccc(OCc3ccccc3)c12 1 c1ccc(COc2cccc3ccccc23)cc1 0.7571374 0.7571 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,242][reinvent][INFO] - loss: 1427.962158203125, augmented_lls: 15.926145553588867, prior_lls: -26.36534881591797, scores: 0.6608046293258667,prior_loss: 72.69999694824219
+[2025-10-02 13:28:51,244][reinvent][INFO] - loss: 2633.154541015625, augmented_lls: 23.58180046081543, prior_lls: -32.608917236328125, scores: 0.8779800534248352,prior_loss: 61.855995178222656
+[2025-10-02 13:28:51,268][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.66 Agent NLL: 18.77 Valid:  98% Step: 36
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 20.0754 23.0228 10.5636 0.5247874 ClC1(Cl)C(Cl)(Cl)C1(c1ccccc1)c1ccc(Br)cc1 1 c1ccc(C2(c3ccccc3)CC2)cc1 0.5247874 0.5248 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.6714 24.4789 21.1711 0.7132814 COC(=O)c1cccc2c(OC)ncnc12 1 c1ccc2ncncc2c1 0.7132814 0.7133 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.9185 23.2776 24.2796 0.7430819 COc1ccccc1C1OCCCC1=O 1 O=C1CCCOC1c1ccccc1 0.7430819 0.7431 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.8909 42.6597 15.9410 0.9156369 C1=C(c2cccnc2)CCNC1=C1CCN1c1ccccc1 1 C1=C(c2cccnc2)CCNC1=C1CCN1c1ccccc1 0.9156369 0.9156 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.1699 24.3928 26.0882 0.7887657 FC(F)(F)c1ccccc1C1CCc2ccccc2N1 1 c1ccc(C2CCc3ccccc3N2)cc1 0.7887657 0.7888 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.4875 31.4935 17.8703 0.7713103 O=C1C2CCC1C1(CC2)C(=O)CC1c1ccccc1 1 O=C1C2CCC1C1(CC2)C(=O)CC1c1ccccc1 0.7713103 0.7713 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 31.9329 40.1790 13.7442 0.8425504 O=C1C=C(C2C(c3ccccc3)=NOC3CCCCC32)OC1 1 O=C1C=C(C2C(c3ccccc3)=NOC3CCCCC32)OC1 0.8425504 0.8426 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.9132 29.1928 24.6815 0.8417850 CC12CCN(Cc3ccccc3)CC1CC(=O)C2c1ccccc1 1 O=C1CC2CN(Cc3ccccc3)CCC2C1c1ccccc1 0.8417850 0.8418 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.5308 24.3414 25.9301 0.7854922 COc1ccc(OCc2ccn(C)c2)cc1 1 c1ccc(OCc2cc[nH]c2)cc1 0.7854922 0.7855 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.4736 23.8511 27.7642 0.8064895 CC1(O)c2ccccc2N(O)C1c1ccccc1 1 c1ccc(C2Cc3ccccc3N2)cc1 0.8064895 0.8065 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,370][reinvent][INFO] - loss: 1461.415283203125, augmented_lls: 16.76921844482422, prior_lls: -27.480979919433594, scores: 0.6914093494415283,prior_loss: 90.81639862060547
+[2025-10-02 13:28:51,372][reinvent][INFO] - loss: 2476.46630859375, augmented_lls: 29.892911911010742, prior_lls: -26.2153263092041, scores: 0.8766912817955017,prior_loss: 62.83102035522461
+[2025-10-02 13:28:51,398][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.69 Agent NLL: 19.04 Valid:  97% Step: 37
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 17.3443 24.9461 26.9692 0.8111768 COc1ccc(CN2CCC(c3ccc(Br)cc3)C2)cc1 1 c1ccc(CN2CCC(c3ccccc3)C2)cc1 0.8111768 0.8112 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.0414 18.6055 10.5684 0.4558408 OC1CCC(=S)NC1 1 S=C1CCCCN1 0.4558408 0.4558 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 27.2516 37.8421 2.7691 0.6345495 COC12c3ccccc3CNC1Oc1cccc(Br)c1C2c1ccccc1 1 c1ccc(C2c3ccccc3OC3NCc4ccccc4C32)cc1 0.6345495 0.6345 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.1924 26.3122 31.9456 0.9102792 COc1ccc2c(c1Cl)C(c1ccccc1)C(=O)N2 1 O=C1Nc2ccccc2C1c1ccccc1 0.9102792 0.9103 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.2279 23.3412 33.9057 0.8944839 COC1CCCCC1OC(=O)Nc1ccccc1 1 O=C(Nc1ccccc1)OC1CCCCC1 0.8944839 0.8945 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.8792 24.4906 18.7076 0.6749719 Clc1ccccc1C1Oc2ccccc2C1Nc1ccccc1 1 c1ccc(NC2c3ccccc3OC2c2ccccc2)cc1 0.6749719 0.6750 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.2865 23.1520 25.8689 0.7659513 O=C(OC1CC1c1ccccc1)c1ccccc1 1 O=C(OC1CC1c1ccccc1)c1ccccc1 0.7659513 0.7660 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.8894 24.9393 26.0934 0.7973866 O=C1c2cnccc2NC(c2ccccc2)C1O 1 O=C1CC(c2ccccc2)Nc2ccncc21 0.7973866 0.7974 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.4912 26.7423 14.9426 0.6513272 O=C1c2cc(Br)ccc2CN1Cc1cccc2ccccc12 1 O=C1c2ccccc2CN1Cc1cccc2ccccc12 0.6513272 0.6513 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.1112 30.0763 17.3382 0.7408513 O=C(c1ccccc1)N1CC(O)c2ccccc2N1S(=O)(=O)c1ccccc1 1 O=C(c1ccccc1)N1CCc2ccccc2N1S(=O)(=O)c1ccccc1 0.7408513 0.7409 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,501][reinvent][INFO] - loss: 1414.69580078125, augmented_lls: 14.913545608520508, prior_lls: -27.3865966796875, scores: 0.6609396934509277,prior_loss: 88.0344467163086
+[2025-10-02 13:28:51,503][reinvent][INFO] - loss: 2705.937255859375, augmented_lls: 26.96634864807129, prior_lls: -29.61402702331543, scores: 0.8840684294700623,prior_loss: 39.452789306640625
+[2025-10-02 13:28:51,530][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.66 Agent NLL: 19.00 Valid:  96% Step: 38
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 13.3216 22.3914 24.7637 0.7367972 COC1(C)CCN(c2ccccc2)C1=O 1 O=C1CCCN1c1ccccc1 0.7367972 0.7368 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.6252 25.6974 11.6686 0.5838440 O=C1OC(c2ccccc2)C2CCC1C2Br 1 O=C1OC(c2ccccc2)C2CCC1C2 0.5838440 0.5838 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.5561 21.3344 26.2128 0.7429245 O=C(O)c1ccc(NS(=O)(=O)F)cc1 1 c1ccccc1 0.7429245 0.7429 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.4359 16.4295 15.3984 0.4973115 O=C1CCCCC1O 1 O=C1CCCCC1 0.4973115 0.4973 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.0545 32.5921 18.8262 0.8034112 CN1c2cccc(Cl)c2C(=O)C2Nc3ccccc3C21 1 O=C1c2ccccc2NC2c3ccccc3NC12 0.8034112 0.8034 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.9716 27.1347 22.4651 0.7749972 COc1ccc(C2C3CCN(C3)CN2C)cc1 1 c1ccc(C2NCN3CCC2C3)cc1 0.7749972 0.7750 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 48.7369 56.5674 -8.6999 0.7479297 COC1C2CCCCC3OC32CC1(C)C1CCC(C)c2ccccc2N1 1 c1ccc2c(c1)CCCC(C1CC3CCCCC4OC34C1)N2 0.7479297 0.7479 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.6987 23.0688 -4.2551 0.2939649 FC(F)(F)c1ccc([Si](F)(c2ccccc2)c2ccccc2)cc1 1 c1ccc([SiH](c2ccccc2)c2ccccc2)cc1 0.2939649 0.2940 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.7132 27.2137 22.7363 0.7804683 CC1(O)C2CC(=O)C(c3ccccc3)CC21 1 O=C1CC2CC2CC1c1ccccc1 0.7804683 0.7805 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7389 33.4299 25.8051 0.9255463 COc1ccc2c(c1)CC(=O)N(C)CCC(c1ccccc1)N2 1 O=C1Cc2ccccc2NC(c2ccccc2)CCN1 0.9255463 0.9255 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,641][reinvent][INFO] - loss: 1457.391845703125, augmented_lls: 15.909112930297852, prior_lls: -27.930044174194336, scores: 0.6849868297576904,prior_loss: 93.45921325683594
+[2025-10-02 13:28:51,642][reinvent][INFO] - loss: 2645.2470703125, augmented_lls: 31.80755043029785, prior_lls: -25.23768424987793, scores: 0.8913317918777466,prior_loss: 46.833412170410156
+[2025-10-02 13:28:51,671][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.68 Agent NLL: 19.57 Valid:  98% Step: 39
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 13.6132 31.3568 28.8135 0.9401610 COc1ccc(C2Nc3ccccc3C(=O)C2OC)cc1 1 O=C1CC(c2ccccc2)Nc2ccccc21 0.9401610 0.9402 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7092 27.6361 17.1976 0.7005259 O=C1C(=CNc2cccc3c(O)cccc23)Oc2ccccc21 1 O=C1C(=CNc2cccc3ccccc23)Oc2ccccc21 0.7005259 0.7005 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.1564 24.5389 12.0476 0.5716632 COC1CC(=O)N2C=CC=CC12 1 O=C1CCC2C=CC=CN12 0.5716632 0.5717 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.7070 28.3905 28.6507 0.8912692 COc1ccc(C2NC=C(Br)C(=O)N2Cc2ccccc2)cc1 1 O=C1C=CNC(c2ccccc2)N1Cc1ccccc1 0.8912692 0.8913 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.9452 19.7544 40.5942 0.9429469 COc1ccc(NS(=O)(=O)c2cccc(Cl)c2)cc1 1 O=S(=O)(Nc1ccccc1)c1ccccc1 0.9429469 0.9429 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 36.5056 47.3311 -8.4327 0.6077865 CC1(C)CC(c2ccccc2)C(C)(C)OC2(CCCC2=NNS(=O)(=O)c2ccccc2)C1 1 O=S(=O)(NN=C1CCCC12CCCC(c1ccccc1)CO2)c1ccccc1 0.6077865 0.6078 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.7003 21.4776 22.2996 0.6840191 CC1(C)Cc2ccccc2NC(=O)O1 1 O=C1Nc2ccccc2CCO1 0.6840191 0.6840 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.7673 23.5907 24.0852 0.7449354 COC1=NC(C)(c2ccccc2)c2ccccc21 1 C1=NC(c2ccccc2)c2ccccc21 0.7449354 0.7449 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.6476 24.5068 16.2536 0.6368807 O=C(c1ccccc1)C1C(c2ccccc2)CN1S(=O)(=O)c1ccccc1 1 O=C(c1ccccc1)C1C(c2ccccc2)CN1S(=O)(=O)c1ccccc1 0.6368807 0.6369 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.1950 21.7554 25.2325 0.7341867 O=C1CCCC(c2ccc(Cl)cc2)C1(F)F 1 O=C1CCCC(c2ccccc2)C1 0.7341867 0.7342 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:51,774][reinvent][INFO] - loss: 1285.57958984375, augmented_lls: 11.272636413574219, prior_lls: -28.842247009277344, scores: 0.6267950534820557,prior_loss: 100.11293029785156
+[2025-10-02 13:28:51,776][reinvent][INFO] - loss: 2646.612548828125, augmented_lls: 28.67498779296875, prior_lls: -27.291309356689453, scores: 0.8744733929634094,prior_loss: 28.922550201416016
+[2025-10-02 13:28:51,804][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.63 Agent NLL: 19.81 Valid:  95% Step: 40
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 14.3423 15.1709 36.2420 0.8033254 Oc1ccc(Sc2ccccc2)cc1 1 c1ccc(Sc2ccccc2)cc1 0.8033254 0.8033 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 8.3847 18.0926 14.7901 0.5137915 O=C1NC(c2ccccc2)C(=O)O1 1 O=C1NC(c2ccccc2)C(=O)O1 0.5137915 0.5138 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.1365 25.8791 29.8835 0.8712917 COc1ccc(NN=C2CCCc3ccccc32)cc1OC 1 c1ccc(NN=C2CCCc3ccccc32)cc1 0.8712917 0.8713 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.6225 31.0405 23.3055 0.8491565 COc1cccc(C=O)c1C1Nc2ccccc2NC1=O 1 O=C1Nc2ccccc2NC1c1ccccc1 0.8491565 0.8492 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.9365 25.9074 -25.9074 0.0000000 c1ccc(NS(=O)(=O)Nc2cccccc2Cl)cc1 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 16.0099 24.2875 18.0166 0.6610026 CC1=CC(c2ccccc2)(c2ccccc2)C1 1 C1=CC(c2ccccc2)(c2ccccc2)C1 0.6610026 0.6610 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 10.8735 27.7684 24.0362 0.8094458 O=C1CC(c2ccccn2)Nc2ccccc21 1 O=C1CC(c2ccccn2)Nc2ccccc21 0.8094458 0.8094 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.4110 31.1692 20.6126 0.8090895 O=C1C(c2ccccc2)N1S(=O)(=O)N1CCC1c1ccccc1 1 O=C1C(c2ccccc2)N1S(=O)(=O)N1CCC1c1ccccc1 0.8090895 0.8091 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.3678 31.1142 9.8622 0.6402548 CS(=O)(=O)C1CC(c2ccc(Br)cc2)=C(Br)C1c1ccccc1 1 C1=C(c2ccccc2)CCC1c1ccccc1 0.6402548 0.6403 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.3385 31.4393 11.3981 0.6693346 COc1ccccc1CN1Cc2ccccc2N(c2ccccc2)C1=O 1 O=C1N(Cc2ccccc2)Cc2ccccc2N1c1ccccc1 0.6693346 0.6693 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:52,900][navidiv.scorer][INFO] - Time to get count: 0.98 seconds
+[2025-10-02 13:28:53,166][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,166][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,166][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,166][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,167][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,167][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,167][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,167][navidiv.scorer][INFO] - Time to get added score metrics: 1.25 seconds
+[2025-10-02 13:28:53,167][reinvent][INFO] - Step 40 - Scorer: scaffold_basic_wire_frame - Score: {'Percentage of Unique Fragments': 91.2, 'Total Number of Fragments': 125, 'Number of Unique Fragments': 114, 'Elapsed Time': 1.2518703937530518, 'Elapsed Time_to get count': 0.9842839241027832, 'Appeared more than 10 times': 0, 'Appeared more than 5 times': 0, 'Appeared once': 105}
+[2025-10-02 13:28:53,168][root][INFO] - Step 40 - Grouping results
+[2025-10-02 13:28:53,173][reinvent][INFO] - Updating custom alert customalertsscaffold with fragments: []
+[2025-10-02 13:28:53,173][reinvent][INFO] - customalertsscaffold updated with set()
+[2025-10-02 13:28:53,190][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:53,200][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,200][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,201][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,201][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,201][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,201][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:53,202][navidiv.scorer][INFO] - Time to get added score metrics: 0.03 seconds
+[2025-10-02 13:28:53,202][reinvent][INFO] - Step 40 - Scorer: ngrams_10 - Score: {'Percentage of Unique Fragments': 74.67591196864637, 'Total Number of Fragments': 3317, 'Number of Unique Fragments': 2477, 'Elapsed Time': 0.02863597869873047, 'Elapsed Time_to get count': 0.01680302619934082, 'Appeared more than 10 times': 14, 'Appeared more than 5 times': 47, 'Appeared once': 2155}
+[2025-10-02 13:28:53,247][root][WARNING] - Ring transformation failed for: c1ncnn1
+[2025-10-02 13:28:53,347][root][WARNING] - Ring transformation failed for: c1ccc2nccc2c1
+[2025-10-02 13:28:53,397][root][WARNING] - Ring transformation failed for: c1cccccc1
+[2025-10-02 13:28:53,446][root][WARNING] - Ring transformation failed for: c1ccc2nccc2c1
+[2025-10-02 13:28:53,474][root][WARNING] - Ring transformation failed for: c1ccc2cncc2c1
+[2025-10-02 13:28:59,128][navidiv.scorer][INFO] - Time to get count: 5.93 seconds
+[2025-10-02 13:28:59,130][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,130][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,130][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,131][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,131][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,131][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,131][py.warnings][WARNING] - 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+[2025-10-02 13:28:59,132][navidiv.scorer][INFO] - Time to get added score metrics: 5.93 seconds
+[2025-10-02 13:28:59,132][reinvent][INFO] - Step 40 - Scorer: fragments_none - Score: {'Percentage of Unique Fragments': 85.69587628865979, 'Total Number of Fragments': 776, 'Number of Unique Fragments': 665, 'Elapsed Time': 5.929444074630737, 'Elapsed Time_to get count': 5.925306081771851, 'Appeared more than 10 times': 3, 'Appeared more than 5 times': 4, 'Appeared once': 614}
+[2025-10-02 13:28:59,132][root][INFO] - Step 40 - Grouping results
+[2025-10-02 13:28:59,139][reinvent][INFO] - Updating custom alert customalerts with fragments: []
+[2025-10-02 13:28:59,139][reinvent][INFO] - customalerts updated with {'[#6;R0]~[#6;R0]'}
+[2025-10-02 13:28:59,157][navidiv.scorer][INFO] - Time to get count: 0.02 seconds
+[2025-10-02 13:28:59,187][navidiv.scorer][INFO] - Time to get added score metrics: 0.05 seconds
+[2025-10-02 13:28:59,187][reinvent][INFO] - Step 40 - Scorer: clusters_tanimoto_morgan_threshold_0.8.csv - Score: {'Percentage of Unique Fragments': 100.0, 'Total Number of Fragments': 125, 'Number of Unique Fragments': 125, 'Elapsed Time': 0.04803586006164551, 'Elapsed Time_to get count': 0.017915725708007812, 'mean_similarity': 0.21075380563239635, 'std_similarity': 0.07588028930286993}
+[2025-10-02 13:28:59,187][root][INFO] - Step 40 - Grouping results
+[2025-10-02 13:28:59,224][reinvent][INFO] - Updating custom alert dissimilarity with fragments: []
+[2025-10-02 13:28:59,224][reinvent][INFO] - dissimilarity updated with {'CCCCCCCCCCCCCCC'}
+[2025-10-02 13:28:59,235][reinvent][INFO] - loss: 1318.968017578125, augmented_lls: 12.556049346923828, prior_lls: -30.475662231445312, scores: 0.6723704934120178,prior_loss: 117.83964538574219
+[2025-10-02 13:28:59,237][reinvent][INFO] - loss: 2430.064697265625, augmented_lls: 28.069385528564453, prior_lls: -28.661420822143555, scores: 0.8864188194274902,prior_loss: 88.36822509765625
+[2025-10-02 13:28:59,268][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.67 Agent NLL: 20.71 Valid:  98% Step: 41
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 15.7954 20.7959 22.2127 0.6720092 COc1cccc(C=NNC(=O)c2cccnc2)c1OC 1 O=C(NN=Cc1ccccc1)c1cccnc1 0.6720092 0.6720 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.5967 29.9604 14.4507 0.6939220 Oc1ccc(N=Cc2cc[nH]c2N=Cc2ccccc2)cc1 1 C(=Nc1ccccc1)c1cc[nH]c1N=Cc1ccccc1 0.6939220 0.6939 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.2056 22.3489 26.5670 0.7643115 COc1ccc(N2CCCC(C)C2=O)cc1 1 O=C1CCCCN1c1ccccc1 0.7643115 0.7643 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.4949 21.0292 32.1206 0.8304663 CN1C(=O)c2ccccc2C1c1ccccc1O 1 O=C1NC(c2ccccc2)c2ccccc21 0.8304663 0.8305 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.6785 34.9992 19.9429 0.8584715 O=C1C(c2ccc(Cl)cc2)CC(O)C12CC1CCCC12 1 O=C1C(c2ccccc2)CCC12CC1CCCC12 0.8584715 0.8585 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.2859 30.8858 28.1594 0.9225811 O=C1NC(c2ccc(Cl)cc2)=CC1CC1OCCO1 1 O=C1NC(c2ccccc2)=CC1CC1OCCO1 0.9225811 0.9226 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 35.6845 43.8724 -43.8724 0.0000000 O=C1N(C2C(CC(O)c3ccccc3)CCC2c2ccccc2)CCN1S(=O)(=O)c1ccccc1 1 O=C1N(C2C(CCc3ccccc3)CCC2c2ccccc2)CCN1S(=O)(=O)c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 19.4898 35.1561 8.6340 0.6842208 O=C(O)c1ccccc1Nc1ccccc1C1OC(=O)N1c1ccccc1 1 O=C1OC(c2ccccc2Nc2ccccc2)N1c1ccccc1 0.6842208 0.6842 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.4234 20.7173 28.9026 0.7753106 CC1C(=O)C(c2ccccc2)C1c1ccccc1 1 O=C1CC(c2ccccc2)C1c1ccccc1 0.7753106 0.7753 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.3357 28.5078 -28.5078 0.0000000 O=C(Cn1ncnc1S(=O)(=O)c1ccccc1)c1ccccc1 1 O=C(Cn1ncnc1S(=O)(=O)c1ccccc1)c1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+[2025-10-02 13:28:59,389][reinvent][INFO] - loss: 1439.11474609375, augmented_lls: 13.277945518493652, prior_lls: -31.127532958984375, scores: 0.6938356161117554,prior_loss: 110.05203247070312
+[2025-10-02 13:28:59,391][reinvent][INFO] - loss: 2562.784912109375, augmented_lls: 28.735448837280273, prior_lls: -28.31231117248535, scores: 0.8913713693618774,prior_loss: 52.85380935668945
+[2025-10-02 13:28:59,422][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.69 Agent NLL: 21.96 Valid:  98% Step: 42
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 25.5493 31.2843 10.7855 0.6573399 O=S(=O)(c1ccccc1)N1CC(c2ccc(Br)cc2)c2ccccc2CN1 1 O=S(=O)(c1ccccc1)N1CC(c2ccccc2)c2ccccc2CN1 0.6573399 0.6573 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.5125 29.3370 19.9021 0.7693622 CN1CC2CCC1C(=S)N2Cc1ccc(Cl)cc1 1 S=C1C2CCC(CN2)N1Cc1ccccc1 0.7693622 0.7694 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 49.5820 51.1752 -10.6412 0.6333436 O=C1C2CC3CCC4(O)C(Sc5ccccc5)C=CC(SC34)N1c1ccccc1S2 1 O=C1C2CC3CCC4C(Sc5ccccc5)C=CC(SC34)N1c1ccccc1S2 0.6333436 0.6333 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 37.3853 41.5564 4.0878 0.7131909 c1ccc2c(c1)CC1CCC3C(O2)OC12CCc1ccccc1C32 1 c1ccc2c(c1)CC1CCC3C(O2)OC12CCc1ccccc1C32 0.7131909 0.7132 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.4752 32.4149 4.1469 0.5712784 O=C1COCC2OC3OCCCC1C3O2 1 O=C1COCC2OC3OCCCC1C3O2 0.5712784 0.5713 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 39.2981 56.2077 -25.0454 0.4869103 COc1cccc(CC23CC2C2(CCCC2)c2ccccc2N3S(=O)(=O)NCc2ccccc2)c1 1 O=S(=O)(NCc1ccccc1)N1c2ccccc2C2(CCCC2)C2CC21Cc1ccccc1 0.4869103 0.4869 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.8092 25.2896 12.6683 0.5930925 c1ccc(C2CCN(c3ccccc3)C3c4ccccc4CC23)cc1 1 c1ccc(C2CCN(c3ccccc3)C3c4ccccc4CC23)cc1 0.5930925 0.5931 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.9463 22.2204 38.4327 0.9477047 COc1ncccc1C(=O)Nc1ccc(Br)cc1 1 O=C(Nc1ccccc1)c1cccnc1 0.9477047 0.9477 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3372 31.0446 23.2696 0.8486600 O=C1C(c2ccccc2)CCN1S(=O)(=O)C1CCC1 1 O=C1C(c2ccccc2)CCN1S(=O)(=O)C1CCC1 0.8486600 0.8487 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.3174 23.5147 7.9938 0.4923214 COc1cc(C=NNS(=O)(=O)c2ccccc2)cc([N+](=O)[O-])c1 1 O=S(=O)(NN=Cc1ccccc1)c1ccccc1 0.4923214 0.4923 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:59,542][reinvent][INFO] - loss: 1450.1109619140625, augmented_lls: 13.823165893554688, prior_lls: -29.951881408691406, scores: 0.6839851140975952,prior_loss: 85.83243560791016
+[2025-10-02 13:28:59,544][reinvent][INFO] - loss: 2354.96484375, augmented_lls: 32.15749740600586, prior_lls: -25.526838302612305, scores: 0.9013177752494812,prior_loss: 95.70963287353516
+[2025-10-02 13:28:59,574][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.68 Agent NLL: 21.56 Valid:  97% Step: 43
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.3331 17.8005 29.2782 0.7356048 COc1ccc2cc(Br)ccc2c1 1 c1ccc2ccccc2c1 0.7356048 0.7356 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.3573 25.1199 -25.1199 0.0000000 O=S(=O)(=O)N1CCC(c2ccccc2)c2ccccc21 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 18.0196 30.0141 30.4136 0.9441842 O=C1C(OCc2ccccc2)CC(F)C1(O)c1ccccc1 1 O=C1C(OCc2ccccc2)CCC1c1ccccc1 0.9441842 0.9442 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 42.2008 55.9784 -21.8934 0.5325781 O=C1C=CC(C2CCC3CCCCC32C(=O)OCC2C3CCC2N(S(=O)(=O)c2ccccc2)CC3)O1 1 O=C1C=CC(C2CCC3CCCCC32C(=O)OCC2C3CCC2N(S(=O)(=O)c2ccccc2)CC3)O1 0.5325781 0.5326 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.2772 29.8567 27.4664 0.8956739 C=C1c2ccccc2N(S(=O)(=O)c2ccccc2)C2CCCCC12O 1 C=C1c2ccccc2N(S(=O)(=O)c2ccccc2)C2CCCCC12 0.8956739 0.8957 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.1232 21.7109 20.0960 0.6532324 c1ccc(C2=NCc3ccccc3-c3ncccc32)cc1 1 c1ccc(C2=NCc3ccccc3-c3ncccc32)cc1 0.6532324 0.6532 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.0231 21.3161 29.7095 0.7972750 COc1ccc(C2CCC(=O)C2O)cc1 1 O=C1CCC(c2ccccc2)C1 0.7972750 0.7973 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 42.5426 55.5555 -9.3230 0.7223830 CC1(C)C=C2CCCC3OC(CCCS3(=O)=O)(O2)C(c2ccccc2)C1 1 O=S1(=O)CCCC23OC(=CCCC2c2ccccc2)CCCC1O3 0.7223830 0.7224 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.5600 29.0036 -3.3456 0.4009051 O=C(Nc1cccc(Nc2cccc(C(=O)c3ccccc3)c2)c1)c1ccccc1 1 O=C(Nc1cccc(Nc2cccc(C(=O)c3ccccc3)c2)c1)c1ccccc1 0.4009051 0.4009 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.1860 30.5767 16.2559 0.7317595 C1CCN(CN2CCOCCOCCOCCOC2)C1 1 C1CCN(CN2CCOCCOCCOCCOC2)C1 0.7317595 0.7318 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:59,696][reinvent][INFO] - loss: 1432.7864990234375, augmented_lls: 14.021137237548828, prior_lls: -30.358951568603516, scores: 0.6934388875961304,prior_loss: 113.05069732666016
+[2025-10-02 13:28:59,697][reinvent][INFO] - loss: 2616.38037109375, augmented_lls: 32.392601013183594, prior_lls: -24.376535415649414, scores: 0.8870177268981934,prior_loss: 68.196533203125
+[2025-10-02 13:28:59,728][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.69 Agent NLL: 20.86 Valid:  97% Step: 44
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 22.5735 28.5655 14.4060 0.6714295 COc1cc2c(ccc3ccccc32)c(OC)c1OC 1 c1ccc2c(c1)ccc1ccccc12 0.6714295 0.6714 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.4889 31.5091 27.6107 0.9237483 O=S(=O)(c1ccccc1)N1CCC2CN1c1ccccc1N2 1 O=S(=O)(c1ccccc1)N1CCC2CN1c1ccccc1N2 0.9237483 0.9237 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.3834 41.4170 10.0552 0.8042542 C=C1CCC2COC3C(=O)CC(c4ccc(OC)cc4OC)C123 1 C=C1CCC2COC3C(=O)CC(c4ccccc4)C123 0.8042542 0.8043 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.3241 28.2049 17.8937 0.7202902 O=C1C(c2ccccc2)N(S(=O)(=O)c2ccccc2)CCC1(O)c1ccccc1 1 O=C1C(c2ccccc2)CCN(S(=O)(=O)c2ccccc2)C1c1ccccc1 0.7202902 0.7203 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.3380 31.6978 5.9838 0.5887747 O=C1OCCNC1=C1C(Br)=Cc2ccccc21 1 O=C1OCCNC1=C1C=Cc2ccccc21 0.5887747 0.5888 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 24.7303 30.5768 16.0927 0.7292115 O=c1c2ccccc2cnn1CC1OCCc2ccccc21 1 O=c1c2ccccc2cnn1CC1OCCc2ccccc21 0.7292115 0.7292 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.0694 22.4836 17.2030 0.6201029 CC1CC(=O)N(c2ccccn2)C1=O 1 O=C1CCC(=O)N1c1ccccn1 0.6201029 0.6201 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 26.6238 35.3111 15.0465 0.7868368 COc1cccc2c1CN(Cc1ccccc1)C(=O)OC1CC=CC21 1 O=C1OC2CC=CC2c2ccccc2CN1Cc1ccccc1 0.7868368 0.7868 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.3560 30.9501 19.4331 0.7872373 O=S(=O)(c1ccccc1)N1CCCCCC2C=CC1O2 1 O=S(=O)(c1ccccc1)N1CCCCCC2C=CC1O2 0.7872373 0.7872 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.2150 29.2806 25.3765 0.8540166 O=C1c2ccccc2C12CCN(S(=O)(=O)c1ccccc1)C2 1 O=C1c2ccccc2C12CCN(S(=O)(=O)c1ccccc1)C2 0.8540166 0.8540 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:59,842][reinvent][INFO] - loss: 1407.10400390625, augmented_lls: 13.85805892944336, prior_lls: -30.521583557128906, scores: 0.6934319138526917,prior_loss: 134.57073974609375
+[2025-10-02 13:28:59,844][reinvent][INFO] - loss: 2908.51806640625, augmented_lls: 32.381568908691406, prior_lls: -24.39872932434082, scores: 0.8871921896934509,prior_loss: 31.922266006469727
+[2025-10-02 13:28:59,872][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.69 Agent NLL: 20.32 Valid:  97% Step: 45
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 16.1783 25.8561 23.8070 0.7759850 O=C1C(c2ccccc2)OC2C(O)CCC12 1 O=C1C(c2ccccc2)OC2CCCC12 0.7759850 0.7760 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.1671 28.3137 -28.3137 0.0000000 O=C1c2ccccc2CCN1CC(O)c1ccc(O)cc1 1 O=C1c2ccccc2CCN1CCc1ccccc1 0.0000000 0.0000 1.0000000 1.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 24.1566 32.4926 16.4302 0.7644190 O=C1C=CC(c2ccc(Cl)cc2)C2=C1CCC(=O)C2c1ccccc1 1 O=C1C=CC(c2ccccc2)C2=C1CCC(=O)C2c1ccccc1 0.7644190 0.7644 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.1964 27.1148 18.6425 0.7149591 O=C1C(c2ccccc2)C(c2ccccc2)OC12CCCCCCC2 1 O=C1C(c2ccccc2)C(c2ccccc2)OC12CCCCCCC2 0.7149591 0.7150 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.2495 29.8518 17.4762 0.7394998 CNc1cn(Br)ccc1=O 1 O=c1cc[nH]cc1 0.7394998 0.7395 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.4707 22.5851 14.2463 0.5754897 O=C1NC(c2ccccc2)NCC1O 1 O=C1CCNC(c2ccccc2)N1 0.5754897 0.5755 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.7954 34.2634 26.0364 0.9421842 COC1C(S(N)(=O)=O)=C(c2ccccc2)C1c1ccccc1 1 C1=C(c2ccccc2)C(c2ccccc2)C1 0.9421842 0.9422 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.4110 56.2108 -56.2108 0.0000000 CC12CCCCCC3CCC(CCN(S(=O)(=O)=O)C3)C1CCCC2=O 0 -- 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000 0.0000000 0.0000
+ | 13.4652 25.6579 29.6232 0.8637672 COc1ccc(C2=CN(S(=O)(=O)c3ccccc3)CC2C)cc1 1 O=S(=O)(c1ccccc1)N1C=C(c2ccccc2)CC1 0.8637672 0.8638 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.3560 20.4315 30.0138 0.7882078 COc1ccc(-c2ccccn2)nc1OC 1 c1ccc(-c2ccccn2)nc1 0.7882078 0.7882 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:28:59,996][reinvent][INFO] - loss: 1376.133056640625, augmented_lls: 11.73369026184082, prior_lls: -31.16800880432129, scores: 0.670339047908783,prior_loss: 111.12350463867188
+[2025-10-02 13:28:59,998][reinvent][INFO] - loss: 2785.106201171875, augmented_lls: 28.64912223815918, prior_lls: -28.503253936767578, scores: 0.8930058479309082,prior_loss: 40.48925018310547
+[2025-10-02 13:29:00,030][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.67 Agent NLL: 21.77 Valid:  98% Step: 46
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 24.7291 29.8817 20.2235 0.7828930 COc1ccccc1NC1CCCC1n1cnc2ccccc21 1 c1ccc(NC2CCCC2n2cnc3ccccc32)cc1 0.7828930 0.7829 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.7849 24.0942 34.4256 0.9143716 O=C1C(c2ccccc2)CCC1(O)c1ccc(Cl)cc1 1 O=C1C(c2ccccc2)CCC1c1ccccc1 0.9143716 0.9144 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.9209 31.9079 21.5129 0.8347011 O=C1CCCC1COC1OCCC1c1ccccc1 1 O=C1CCCC1COC1OCCC1c1ccccc1 0.8347011 0.8347 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 20.3719 33.3339 0.4891 0.5284832 O=S(=O)(c1ccc(Br)cc1)c1cccc(Cl)c1[Se]c1ccccc1 1 O=S(=O)(c1ccccc1)c1ccccc1[Se]c1ccccc1 0.5284832 0.5285 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.4872 26.8664 25.3958 0.8165965 O=C1CCC(c2cccc(Br)c2)C1S(=O)(=O)c1ccccc1 1 O=C1CCC(c2ccccc2)C1S(=O)(=O)c1ccccc1 0.8165965 0.8166 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.8920 35.7019 10.3908 0.7201975 O=C1c2ccccc2OC12CC(O)(c1ccc(Cl)cc1)N2Cc1ccccc1 1 O=C1c2ccccc2OC12CC(c1ccccc1)N2Cc1ccccc1 0.7201975 0.7202 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 30.1692 38.9663 16.0487 0.8596079 CN1C(=O)C(C2C(=O)OC2c2ccccc2)N(c2ccccc2)C1O 1 O=C1OC(c2ccccc2)C1C1C(=O)NCN1c1ccccc1 0.8596079 0.8596 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.3348 28.4555 23.2169 0.8073811 CC1=C(c2ccccc2)N(S(=O)(=O)c2ccccc2)C(F)C1 1 O=S(=O)(c1ccccc1)N1CCC=C1c1ccccc1 0.8073811 0.8074 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.1370 21.7102 27.2727 0.7653578 O=C1c2ccccc2OC1c1cccc(Cl)c1 1 O=C1c2ccccc2OC1c1ccccc1 0.7653578 0.7654 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.7534 29.1961 21.8624 0.7977888 COc1ccc(COC2ON3CCCC23)cc1 1 c1ccc(COC2ON3CCCC23)cc1 0.7977888 0.7978 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:29:00,149][reinvent][INFO] - loss: 1487.6898193359375, augmented_lls: 14.324226379394531, prior_lls: -29.919580459594727, scores: 0.6913094520568848,prior_loss: 123.85356140136719
+[2025-10-02 13:29:00,152][reinvent][INFO] - loss: 2336.230224609375, augmented_lls: 27.766332626342773, prior_lls: -29.96747398376465, scores: 0.9020906686782837,prior_loss: 106.92894744873047
+[2025-10-02 13:29:00,180][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.69 Agent NLL: 20.26 Valid:  95% Step: 47
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 18.6265 30.1622 21.9128 0.8136707 CC1=C(C)N(S(=O)(=O)c2ccccc2)C2CCCCCCC12 1 O=S(=O)(c1ccccc1)N1C=CC2CCCCCCC21 0.8136707 0.8137 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 16.8895 23.2055 11.0159 0.5347082 c1ccc(Cn2cccc2N=NNc2ccccc2)cc1 1 c1ccc(Cn2cccc2N=NNc2ccccc2)cc1 0.5347082 0.5347 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.9085 22.7503 26.6064 0.7711980 c1ccc(C(c2ccccc2)C2COC3CCCCC32)cc1 1 c1ccc(C(c2ccccc2)C2COC3CCCCC32)cc1 0.7711980 0.7712 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.1083 39.5750 13.6253 0.8312547 COc1ccc(N2CC3CCCC3CC2=O)cc1NS(=O)(=O)c1ccccc1 1 O=C1CC2CCCC2CN1c1cccc(NS(=O)(=O)c2ccccc2)c1 0.8312547 0.8313 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 33.8713 50.6601 -18.3537 0.5047869 CC1CCC(B2OCCOC2=O)C2=C1CCCC1=Cc3ccccc3CC12 1 O=C1OCCOB1C1CCCC2=C1C1Cc3ccccc3C=C1CCC2 0.5047869 0.5048 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.9718 27.0241 22.0888 0.7673891 O=C1CCCC12C1CC2C(c2ccccc2)C1c1ccccc1 1 O=C1CCCC12C1CC2C(c2ccccc2)C1c1ccccc1 0.7673891 0.7674 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 15.8036 27.4548 18.9238 0.7246667 COC1C(=O)C(c2ccccc2)(c2ccccc2)N1c1ccccc1 1 O=C1CN(c2ccccc2)C1(c1ccccc1)c1ccccc1 0.7246667 0.7247 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 28.5522 38.2076 16.2442 0.8508101 CC1(O)C2CCCCC1C(S(=O)(=O)c1ccccc1)c1ccccc1C2=O 1 O=C1c2ccccc2C(S(=O)(=O)c2ccccc2)C2CCCCC1C2 0.8508101 0.8508 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.3849 26.5695 31.6109 0.9090692 O=C1CC(c2ccc(Cl)cc2)CC(O)C1Nc1ccccc1 1 O=C1CC(c2ccccc2)CCC1Nc1ccccc1 0.9090692 0.9091 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 13.0928 23.1781 31.0929 0.8479840 COc1ccc(NCc2ccncn2)cc1 1 c1ccc(NCc2ccncn2)cc1 0.8479840 0.8480 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:29:00,293][reinvent][INFO] - loss: 1629.062255859375, augmented_lls: 16.466455459594727, prior_lls: -29.48717498779297, scores: 0.7180254459381104,prior_loss: 109.26545715332031
+[2025-10-02 13:29:00,295][reinvent][INFO] - loss: 2720.110107421875, augmented_lls: 30.105026245117188, prior_lls: -27.068037033081055, scores: 0.8933290839195251,prior_loss: 45.43354415893555
+[2025-10-02 13:29:00,324][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.72 Agent NLL: 20.44 Valid:  96% Step: 48
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 19.5349 25.2236 14.3067 0.6176616 O=C1OC2CCCCC2C(C(=O)c2ccccc2)C1c1ccccc1 1 O=C1OC2CCCCC2C(C(=O)c2ccccc2)C1c1ccccc1 0.6176616 0.6177 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.3352 29.4591 28.2997 0.9024821 Cc1ccc(C(=O)NC2CCCCC(=O)c3ccccc32)cc1 1 O=C(NC1CCCCC(=O)c2ccccc21)c1ccccc1 0.9024821 0.9025 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.2615 29.5916 17.4357 0.7348030 COc1cccc2c1C(c1ccc(F)cc1)C1CCCCC21 1 c1ccc(C2c3ccccc3C3CCCCC32)cc1 0.7348030 0.7348 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.3250 19.3193 26.6930 0.7189426 COc1ccc(C(=O)NC(N)=O)cc1 1 c1ccccc1 0.7189426 0.7189 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 25.2484 35.2980 18.4192 0.8393317 CC12CCCCC13CC(C2)N(S(=O)(=O)c1ccccc1)C3 1 O=S(=O)(c1ccccc1)N1CC23CCCCC2CC1C3 0.8393317 0.8393 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 19.4855 27.0790 19.0050 0.7200626 Brc1ccc(C2CCCC2OC2CCCCC2)cc1 1 c1ccc(C2CCCC2OC2CCCCC2)cc1 0.7200626 0.7201 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 29.5682 39.0471 12.6259 0.8073910 CC1CCCC2(O)CN(S(=O)(=O)c3ccccc3)CCC(O)(c3ccccc3)C12 1 O=S(=O)(c1ccccc1)N1CCC(c2ccccc2)C2CCCCC2C1 0.8073910 0.8074 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.3035 29.4228 15.7192 0.7053433 COc1ccc(Cn2ccnn2)cc1Cn1ccnc1 1 c1cc(Cn2ccnc2)cc(Cn2ccnn2)c1 0.7053433 0.7053 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 17.7647 27.5242 20.9589 0.7575486 COc1ccccc1C1C(C)CCCN1C 1 c1ccc(C2CCCCN2)cc1 0.7575486 0.7575 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 12.8488 18.9238 38.1831 0.8922953 O=C(Nc1ccccc1)c1ccc(Br)s1 1 O=C(Nc1ccccc1)c1cccs1 0.8922953 0.8923 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:29:00,431][reinvent][INFO] - loss: 1475.55517578125, augmented_lls: 17.11733627319336, prior_lls: -27.97218894958496, scores: 0.7045238018035889,prior_loss: 94.65872192382812
+[2025-10-02 13:29:00,433][reinvent][INFO] - loss: 2513.862548828125, augmented_lls: 29.661762237548828, prior_lls: -27.397321701049805, scores: 0.8915481567382812,prior_loss: 64.28617095947266
+[2025-10-02 13:29:00,461][reinvent.runmodes.RL.reports.csv_summmary][INFO] - Score: 0.70 Agent NLL: 19.02 Valid:  98% Step: 49
+ | Agent Prior Target Score SMILES SMILES_state Scaffold QED QED (raw) custom alerts ngrams custom alerts ngrams (raw) custom alerts custom alerts (raw) dissimilarity dissimilarity (raw) custom alerts scaffold custom alerts scaffold (raw)
+ | 21.8261 31.5399 25.3573 0.8890184 COc1ccc(C2CC2C2CCC3(CCCCC3)C2O)cc1 1 c1ccc(C2CC2C2CCC3(CCCCC3)C2)cc1 0.8890184 0.8890 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 23.4721 31.6965 14.3719 0.7198189 COC1=C(c2ccccc2)C2(C)CCC1(C)C(c1ccccc1)OC2=O 1 O=C1OC(c2ccccc2)C2C=C(c3ccccc3)C1CC2 0.7198189 0.7198 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 21.7792 36.2560 12.8708 0.7676052 O=C1CC(c2ccccc2)C(c2ccccc2)C12CCCCC1OCC2O1 1 O=C1CC(c2ccccc2)C(c2ccccc2)C12CCCCC1OCC2O1 0.7676052 0.7676 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 9.8253 18.8266 -18.8266 0.0000000 O=S(=O)(c1ccccc1)N1CCCC1c1ccccc1 1 O=S(=O)(c1ccccc1)N1CCCC1c1ccccc1 0.8689777 0.8690 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 22.4936 34.6913 24.7343 0.9285263 CC1C(c2ccccc2CN2CCOCC2)CCC1(C)O 1 c1ccc(C2CCCC2)c(CN2CCOCC2)c1 0.9285263 0.9285 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.4221 25.7836 31.9340 0.9018376 COc1ccccc1NS(=O)c1ccccc1 1 O=S(Nc1ccccc1)c1ccccc1 0.9018376 0.9018 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 11.4351 20.5404 29.1209 0.7759581 COc1ccc(C2CCCCCC2O)cc1 1 c1ccc(C2CCCCCC2)cc1 0.7759581 0.7760 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 14.0653 22.5188 21.9684 0.6951112 COc1ccccc1C1CC(=O)OC1C 1 O=C1CC(c2ccccc2)CO1 0.6951112 0.6951 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 18.4869 32.6752 4.4520 0.5801121 CC12CCC1CCCC2S(#N)=O 1 C1CCC2CCC2C1 0.5801121 0.5801 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+ | 41.8415 49.1029 0.9312 0.7817833 O=C1CSC2(C3C=CC(O)C(=C3)C3CCCCC32)N1c1ccccc1 1 O=C1CSC2(C3C=CCC(=C3)C3CCCCC32)N1c1ccccc1 0.7817833 0.7818 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000 1.0000000 1.0000
+[2025-10-02 13:29:00,538][reinvent.runmodes.handler][CRITICAL] - Received exception ('Signal 2'): saving checkpoint and then terminate

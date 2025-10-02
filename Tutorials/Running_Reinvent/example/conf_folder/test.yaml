@@ -1,0 +1,11 @@
+wd: "/media/mohammed/Work/OPT_MOL_GEN/example_running_to_find_low_band_gap_mols/reinvent_runs/first_run"
+name: "stage1"
+generate_input_only: false
+input_generator: 
+  file_path: "/media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/InputGenerator_custom.py"
+  class_name: "InputGeneratorCustom"
+
+defaults:
+  - diversity_scorer: default
+  - reinvent_common: default
+  - stage_comp: QED
