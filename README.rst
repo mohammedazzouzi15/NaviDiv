@@ -134,20 +134,20 @@ Launch the Streamlit dashboard for comprehensive diversity analysis:
    # Run staged learning with diversity constraints
    run_staged_learning(cfg)
 
-Use Cases
----------
+.. Use Cases
+.. ---------
 
-**Research Applications**
+.. **Research Applications**
 
-- **Materials Discovery**: Monitor chemical space exploration in organic electronics, catalysis
-- **Drug Discovery**: Ensure diverse scaffold exploration during lead optimization
-- **Chemical Space Analysis**: Understand trade-offs between property optimization and diversity
+.. - **Materials Discovery**: Monitor chemical space exploration in organic electronics, catalysis
+.. - **Drug Discovery**: Ensure diverse scaffold exploration during lead optimization
+.. - **Chemical Space Analysis**: Understand trade-offs between property optimization and diversity
 
-**Educational & Industrial**
+.. **Educational & Industrial**
 
-- **Teaching Tool**: Visualize how generative models explore chemical space
-- **Industrial Pipelines**: Quality control for automated molecular discovery workflows
-- **Research Validation**: Compare diversity across different generative approaches
+.. - **Teaching Tool**: Visualize how generative models explore chemical space
+.. - **Industrial Pipelines**: Quality control for automated molecular discovery workflows
+.. - **Research Validation**: Compare diversity across different generative approaches
 
 Performance
 -----------
@@ -166,15 +166,15 @@ If you use NaviDiv in your research, please cite:
 
    Comming soon
 
-**Data Availability**: The framework is freely available on GitHub at https://github.com/mohammedazzouzi15/Navi_diversity.
+**Data Availability**: The framework is freely available on GitHub at https://github.com/mohammedazzouzi15/NaviDiv.
 
-Documentation
--------------
+.. Documentation
+.. -------------
 
-- **API Documentation**: Detailed function and class documentation
-- **Tutorials**: Step-by-step guides for common use cases  
-- **Case Studies**: Example applications in singlet fission material discovery
-- **Integration Guides**: REINVENT4 and custom workflow integration
+.. - **API Documentation**: Detailed function and class documentation
+.. - **Tutorials**: Step-by-step guides for common use cases  
+.. - **Case Studies**: Example applications in singlet fission material discovery
+.. - **Integration Guides**: REINVENT4 and custom workflow integration
 
 Contributing
 ------------
@@ -203,4 +203,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Acknowledgments
 ---------------
 
-This work was supported by the Swiss National Science Foundation (SNSF) and the National Center for Competence in Research-Catalysis (NCCR-Catalysis).
+This work was supported by the Swiss National Science Foundation (SNSF).
