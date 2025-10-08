@@ -1,0 +1,47 @@
+scorer_dicts:
+  - prop_dict:
+      scorer_name: Scaffold
+      scaffold_type: basic_wire_frame
+      output_path: results/tmp/
+      min_count_fragments: 1
+      selection_criteria:
+        diff_median_score: 0.1
+    score_every: 10
+    groupby_every: 20
+    selection_criteria:
+      count_perc_ratio: 500
+      Total Number of Molecules with Substructure: 50000
+    custom_alert_name: customalertsscaffold
+  - prop_dict:
+      scorer_name: Ngram
+      ngram_size: 10
+      output_path: results/tmp/
+      min_count_fragments: 3
+    score_every: 10
+    groupby_every: 30
+    selection_criteria:
+      count_perc_ratio: 3000
+      Total Number of Molecules with Substructure: 10000
+    custom_alert_name: customalertsngrams
+  - prop_dict:
+      scorer_name: Fragments
+      output_path: results/tmp/
+      min_count_fragments: 2
+      transformation_mode: none
+    score_every: 10
+    groupby_every: 20
+    selection_criteria:
+      count_perc_ratio: 500
+      Total Number of Molecules with Substructure: 50000
+    custom_alert_name: customalerts
+  - prop_dict:
+      scorer_name: Cluster
+      output_path: results/tmp/
+      threshold: 0.25
+      min_count_fragments: 0
+    score_every: 10
+    groupby_every: 10
+    selection_criteria:
+      count_perc_ratio: 1000
+      Total Number of Molecules with Substructure: 10000
+    custom_alert_name: dissimilarity

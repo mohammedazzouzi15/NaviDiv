@@ -1,0 +1,12 @@
+[2025-10-02 13:28:05,388][navidiv.reinvent.run_staged_learning_2][INFO] - Starting 1 stage of Reinforcement Learning
+[2025-10-02 13:28:05,388][navidiv.reinvent.run_staged_learning_2][INFO] - Using prior model /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior, agent model /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/agents/formed.prior
+[2025-10-02 13:28:05,388][navidiv.reinvent.run_staged_learning_2][INFO] - Using avoid model(s) []
+[2025-10-02 13:28:05,396][reinvent.runmodes.create_adapter][WARNING] - /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/priors/formed.prior does not contain metadata
+[2025-10-02 13:28:05,497][reinvent.runmodes.create_adapter][INFO] - Number of network parameters: 5,886,347
+[2025-10-02 13:28:05,497][reinvent.runmodes.create_adapter][INFO] - Network architecture:
+RNN(
+  (_embedding): Embedding(139, 256)
+  (_rnn): LSTM(256, 512, num_layers=3, batch_first=True)
+  (_linear): Linear(in_features=512, out_features=139, bias=True)
+)
+[2025-10-02 13:28:05,498][reinvent.runmodes.create_adapter][CRITICAL] - model file /media/mohammed/Work/Navi_diversity/Tutorials/Running_Reinvent/example/agents/formed.prior is not accessible

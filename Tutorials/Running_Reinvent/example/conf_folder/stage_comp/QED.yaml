@@ -1,0 +1,6 @@
+model_params_rdkit_physchem:
+  params_list: ["QED"]
+  lower_bound: [0.0]
+  higher_bound: [1.0]
+  weight: [1.0]
+
