@@ -69,7 +69,8 @@ def load_file_section() -> str:
                 "📄 Enter path to your CSV file containing SMILES data",
                 key="file_path_input",
                 on_change=on_change_file_path,
-                placeholder="/media/mohammed/Work/Navi_diversity/tests/test_data/default/default_1_TSNE.csv",
+                placeholder="Tutorials/Using_The_app/example/default_1_TSNE.csv",
+                value="Tutorials/Using_The_app/example/default_1_TSNE.csv",
                 help="CSV should contain SMILES strings and optionally "
                 "'step' and 'Score' columns for analysis",
             )

@@ -27,3 +27,5 @@ Tutorials/Running_Reinvent/example/runs/*
 *.out
 Tutorials/Using_The_app/example/scorer_output/*
 # Jupyter Notebook checkpoints
+
+Notes_to_improve_the_app.txt
