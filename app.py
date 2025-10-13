@@ -59,21 +59,88 @@ def on_change_file_path() -> None:
     st.session_state.file_path = st.session_state.file_path_input
 
 
-def load_file_section() -> str:
-    """Handle file loading section and return the file path."""
-    st.markdown("### 📁 Load Your Dataset")
+def cleanup_temp_files() -> None:
+    """Clean up temporary uploaded files."""
+    if (hasattr(st.session_state, "file_path") and
+        hasattr(st.session_state, "is_uploaded_file") and
+        st.session_state.is_uploaded_file and
+        st.session_state.file_path):
+        try:
+            temp_path = Path(st.session_state.file_path)
+            if temp_path.exists():
+                temp_path.unlink()
+        except OSError:
+            pass  # File might already be cleaned up
 
+
+def _get_example_csv_files() -> list[str]:
+    """Get list of example CSV files from project directories."""
+    default_dir = Path()
+    example_dirs = ["Tutorials", "data", "examples"]
+    csv_files = []
+    
+    for dir_name in example_dirs:
+        dir_path = default_dir / dir_name
+        if dir_path.exists():
+            csv_files.extend([
+                str(f.relative_to(default_dir))
+                for f in dir_path.rglob("*.csv")
+            ])
+    
+    return sorted(csv_files)
+
+
+def _handle_file_upload() -> str | None:
+    """Handle file upload and return file path."""
+    uploaded_file = st.file_uploader(
+        "Choose a CSV file",
+        type=["csv"],
+        help="CSV should contain SMILES strings and optionally "
+             "'step' and 'Score' columns for analysis",
+        key="file_uploader"
+    )
+
+    if uploaded_file is not None:
+        import tempfile
+
+        # Create temporary file
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            delete=False,
+            suffix=".csv"
+        ) as tmp_file:
+            tmp_file.write(uploaded_file.getvalue())
+            temp_file_path = tmp_file.name
+
+        # Store the temporary file path in session state
+        st.session_state.file_path = temp_file_path
+        st.session_state.uploaded_file_name = uploaded_file.name
+        st.session_state.is_uploaded_file = True
+
+        st.success(f"✅ File uploaded: {uploaded_file.name}")
+
+        # Show file info
+        file_size = len(uploaded_file.getvalue())
+        st.info(f"📊 File size: {file_size:,} bytes")
+
+        return temp_file_path
+    
+    return None
+
+
+def _handle_path_input() -> str | None:
+    """Handle manual path input and return file path."""
+    val = None
     with st.container():
         col_loading = st.columns([3, 1])
         with col_loading[0]:
-            val = st.text_input(
+            path_input = st.text_input(
                 "📄 Enter path to your CSV file containing SMILES data",
                 key="file_path_input",
-                on_change=on_change_file_path,
                 placeholder="Tutorials/Using_The_app/example/default_1_TSNE.csv",
                 value="Tutorials/Using_The_app/example/default_1_TSNE.csv",
                 help="CSV should contain SMILES strings and optionally "
-                "'step' and 'Score' columns for analysis",
+                     "'step' and 'Score' columns for analysis",
             )
         with col_loading[1]:
             if st.button(
@@ -81,23 +148,103 @@ def load_file_section() -> str:
                 type="primary",
                 help="Load and validate the CSV file",
             ):
-                if not val:
+                if not path_input:
                     st.error("❌ Please enter a valid file path.")
                 else:
                     try:
                         # Basic validation
-                        file_path = Path(val)
+                        file_path = Path(path_input)
                         if not file_path.exists():
-                            st.error(f"❌ File not found: {val}")
+                            st.error(f"❌ File not found: {path_input}")
                         elif file_path.suffix.lower() != ".csv":
                             st.warning("⚠️ File should be a CSV (.csv)")
                         else:
-                            st.session_state.file_path = val
+                            st.session_state.file_path = path_input
+                            st.session_state.is_uploaded_file = False
                             st.success(f"✅ File loaded: {file_path.name}")
+                            val = path_input
                     except OSError as e:
                         st.error(f"❌ Error loading file: {e}")
-
     return val
+
+
+def _display_current_file_status() -> bool:
+    """Display current file status and return whether file is loaded."""
+    file_loaded = (hasattr(st.session_state, "file_path") and
+                   st.session_state.file_path)
+
+    if file_loaded:
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            file_name = (st.session_state.get("uploaded_file_name",
+                        Path(st.session_state.file_path).name))
+            st.success(f"✅ **Current file:** {file_name}")
+        with col2:
+            if st.button("🔄 Change File", help="Load a different file"):
+                # Clear current file to expand the section
+                keys_to_clear = [
+                    "file_path", "uploaded_file_name", "is_uploaded_file"
+                ]
+                for key in keys_to_clear:
+                    if hasattr(st.session_state, key):
+                        delattr(st.session_state, key)
+                st.rerun()
+
+    return file_loaded
+
+
+def load_file_section() -> str:
+    """Handle file loading section and return the file path."""
+    # Display current file status and get load state
+    file_loaded = _display_current_file_status()
+
+    # Create expander that collapses when file is loaded
+    with st.expander(
+        "📁 Load Your Dataset",
+        expanded=not file_loaded
+    ):
+        # Create tabs for different loading methods
+        tab_upload, tab_path = st.tabs(["📤 Upload File", "📁 File Path"])
+
+        val = None
+
+    with tab_upload:
+        st.markdown("**Upload a CSV file from your computer:**")
+
+        # Option 1: Browse local project files
+        st.markdown("**Browse project example files:**")
+        csv_files = _get_example_csv_files()
+
+        if csv_files:
+            selected_file = st.selectbox(
+                "Select an example CSV file:",
+                options=["", *csv_files],
+                help="Choose from available CSV files in the project"
+            )
+
+            if selected_file:
+                full_path = str(Path() / selected_file)
+                st.session_state.file_path = full_path
+                st.session_state.is_uploaded_file = False
+                st.success(f"✅ File selected: {selected_file}")
+                val = full_path
+
+        st.markdown("**Or upload your own CSV file:**")
+        upload_result = _handle_file_upload()
+        if upload_result:
+            val = upload_result
+
+    with tab_path:
+        st.markdown("**Or enter a file path manually:**")
+        path_result = _handle_path_input()
+        if path_result:
+            val = path_result
+
+    # Return the current file path from session state if available
+    if hasattr(st.session_state, "file_path") and st.session_state.file_path:
+        return st.session_state.file_path
+
+    return val or ""
 
 def sidebar_analysis(file_path):
         # Analysis buttons in sidebar
