@@ -17,6 +17,7 @@ dependencies = [
   "streamlit",
   "scikit-learn",
   "igraph",
+  "plotly",
 ]
 requires-python = ">=3.10"
 dynamic = ["version"]
@@ -36,6 +37,7 @@ reinvent = [
   "pathos",
   "chemprop==1.5.2",
   "tomli",
+
 ]
 dev = [
   "ruff",
