@@ -5,12 +5,48 @@ using various scoring functions including frequency-based, similarity-based,
 and cluster-based approaches.
 """
 
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import plotly.io as pio
 import streamlit as st
 from rdkit import RDLogger
+
+# Check if navidiv is installed, if not install it in development mode
+try:
+    import navidiv  # noqa: F401
+except ImportError:
+    st.error("NaviDiv package not found. Installing in development mode...")
+    try:
+        # Get the current directory (where the app is running from)
+        current_dir = Path(__file__).parent
+        
+        # Install the package in development mode
+        # Using trusted input (sys.executable and hardcoded command)
+        subprocess.run([
+            sys.executable, "-m", "pip", "install", "-e", str(current_dir)
+        ], capture_output=True, text=True, check=True)
+        
+        st.success("NaviDiv package installed successfully!")
+        st.info(
+            "Please restart the Streamlit app to use the newly installed "
+            "package."
+        )
+        st.stop()
+        
+    except subprocess.CalledProcessError as e:
+        st.error(f"Failed to install NaviDiv package: {e}")
+        st.error(f"Error output: {e.stderr}")
+        st.info(
+            "Please manually install the package by running: "
+            "`pip install -e .` in the project directory"
+        )
+        st.stop()
+    except (OSError, RuntimeError) as e:
+        st.error(f"Installation error: {e}")
+        st.stop()
 
 from navidiv.app_utils.action_func import do_tsne, run_all_scorers, run_scorer
 from navidiv.app_utils.description import (
